@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	
+	<!--  <constant name="struts.objectFactory" value="spring"/>-->
+	<!-- 开发模式 -->
+	<constant name="struts.devMode" value="true"/>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.i18n.encoding" value="utf-8" />   
+    <!-- 加入下面的配置修改struts.xml不需重启服务 --> 
+	<constant name="struts.configuration.xml.reload" value="true"/>
+	<constant name="struts.multipart.maxSize" value="5242880"/>
+	
+	
+ 	<package name="manager" extends="struts-default" namespace="/">
+ 		<!-- 用户 -->
+	    <action name="manager_*" class="managerAction" method="{1}">
+			<result name="loginSuccess" type="redirect" >manager_init</result>
+			<result name="init">/business/index.jsp</result>
+			<result name="error">/login.jsp</result>
+		</action>
+		<!-- 锁种类 -->
+		<action name="kindOfKey_*" class="kindOfKeyAction" method="{1}">
+			<result name="success" type="redirect" >kindOfKey_init</result>
+			<result name="init">/business/kindOfKey.jsp</result>
+			<result name="error">/404.jsp</result>
+		</action>
+		
+		<!-- 锁仓库 -->
+		<action name="contain_*" class="containAction" method="{1}">
+			<result name="addSuccess" type="redirect" >contain_initContain</result>
+			<result name="init">/business/kindOfKey.jsp</result>
+			<result name="error">/404.jsp</result>
+		</action>
+		
+	</package>
+</struts>
