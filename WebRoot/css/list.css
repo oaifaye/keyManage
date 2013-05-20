@@ -1,0 +1,62 @@
+@CHARSET "UTF-8";
+
+body {
+	background: #FFF;
+	font-size: 12px;
+}
+
+.center {
+	background: #fff;
+	margin: 30px auto;
+	text-align: center;
+	padding-top: 70px;
+}
+
+.add{
+	margin-top: 30px;
+	margin-bottom: 20px;
+}
+
+.trLight {
+	background: #f9fcfd
+}
+
+.table {
+	margin: auto;
+	width: 100%;
+	border-collapse: collapse;
+	table-layout: fixed;
+	cursor: default;
+	text-align: center;
+}
+
+.table tr td,.table th {
+	border: solid #ccc 1px;
+	height: 25px;
+}
+
+.pageColumn thead {
+	color: #075587;
+	background: url(../images/page-thead-bg.gif);
+}
+
+.pageTitle {
+	padding-left: 10px;
+	height: 31px;
+	line-height: 31px;
+	color: #075587;
+	background: url(../images/page-pageTitle-bg.gif);
+}
+
+.pageColumn {
+	background: url(../images/page-bg.gif) repeat-x;
+	padding: 5px;
+}
+
+.pageButton {
+	height: 50px;
+}
+
+.remark{
+	width: 600px;
+}

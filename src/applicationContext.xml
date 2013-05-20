@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>net.sourceforge.jtds.jdbc.Driver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:jtds:sqlserver://127.0.0.1:3898/keyManagedb</value>
+		</property>
+		<property name="username">
+			<value>sa</value>
+		</property>
+		<property name="password">
+			<value>123456</value>
+		</property> 
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="mappingResources">
+			<list>
+				<value>com/keyManage/bean/Manager.hbm.xml</value>
+				<value>com/keyManage/bean/Contain.hbm.xml</value>
+				<value>com/keyManage/bean/KindOfKey.hbm.xml</value>
+				<value>com/keyManage/bean/LotNumber.hbm.xml</value>
+				<value>com/keyManage/bean/Department.hbm.xml</value>
+				<value>com/keyManage/bean/ExpressType.hbm.xml</value>
+				<value>com/keyManage/bean/Key.hbm.xml</value>
+				<value>com/keyManage/bean/Procedure.hbm.xml</value>
+				<value>com/keyManage/bean/Province.hbm.xml</value>
+				<value>com/keyManage/bean/Version.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.SQLServerDialect
+				</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="txProxyTemplate" abstract="true" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref local="transactionManager" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="insert">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="del*">PROPAGATION_REQUIRED</prop>
+				<prop key="remove*">PROPAGATION_REQUIRED</prop>
+				<prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<!-- 登录 -->
+	<bean id="managerDAO" class="com.keyManage.dao.manager.ManagerDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="managerDAOProxy" parent="txProxyTemplate">
+		<property name="target">
+			<ref local="managerDAO" />
+		</property>
+	</bean>
+	<bean id="managerService" class="com.keyManage.service.manager.ManagerServiceImpl">
+		<property name="managerDAO" ref="managerDAOProxy"></property>
+	</bean>
+	<bean id="managerAction" class="com.keyManage.action.ManagerAction" scope="prototype">
+		<property name="managerService" ref="managerService"></property>
+	</bean>
+	
+	<!-- 锁类型 -->
+	<bean id="kindOfKeyDAO" class="com.keyManage.dao.kindOfKey.KindOfKeyDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="kindOfKeyDAOProxy" parent="txProxyTemplate">
+		<property name="target">
+			<ref local="kindOfKeyDAO" />
+		</property>
+	</bean>
+	<bean id="kindOfKeyService" class="com.keyManage.service.kindOfKey.KindOfKeyServiceImpl">
+		<property name="kindOfKeyDAO" ref="kindOfKeyDAOProxy"></property>
+	</bean>
+	<bean id="kindOfKeyAction" class="com.keyManage.action.KindOfKeyAction" scope="prototype">
+		<property name="kindOfKeyService" ref="kindOfKeyService"></property>
+	</bean>
+	
+	<!-- 锁仓库 -->
+	<bean id="containDAO" class="com.keyManage.dao.contain.ContainDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="containDAOProxy" parent="txProxyTemplate">
+		<property name="target">
+			<ref local="containDAO" />
+		</property>
+	</bean>
+	<bean id="containService" class="com.keyManage.service.contain.ContainServiceImpl">
+		<property name="containDAO" ref="containDAOProxy"></property>
+	</bean>
+	<bean id="containAction" class="com.keyManage.action.ContainAction" scope="prototype">
+		<property name="containService" ref="containService"></property>
+	</bean>
+</beans>
