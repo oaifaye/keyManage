@@ -26,7 +26,7 @@
 		</action>
 		<!-- 锁种类 -->
 		<action name="kindOfKey_*" class="kindOfKeyAction" method="{1}">
-			<result name="addSuccess" type="redirect" >kindOfKey_init</result>
+			<result name="success" type="redirect" >kindOfKey_init</result>
 			<result name="init">/business/kindOfKey.jsp</result>
 			<result name="error">/404.jsp</result>
 		</action>

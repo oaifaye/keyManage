@@ -2,6 +2,8 @@ package com.keyManage.base;
 
 import java.lang.reflect.ParameterizedType;
 import java.sql.SQLException;
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +14,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.criterion.Property;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.hibernate3.HibernateCallback;
@@ -20,7 +23,6 @@ import org.springframework.util.Assert;
 
 /**
  * Dao基类实现类
- * 
  * @author: sulifeng
  */
 
@@ -49,7 +51,6 @@ public class HibernateGenericDAOImpl<T> extends HibernateDaoSupport implements
 
 	// ==============================================增========================================================
 	public void insert(T entity) {
-
 		try {
 			Assert.notNull(entity);
 			getHibernateTemplate().save(entity);
@@ -57,11 +58,42 @@ public class HibernateGenericDAOImpl<T> extends HibernateDaoSupport implements
 			throw new DaoException("jdbc.error.code.Common.insert",
 					new String[] { entityClass.getName() }, e);
 		}
-
 	}
+	
+	// ==============================================改==========================================================
+	public void update(T entity){
+		try {
+			Assert.notNull(entity);
+			getHibernateTemplate().update(entity);
+		} catch (DataAccessException e) {
+			throw new DaoException("jdbc.error.code.Common.update",
+					new String[] { entityClass.getName() }, e);
+		}
+	}
+	public void updateAll(final Collection<T> collection){
+		if (collection == null || collection.isEmpty())
+			return;
+		for(T entity : collection){
+			getHibernateTemplate().update(entity);
+		}
+	}
+//	public void updateAll(String[] ids){
+//		if(ids.length!=0){
+//			for(String s : ids){
+//				T entity=findByPrimaryKey(s);
+//				getHibernateTemplate().update(entity);
+//			}
+//		}
+//		
+//	}
 
 	// ==============================================查==========================================================
 
+	public T findByPrimaryKey(String id) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", id);
+		return findUniqueByParams(params);
+	}
 	@SuppressWarnings("unchecked")
 	public T findUniqueByParams(Map<String, Object> params) {
 		try {
@@ -74,7 +106,9 @@ public class HibernateGenericDAOImpl<T> extends HibernateDaoSupport implements
 				String key = keyIterator.next();
 				crit.add(Restrictions.eq(key, params.get(key)));
 			}
-			List<T> list = crit.list();
+			
+			List<T> list = crit.addOrder( Property.forName("createDate").desc()) 
+							.list();
 			if (list == null || list.size() == 0) {
 				return null;
 			} else if (list.size() == 1) {
@@ -117,27 +151,14 @@ public class HibernateGenericDAOImpl<T> extends HibernateDaoSupport implements
 								String key = keyIterator.next();
 								crit.add(Restrictions.eq(key, params.get(key)));
 							}
+							//总条数
 							int totalCount = crit.list().size();
-//							//异常页码处理
-//							int trueCurrentPage;
-//							if(currentPage<=1){
-//								trueCurrentPage=1;
-//							}else if(currentPage>totalCount){
-//								trueCurrentPage=totalCount;
-//							}else{
-//								trueCurrentPage=currentPage;
-//							}
 							List<T> result = crit
 									.setFirstResult(
 											(currentPage - 1) * pageSize)
 									.setMaxResults(pageSize)
+									.addOrder( Property.forName("createDate").desc())
 									.list();
-//							 List<T> result = session.createQuery(hql)
-//							 .setFirstResult((currentPage-1)*pageSize)
-//							 .setMaxResults(pageSize)
-//							 .list();
-							
-							
 							PaginationSupport ps = new PaginationSupport(
 									result, totalCount, currentPage, pageSize);
 							return ps;

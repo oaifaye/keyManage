@@ -13,13 +13,13 @@ public class KindOfKey implements java.io.Serializable {
 	// Fields
 
 	private String id;
+	private Manager managerByUpdateBy;
 	private KindOfKey kindOfKey;
+	private Manager managerByCreateBy;
 	private String kindName;
 	private String remark;
 	private String isDelete;
-	private String createBy;
 	private Timestamp createDate;
-	private String updateBy;
 	private Timestamp updateDate;
 	private Set keies = new HashSet(0);
 	private Set kindOfKeies = new HashSet(0);
@@ -37,18 +37,18 @@ public class KindOfKey implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public KindOfKey(String id, KindOfKey kindOfKey, String kindName,
-			String remark, String isDelete, String createBy,
-			Timestamp createDate, String updateBy, Timestamp updateDate,
+	public KindOfKey(String id, Manager managerByUpdateBy, KindOfKey kindOfKey,
+			Manager managerByCreateBy, String kindName, String remark,
+			String isDelete, Timestamp createDate, Timestamp updateDate,
 			Set keies, Set kindOfKeies) {
 		this.id = id;
+		this.managerByUpdateBy = managerByUpdateBy;
 		this.kindOfKey = kindOfKey;
+		this.managerByCreateBy = managerByCreateBy;
 		this.kindName = kindName;
 		this.remark = remark;
 		this.isDelete = isDelete;
-		this.createBy = createBy;
 		this.createDate = createDate;
-		this.updateBy = updateBy;
 		this.updateDate = updateDate;
 		this.keies = keies;
 		this.kindOfKeies = kindOfKeies;
@@ -64,12 +64,28 @@ public class KindOfKey implements java.io.Serializable {
 		this.id = id;
 	}
 
+	public Manager getManagerByUpdateBy() {
+		return this.managerByUpdateBy;
+	}
+
+	public void setManagerByUpdateBy(Manager managerByUpdateBy) {
+		this.managerByUpdateBy = managerByUpdateBy;
+	}
+
 	public KindOfKey getKindOfKey() {
 		return this.kindOfKey;
 	}
 
 	public void setKindOfKey(KindOfKey kindOfKey) {
 		this.kindOfKey = kindOfKey;
+	}
+
+	public Manager getManagerByCreateBy() {
+		return this.managerByCreateBy;
+	}
+
+	public void setManagerByCreateBy(Manager managerByCreateBy) {
+		this.managerByCreateBy = managerByCreateBy;
 	}
 
 	public String getKindName() {
@@ -96,28 +112,12 @@ public class KindOfKey implements java.io.Serializable {
 		this.isDelete = isDelete;
 	}
 
-	public String getCreateBy() {
-		return this.createBy;
-	}
-
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
-	}
-
 	public Timestamp getCreateDate() {
 		return this.createDate;
 	}
 
 	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
-	}
-
-	public String getUpdateBy() {
-		return this.updateBy;
-	}
-
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
 	}
 
 	public Timestamp getUpdateDate() {

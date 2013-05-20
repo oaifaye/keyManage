@@ -20,9 +20,13 @@ public class KindOfKeyAction extends ActionSupport {
 	private KindOfKeyService kindOfKeyService;
 	private int currentPage;
 	private PaginationSupport paginationSupport;
+	private String kindOfKeyId;
 
 	// 初始化
 	public String init() {
+		if(kindOfKeyId!=null){
+			kindOfKey=kindOfKeyService.findByPrimaryKey(kindOfKeyId);
+		}
 		if(currentPage<=1){
 			currentPage=1;
 		}
@@ -38,15 +42,31 @@ public class KindOfKeyAction extends ActionSupport {
 
 	public String add() {
 		try {
-			Manager manager = (Manager)ActionContext.getContext().getSession().get("manager");
-			String namegerId = manager.getId();
-			Assert.notNull(kindOfKey);
-			kindOfKey.setIsDelete("1");
-			kindOfKey.setCreateBy(namegerId);
-			kindOfKey.setCreateDate(new Timestamp(System
-					.currentTimeMillis()));
-			kindOfKeyService.addKindOfKey(kindOfKey);
-			return "addSuccess";
+			if(kindOfKey.getId()==null||kindOfKey.getId().equals("")){
+			//新建保存
+				Manager manager = (Manager)ActionContext.getContext().getSession().get("manager");
+				Assert.notNull(kindOfKey);
+				kindOfKey.setIsDelete("1");
+				kindOfKey.setManagerByCreateBy(manager);
+				kindOfKey.setCreateDate(new Timestamp(System
+						.currentTimeMillis()));
+				kindOfKeyService.addKindOfKey(kindOfKey);
+			}else{
+			//修改保存
+				kindOfKeyService.update(kindOfKey);
+			}
+			return SUCCESS;
+		} catch (DataAccessException e) {
+			return ERROR;
+		}
+	}
+	
+	//逻辑删
+	public String removeAll(){
+		try {
+			String[] ids=(String[]) ActionContext.getContext().getParameters().get("ids");
+			kindOfKeyService.removeAll(ids);
+			return SUCCESS;
 		} catch (DataAccessException e) {
 			return ERROR;
 		}
@@ -82,6 +102,14 @@ public class KindOfKeyAction extends ActionSupport {
 
 	public void setPaginationSupport(PaginationSupport paginationSupport) {
 		this.paginationSupport = paginationSupport;
+	}
+
+	public String getKindOfKeyId() {
+		return kindOfKeyId;
+	}
+
+	public void setKindOfKeyId(String kindOfKeyId) {
+		this.kindOfKeyId = kindOfKeyId;
 	}
 
 }

@@ -9,4 +9,9 @@ public interface KindOfKeyService {
 
 	public void addKindOfKey(KindOfKey kindOfKey);
 	public PaginationSupport findByPage(Map<String, Object> params,int currentPage, int pageSize);
+	/**逻辑删*/
+	public void update(KindOfKey kindOfKey);
+	public void removeAll(String[] ids);
+	public KindOfKey findByPrimaryKey(String id);
+	
 }

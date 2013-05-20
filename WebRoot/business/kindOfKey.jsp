@@ -17,7 +17,7 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/list.js"></script>
 <link rel="stylesheet" href="css/list.css" type="text/css"></link>
-<script type="text/javascript" src="js/pageControl.js"></script>
+<script type="text/javascript" src="js/kindOfKey.js"></script>
 </head>
 
 <body>
@@ -25,17 +25,23 @@
 	<div class="pageColumn">
 	<div class="add">
 		
-		<s:form action="kindOfKey_add" theme="simple">
+		<s:form action="kindOfKey_add" theme="simple" id="add">
 		增加：<br />
-			种类名称：<s:textfield name="kindOfKey.kindName" maxLength="20"></s:textfield><br />
-			备&nbsp;&nbsp;&nbsp;&nbsp;注：<s:textfield name="kindOfKey.remark" maxLength="85"  cssClass="remark"></s:textfield>
+			种类名称：<s:textfield id="kindName" name="kindOfKey.kindName" maxLength="20"></s:textfield><br />
+			备&nbsp;&nbsp;&nbsp;&nbsp;注：<s:textfield id="remark" name="kindOfKey.remark" maxLength="85"  cssClass="remark"></s:textfield>
+			<input type="hidden" name="kindOfKey.id" value="${kindOfKey.id}" />
+			<input type="hidden" name="kindOfKey.isDelete" value="${kindOfKey.isDelete}" />
+			<input type="hidden" name="kindOfKey.managerByCreateBy.id" value="${kindOfKey.managerByCreateBy.id}" />
+			<input type="hidden" name="kindOfKey.createDate" value="${kindOfKey.createDate}" />
 			<input type="submit" value="保存" class="button2" />
 		</s:form>
 	</div>
+	<s:form name="submitForm">
 	<table class="table">
 		<thead>
-			<th width="30"><input class="select-all" name="" type="checkbox"
-				value="" />
+			<th width="70">
+				<input class="select-all" name="" type="checkbox" value="" />
+				<a href="javascript:del('kindOfKey_removeAll')" >删除</a>
 			</th>
 			<th width="">密码锁名称</th>
 			<th width="">新建人</th>
@@ -45,32 +51,29 @@
 		<tbody>
 			<s:iterator value="paginationSupport.items" >
 				<tr>
-					<td class="checkBox"><input name="ids[]" type="checkbox" value="" /></td>
+					<td class="checkBox"><input type="checkbox" name="ids" value='${id}'/></td>
 					<td><s:property value="kindName"/></td>
-					<td><s:property value="kindName"/></td>
+					<td><s:property value="managerByCreateBy.name"/></td>
 					<td><s:property value="remark"/></td>
 					<td>
-						<img src="images/icon/edit2.png" width="16" height="16" />
-						<img src="images/icon/del.png" width="16" height="16" />
+						<s:a action="kindOfKey_init" >
+							<s:param name="kindOfKeyId" value="id"></s:param>
+							<s:param name="currentPage" value="currentPage"></s:param>
+							修改
+						</s:a>
 					</td>
 				</tr>
 			</s:iterator>
 
-			<tr class=" ">
-				<td colspan="5 class="checkBox">
-					<s:form name="newsForm" theme="simple" id="newsForm">
-					共${paginationSupport.totalCount}条&nbsp;
-            		第${currentPage}页&nbsp;
-					<a href="javascript:paginate(${1})">首页</a>
-					<a href="javascript:paginate(${paginationSupport.previousPage})">上一页</a>
-					<a href="javascript:paginate(${paginationSupport.nextPage})">下一页</a>
-					<a href="javascript:paginate(${paginationSupport.lastPage})">尾页</a>
-					</s:form>
+			<tr>
+				<td colspan="5" class="pageControl">
+					<jsp:include page="/include/pageControl.jsp" />
 				</td>
 			</tr>
 
 		</tbody>
 	</table>
+	</s:form>
 	</div>
 </body>
 </html>

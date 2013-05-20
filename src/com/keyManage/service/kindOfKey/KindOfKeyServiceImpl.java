@@ -15,6 +15,24 @@ public class KindOfKeyServiceImpl implements KindOfKeyService {
 
 	}
 	
+	public void update(KindOfKey kindOfKey){
+		kindOfKeyDAO.update(kindOfKey);
+	}
+	
+	@Override
+	public void removeAll(String[] ids){
+		KindOfKey kindOfKey;
+		for(String id:ids){
+			kindOfKey=kindOfKeyDAO.findByPrimaryKey(id);
+			kindOfKey.setIsDelete("0");
+			kindOfKeyDAO.update(kindOfKey);
+		}
+	}
+	
+	public KindOfKey findByPrimaryKey(String id){
+		return kindOfKeyDAO.findByPrimaryKey(id);
+	}
+	
 	public PaginationSupport findByPage(Map<String, Object> params,int currentPage, int pageSize){
 		return kindOfKeyDAO.findByPage(params, currentPage, pageSize);
 	}
@@ -27,5 +45,9 @@ public class KindOfKeyServiceImpl implements KindOfKeyService {
 	public void setKindOfKeyDAO(KindOfKeyDAO kindOfKeyDAO) {
 		this.kindOfKeyDAO = kindOfKeyDAO;
 	}
+
+
+
+	
 	
 }

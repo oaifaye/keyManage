@@ -60,3 +60,7 @@ body {
 .remark{
 	width: 600px;
 }
+
+.pageControl{
+	text-align: right;
+}

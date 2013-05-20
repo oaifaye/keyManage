@@ -8,7 +8,7 @@
     <class name="com.keyManage.bean.Department" table="Department" schema="dbo" catalog="keyManagedb">
         <id name="id" type="java.lang.String">
             <column name="ID" length="32" />
-            <generator class="assigned" />
+            <generator class="uuid.hex" />
         </id>
         <many-to-one name="province" class="com.keyManage.bean.Province" fetch="select">
             <column name="ProvinceID" length="32" />

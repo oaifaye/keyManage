@@ -8,7 +8,7 @@
     <class name="com.keyManage.bean.ExpressType" table="ExpressType" schema="dbo" catalog="keyManagedb">
         <id name="id" type="java.lang.String">
             <column name="ID" length="32" />
-            <generator class="assigned" />
+            <generator class="uuid.hex" />
         </id>
         <property name="expressTypeName" type="java.lang.String">
             <column name="ExpressTypeName" length="100" />

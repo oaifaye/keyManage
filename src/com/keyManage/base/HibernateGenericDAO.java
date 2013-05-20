@@ -1,5 +1,6 @@
 package com.keyManage.base;
 
+import java.util.Collection;
 import java.util.Map;
 
 /**
@@ -15,8 +16,33 @@ public interface HibernateGenericDAO<T> {
 	 * */
 	public void insert(T entity);
 	
+	//===============================================删==========================================================
 	
+	
+	// ==============================================改==========================================================
+	/**
+	 * 修改一条信息
+	 * @param entity 要修改的对象
+	 * */
+	public void update(T entity);
+	
+	/**
+	 * 批量修改
+	 * @param collection 需要批量修改的对象的集合
+	 * */
+	public void updateAll(final Collection<T> collection);
+//	/**
+//	 * 批量修改
+//	 * @param ids 需要批量修改的对象的主键数组
+//	 * */
+//	public void updateAll(String[] ids);
+//	
 	//==============================================查========================================================
+	/**
+	 * 按主键查询对象
+	 * @param id 主键（String）
+	 * */
+	public T findByPrimaryKey(String id);
 	/**
 	 * 按条件查询，返回一个对象
 	 * @param params key为表中字段 value为对应字段的值
