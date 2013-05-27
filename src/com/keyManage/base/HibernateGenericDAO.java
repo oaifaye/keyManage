@@ -1,6 +1,7 @@
 package com.keyManage.base;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -49,6 +50,11 @@ public interface HibernateGenericDAO<T> {
 	 * */
 	public T findUniqueByParams(Map<String, Object> params);
 	/**
+	 * 按条件查询，返回一个对象List
+	 * @param params key为表中字段 value为对应字段的值
+	 * */
+	public List<T> findListByParams(Map<String, Object> params);
+	/**
 	 * 分页查询
 	 * @param params key为要查询的字段 value为要查询的值
 	 * @param currentPage 当前页
@@ -56,4 +62,6 @@ public interface HibernateGenericDAO<T> {
 	 * */
 	public PaginationSupport findByPage(final Map<String, Object> params,
 			final int currentPage, final int pageSize);
+	
+	public List<T> findByHql(String hql);
 }

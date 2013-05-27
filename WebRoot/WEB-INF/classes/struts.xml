@@ -18,6 +18,23 @@
 	
 	
  	<package name="manager" extends="struts-default" namespace="/">
+ 		<!-- 登录验证拦截器 -->
+		<interceptors>
+			<interceptor name="authority" class="com.keyManage.interceptor.AuthorizationInterceptor">
+				<param name="excludemethods">login</param>
+			</interceptor>
+			<interceptor-stack name="authorityStack">
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="authority"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="authorityStack"></default-interceptor-ref>
+		<!-- 全局result -->
+		<global-results>
+			<result name="relogin" type="redirect">/logout.jsp</result>
+		</global-results>
+		
+ 	
  		<!-- 用户 -->
 	    <action name="manager_*" class="managerAction" method="{1}">
 			<result name="loginSuccess" type="redirect" >manager_init</result>
@@ -33,10 +50,18 @@
 		
 		<!-- 锁仓库 -->
 		<action name="contain_*" class="containAction" method="{1}">
-			<result name="addSuccess" type="redirect" >contain_initContain</result>
-			<result name="init">/business/kindOfKey.jsp</result>
+			<result name="success" type="redirect" >contain_init</result>
+			<result name="initShipment">/business/shipment.jsp</result>
+			<result name="initContain">/business/contain.jsp</result>
 			<result name="error">/404.jsp</result>
 		</action>
 		
+		<!-- 锁请求 -->
+		<action name="keyAsk_*" class="keyAskAction" method="{1}">
+			<result name="success" type="redirect" >keyAsk_initKeyAsk</result>
+			<result name="initKeyAsk">/business/keyAsk.jsp</result>
+			<result name="initListKeyAsk">/business/listKeyAsk.jsp</result>
+			<result name="error">/404.jsp</result>
+		</action>
 	</package>
 </struts>

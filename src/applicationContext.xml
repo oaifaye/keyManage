@@ -30,6 +30,7 @@
 				<value>com/keyManage/bean/Procedure.hbm.xml</value>
 				<value>com/keyManage/bean/Province.hbm.xml</value>
 				<value>com/keyManage/bean/Version.hbm.xml</value>
+				<value>com/keyManage/bean/KeyAsk.hbm.xml</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -104,9 +105,30 @@
 		</property>
 	</bean>
 	<bean id="containService" class="com.keyManage.service.contain.ContainServiceImpl">
+		<property name="kindOfKeyDAO" ref="kindOfKeyDAO"></property>
 		<property name="containDAO" ref="containDAOProxy"></property>
 	</bean>
 	<bean id="containAction" class="com.keyManage.action.ContainAction" scope="prototype">
+		<property name="keyAskService" ref="keyAskService"></property>
 		<property name="containService" ref="containService"></property>
+		<property name="kindOfKeyService" ref="kindOfKeyService"></property>
+	</bean>
+	
+	<!-- 请求锁 -->
+	<bean id="keyAskDAO" class="com.keyManage.dao.keyAsk.KeyAskDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="keyAskDAOProxy" parent="txProxyTemplate">
+		<property name="target">
+			<ref local="keyAskDAO" />
+		</property>
+	</bean>
+	<bean id="keyAskService" class="com.keyManage.service.keyAsk.KeyAskServiceImpl">
+		<property name="keyAskDAO" ref="keyAskDAOProxy"></property>
+	</bean>
+	<bean id="keyAskAction" class="com.keyManage.action.KeyAskAction" scope="prototype">
+		<property name="keyAskService" ref="keyAskService"></property>
+		<property name="containService" ref="containService"></property>
+		<property name="kindOfKeyService" ref="kindOfKeyService"></property>
 	</bean>
 </beans>

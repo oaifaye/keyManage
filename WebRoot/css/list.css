@@ -5,6 +5,17 @@ body {
 	font-size: 12px;
 }
 
+a {
+	font-size: 13px;
+	text-decoration: none;
+	color: #075587;
+}
+
+a:hover {
+	cursor: pointer;
+	color: #075587;
+}
+
 .center {
 	background: #fff;
 	margin: 30px auto;
@@ -12,7 +23,7 @@ body {
 	padding-top: 70px;
 }
 
-.add{
+.add {
 	margin-top: 30px;
 	margin-bottom: 20px;
 }
@@ -57,10 +68,41 @@ body {
 	height: 50px;
 }
 
-.remark{
+.remark {
 	width: 600px;
 }
 
-.pageControl{
+.pageControl {
 	text-align: right;
+}
+
+.askKeySubmit {
+	display: none;
+}
+
+#greybackground {
+	background: #000;
+	filter: Alpha(opacity =   30);
+	-moz-opacity: .3;
+	opacity: 0.5;
+	display: block;
+	z-index: 1;
+	width: 100%;
+	height: 0px;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+#askKeySubmit {
+	position: absolute;
+	top: 50px;
+	left: 200px;
+	height: 380px;
+	width: 700px;
+	background-color: #ffffff;
+	text-align: center;
+	padding-top: 50px;
+	z-index: 2;
+	display: none;
 }

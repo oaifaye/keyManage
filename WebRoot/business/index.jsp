@@ -23,7 +23,7 @@
 	<div id="wrap">
 		<div id="header">
 			<div class="logo fleft"></div>
-			<a class="logout fright" href="<%=basePath%>login.jsp"> </a>
+			<a class="logout fright" href="<%=basePath%>logout.jsp"> </a>
 			<div class="clear"></div>
 			<div class="subnav">
 				<div class="subnavLeft fleft"></div>
@@ -34,7 +34,7 @@
 		<!--#header -->
 		<div id="content">
 			<div class="space"></div>
-			<div class="menu fleft">
+			<div class="menu">
 				<ul>
 					<li class="subMenuTitle">功能菜单</li>
 				<!-- 锁管理员start -->
@@ -42,32 +42,34 @@
 					<li class="subMenu"><a href="#">密码锁仓库管理</a>
 						<ul>
 							<li><a href="<%=basePath%>kindOfKey_init" target="right">锁种类</a></li>
-							<li><a href="table.html" target="right">锁入库</a>
-							</li>
-						</ul></li>
+							<li><a href="<%=basePath%>contain_init" target="right">锁入库</a></li>
+							<li><a href="<%=basePath%>contain_initShipment" target="right">锁出库</a></li>
+						</ul>
+					</li>
 					</s:if>
-					<li class="subMenu"><a href="#">常用组件(高级)</a>
+				<!-- 锁管理员end -->
+				<!-- 锁领用者start -->
+					<s:if test='#session.manager.role=="2"'>
+						<li class="subMenu"><a href="#">密码锁申请</a>
 						<ul>
-							<li><a href="table.html" target="right">表格控件</a>
+							<li><a href="<%=basePath%>keyAsk_initKeyAsk" target="right">密码锁申请</a></li>
+							<li><a href="<%=basePath%>keyAsk_initListKeyAsk" target="right">申请管理</a>
 							</li>
-							<li><a href="table.html" target="right">表单控件</a>
-							</li>
-						</ul></li>
-
+						</ul>
+					</li>
+					</s:if>
+				<!-- 锁领用者end -->
 					<li class="subMenu"><a href="#">单页实例</a></li>
 					<li class="subMenu"><a href="#">综合实例</a></li>
 					<li class="subMenu"><a href="#">其他组件</a></li>
 
 				</ul>
 			</div>
-			<div class="sidebar fleft">
-				<div class="btn"></div>
-			</div>
+			<div class="sidebar fleft"></div>
+			<div class="right">
 			<div class="page">
-				<iframe width="100%" scrolling="auto" height="100%"
-					frameborder="false" allowtransparency="true"
-					style="border: medium none;" src="main.html" id="rightMain"
-					name="right"></iframe>
+					<iframe class="rightMain" name="right" frameborder="0" src="main.html"></iframe>
+			</div>
 			</div>
 		</div>
 		<!--#content -->

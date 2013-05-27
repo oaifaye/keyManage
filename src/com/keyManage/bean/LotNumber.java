@@ -20,7 +20,6 @@ public class LotNumber implements java.io.Serializable {
 	private Timestamp createDate;
 	private String updateBy;
 	private Timestamp updateDate;
-	private Set contains = new HashSet(0);
 	private Set keies = new HashSet(0);
 
 	// Constructors
@@ -37,7 +36,7 @@ public class LotNumber implements java.io.Serializable {
 	/** full constructor */
 	public LotNumber(String id, String lotNumberName, Timestamp deliveryDate,
 			String isDelete, String createBy, Timestamp createDate,
-			String updateBy, Timestamp updateDate, Set contains, Set keies) {
+			String updateBy, Timestamp updateDate, Set keies) {
 		this.id = id;
 		this.lotNumberName = lotNumberName;
 		this.deliveryDate = deliveryDate;
@@ -46,7 +45,6 @@ public class LotNumber implements java.io.Serializable {
 		this.createDate = createDate;
 		this.updateBy = updateBy;
 		this.updateDate = updateDate;
-		this.contains = contains;
 		this.keies = keies;
 	}
 
@@ -114,14 +112,6 @@ public class LotNumber implements java.io.Serializable {
 
 	public void setUpdateDate(Timestamp updateDate) {
 		this.updateDate = updateDate;
-	}
-
-	public Set getContains() {
-		return this.contains;
-	}
-
-	public void setContains(Set contains) {
-		this.contains = contains;
 	}
 
 	public Set getKeies() {

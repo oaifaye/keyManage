@@ -11,9 +11,11 @@ public class Contain implements java.io.Serializable {
 	// Fields
 
 	private String id;
+	private KindOfKey kindOfKey;
 	private Manager managerByUpdateBy;
-	private LotNumber lotNumber;
+	private KeyAsk keyAsk;
 	private Manager managerByCreateBy;
+	private String lotNumber;
 	private Timestamp containDate;
 	private Integer keyNum;
 	private String saveOrTake;
@@ -33,14 +35,16 @@ public class Contain implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Contain(String id, Manager managerByUpdateBy, LotNumber lotNumber,
-			Manager managerByCreateBy, Timestamp containDate, Integer keyNum,
-			String saveOrTake, String isDelete, Timestamp createDate,
-			Timestamp updateDate) {
+	public Contain(String id, KindOfKey kindOfKey, Manager managerByUpdateBy,
+			KeyAsk keyAsk, Manager managerByCreateBy, String lotNumber,
+			Timestamp containDate, Integer keyNum, String saveOrTake,
+			String isDelete, Timestamp createDate, Timestamp updateDate) {
 		this.id = id;
+		this.kindOfKey = kindOfKey;
 		this.managerByUpdateBy = managerByUpdateBy;
-		this.lotNumber = lotNumber;
+		this.keyAsk = keyAsk;
 		this.managerByCreateBy = managerByCreateBy;
+		this.lotNumber = lotNumber;
 		this.containDate = containDate;
 		this.keyNum = keyNum;
 		this.saveOrTake = saveOrTake;
@@ -59,6 +63,14 @@ public class Contain implements java.io.Serializable {
 		this.id = id;
 	}
 
+	public KindOfKey getKindOfKey() {
+		return this.kindOfKey;
+	}
+
+	public void setKindOfKey(KindOfKey kindOfKey) {
+		this.kindOfKey = kindOfKey;
+	}
+
 	public Manager getManagerByUpdateBy() {
 		return this.managerByUpdateBy;
 	}
@@ -67,12 +79,12 @@ public class Contain implements java.io.Serializable {
 		this.managerByUpdateBy = managerByUpdateBy;
 	}
 
-	public LotNumber getLotNumber() {
-		return this.lotNumber;
+	public KeyAsk getKeyAsk() {
+		return this.keyAsk;
 	}
 
-	public void setLotNumber(LotNumber lotNumber) {
-		this.lotNumber = lotNumber;
+	public void setKeyAsk(KeyAsk keyAsk) {
+		this.keyAsk = keyAsk;
 	}
 
 	public Manager getManagerByCreateBy() {
@@ -81,6 +93,14 @@ public class Contain implements java.io.Serializable {
 
 	public void setManagerByCreateBy(Manager managerByCreateBy) {
 		this.managerByCreateBy = managerByCreateBy;
+	}
+
+	public String getLotNumber() {
+		return this.lotNumber;
+	}
+
+	public void setLotNumber(String lotNumber) {
+		this.lotNumber = lotNumber;
 	}
 
 	public Timestamp getContainDate() {

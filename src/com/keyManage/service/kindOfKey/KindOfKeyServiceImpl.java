@@ -1,5 +1,6 @@
 package com.keyManage.service.kindOfKey;
 
+import java.util.List;
 import java.util.Map;
 
 import com.keyManage.base.PaginationSupport;
@@ -29,6 +30,11 @@ public class KindOfKeyServiceImpl implements KindOfKeyService {
 		}
 	}
 	
+	@Override
+	public List<KindOfKey> findListByParams(Map<String, Object> params) {
+		return  kindOfKeyDAO.findListByParams(params);
+	}
+	
 	public KindOfKey findByPrimaryKey(String id){
 		return kindOfKeyDAO.findByPrimaryKey(id);
 	}
@@ -46,8 +52,4 @@ public class KindOfKeyServiceImpl implements KindOfKeyService {
 		this.kindOfKeyDAO = kindOfKeyDAO;
 	}
 
-
-
-	
-	
 }

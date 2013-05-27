@@ -33,9 +33,9 @@ table { border-collapse: collapse; border-spacing: 0; }
 	font-size:0px;
 	clear:both;
 	}
-.fleft{ float:left}
+.fleft{ float:left;}
 .fright{ float:right}
-#wrap{ width:100%;}
+#wrap{ width:100%;background-color: #198bc9}
 #header{ height:78px; background:url(../images/index-header-bg.gif) repeat-x;}
 .logo{ width:362px; height:51px; background:url(../images/index-logo.gif);}
 .logout{ width:23px; height:24px; background:url(../images/index-logout.png); margin-top:14px;}
@@ -52,7 +52,7 @@ table { border-collapse: collapse; border-spacing: 0; }
 .subnav{ height:27px; background:url(../images/index-subnav-bg.gif)}
 .subnav .subnavLeft{ width:17px; height:27px; background:url(../images/index-subnav-left.gif)}
 .subnav .subnavRight{ width:17px; height:27px; background:url(../images/index-subnav-right.gif)}
-.menu{ width:168px; height:495px; background:#e6f4fa; color:#075587; margin-left:5px;}
+.menu{ width:11%; height:100%; background:#e6f4fa; color:#075587; margin-left:8px;position:absolute;overflow:hidden; z-index:8}
 .menu ul{ width:168px;}
 .menu ul li{ width:168px; background:url(../images/index-menu-bg.gif) no-repeat; text-align:center}
 .menu ul li a{ height:26px; line-height:26px; color:#075587}
@@ -66,8 +66,8 @@ table { border-collapse: collapse; border-spacing: 0; }
 .sidebar{ width:5px; height:500px;}
 .sidebar .btn{ width:5px; height:39px; background:url(../images/sidebar-on.gif); margin-top:200px;}
 .sidebar .btn:hover{ background-position:0 -39px;}
-.page{ width:100%; height:500px; background:#198bc9}
-.page iframe{ margin:0 auto;}
+.page{ background:#198bc9;width: ;}
+.page iframe{bottom:0;height: 100%;}
 #content .space{ height:5px; font-size:0px; background:#198bc9}
 #main-title{ font-family:Tahoma, Geneva, sans-serif; font-size:50px; text-align:center; color:#075587}
 #main-content{ font-family:Tahoma, Geneva, sans-serif; font-size:30px; text-align:center; color:#000;}
@@ -90,3 +90,4 @@ table { border-collapse: collapse; border-spacing: 0; }
 .pageColumn tbody .checkBox{ background:#f1f7f9; border:1px solid #bfd8e0; text-align:center}
 .pageColumn tbody td{ text-align:center;}
 /* .pageColumn */
+.right{position:absolute;right:0;top:83px;bottom:0; z-index:6;width:88%;height: 20px;}  

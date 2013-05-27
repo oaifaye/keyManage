@@ -1,5 +1,6 @@
 package com.keyManage.service.kindOfKey;
 
+import java.util.List;
 import java.util.Map;
 
 import com.keyManage.base.PaginationSupport;
@@ -13,5 +14,5 @@ public interface KindOfKeyService {
 	public void update(KindOfKey kindOfKey);
 	public void removeAll(String[] ids);
 	public KindOfKey findByPrimaryKey(String id);
-	
+	public List<KindOfKey> findListByParams(Map<String, Object> params);
 }
