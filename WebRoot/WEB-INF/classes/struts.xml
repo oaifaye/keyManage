@@ -11,7 +11,7 @@
 	<!-- 开发模式 -->
 	<constant name="struts.devMode" value="true"/>
     <constant name="struts.enable.DynamicMethodInvocation" value="false" />
-    <constant name="struts.i18n.encoding" value="utf-8" />   
+    <constant name="struts.i18n.encoding" value="utf-8" />
     <!-- 加入下面的配置修改struts.xml不需重启服务 --> 
 	<constant name="struts.configuration.xml.reload" value="true"/>
 	<constant name="struts.multipart.maxSize" value="5242880"/>
@@ -52,6 +52,8 @@
 		<action name="contain_*" class="containAction" method="{1}">
 			<result name="success" type="redirect" >contain_init</result>
 			<result name="initShipment">/business/shipment.jsp</result>
+			<result name="initEditShipment">/business/editShipment.jsp</result>
+			<result name="shipmentSuccess" type="redirect">/contain_initShipment</result>
 			<result name="initContain">/business/contain.jsp</result>
 			<result name="error">/404.jsp</result>
 		</action>

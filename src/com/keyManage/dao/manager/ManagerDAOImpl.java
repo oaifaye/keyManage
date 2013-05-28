@@ -5,8 +5,6 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-
 import com.keyManage.base.HibernateGenericDAOImpl;
 import com.keyManage.bean.Manager;
 

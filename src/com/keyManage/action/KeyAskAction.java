@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+import com.keyManage.base.PaginationSupport;
 import com.keyManage.bean.KeyAsk;
 import com.keyManage.bean.KindOfKey;
 import com.keyManage.bean.Manager;
@@ -27,6 +28,8 @@ public class KeyAskAction extends ActionSupport {
 	private KeyAsk keyAsk;
 	private KindOfKey kindOfKey;
 	private String askDate;
+	private int currentPage;
+	private PaginationSupport paginationSupport;
 
 	//==============================================锁申请用户===========================================================
 	//初始化keyAsk.jsp
@@ -63,12 +66,12 @@ public class KeyAskAction extends ActionSupport {
 	
 	//初始化listKeyAsk.jsp
 	public String initListKeyAsk(){
+		if(currentPage<=1){
+			currentPage=1;
+		}
 		try {
-			Map<String, Object> params= new HashMap<String, Object>();
 			Manager manager = (Manager)ActionContext.getContext().getSession().get("manager");
-			params.put("isDelete", "1");
-			params.put("managerByCreateBy.id", manager.getId());
-			keyAskList=keyAskService.findListByParams(params);
+			paginationSupport=keyAskService.findKeyAskByPage(manager.getId(),currentPage, 2);
 			return "initListKeyAsk";
 		} catch (Exception e) {
 			return ERROR;
@@ -139,5 +142,21 @@ public class KeyAskAction extends ActionSupport {
 
 	public void setKeyAskList(List<KeyAsk> keyAskList) {
 		this.keyAskList = keyAskList;
+	}
+
+	public int getCurrentPage() {
+		return currentPage;
+	}
+
+	public void setCurrentPage(int currentPage) {
+		this.currentPage = currentPage;
+	}
+
+	public PaginationSupport getPaginationSupport() {
+		return paginationSupport;
+	}
+
+	public void setPaginationSupport(PaginationSupport paginationSupport) {
+		this.paginationSupport = paginationSupport;
 	}
 }

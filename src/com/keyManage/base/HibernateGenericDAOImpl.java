@@ -29,7 +29,6 @@ import org.springframework.util.Assert;
 public class HibernateGenericDAOImpl<T> extends HibernateDaoSupport implements
 		HibernateGenericDAO<T> {
 	protected final Log logger = LogFactory.getLog(this.getClass());
-	private static final int BATCH_SIZE = 50;
 	protected Class<T> entityClass;
 	protected String entityClassName;
 	List<T> resultList = null;

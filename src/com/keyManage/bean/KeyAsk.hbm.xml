@@ -29,7 +29,7 @@
             <column name="AskNum" />
         </property>
         <property name="askRemark" type="java.lang.String">
-            <column name="AskRemark" />
+            <column name="AskRemark" length="100" />
         </property>
         <property name="isFinished" type="java.lang.String">
             <column name="IsFinished" length="1" />

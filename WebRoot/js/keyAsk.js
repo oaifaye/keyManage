@@ -1,7 +1,7 @@
 $(function(){
 	
 	//申请取页面切换
-	$("#askKey").click(function(){
+	$(".askKey").click(function(){
 		// 设置div greybackground的高与body一样
 		var winHeight = $(document).height();
 		$("#greybackground").css({

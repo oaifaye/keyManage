@@ -16,9 +16,10 @@
 <title>锁仓库</title>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/list.js"></script>
-<link rel="stylesheet" href="css/list.css" type="text/css"></link>
 <script type="text/javascript" src="js/keyAsk.js"></script>
 <script type="text/javascript" src="js/Calendar3.js"></script>
+<script type="text/javascript" src="js/listKeyAsk.js"></script>
+<link rel="stylesheet" href="css/list.css" type="text/css"></link>
 </head>
 
 <body>
@@ -36,7 +37,7 @@
 					<th width="">操作</th>
 				</thead>
 				<tbody>
-					<s:iterator value="keyAskList">
+					<s:iterator value="paginationSupport.items">
 						<tr>
 							<td><s:property value="kindOfKey.kindName" />
 							</td>
@@ -54,6 +55,11 @@
 							</td>
 						</tr>
 					</s:iterator>
+					<tr>
+						<td colspan="6" class="pageControl">
+							<%@ include file="../include/pageControl.jsp" %>
+						</td>
+					</tr>
 				</tbody>
 			</table>
 	</div>

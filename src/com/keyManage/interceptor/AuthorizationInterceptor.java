@@ -2,8 +2,6 @@ package com.keyManage.interceptor;
 
 import java.util.Map;
 
-import org.apache.struts2.ServletActionContext;
-
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
 

@@ -1,6 +1,5 @@
 package com.keyManage.service.contain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +33,6 @@ public class ContainServiceImpl implements ContainService {
 			contain.setIsDelete("0");
 			containDAO.update(contain);
 		}
-		
 	}
 
 	@Override
@@ -52,15 +50,6 @@ public class ContainServiceImpl implements ContainService {
 			int currentPage, int pageSize) {
 		return containDAO.findByPage(params, currentPage, pageSize);
 	}
-//	@Override
-//	public List findCountByKindOfKeyID(String saveOrTake) {
-//		return containDAO.findCountByKindOfKeyID(saveOrTake);
-//	}
-//	@Override
-//	public List findCountIDByKindOfKeyID(String saveOrTake) {
-//		return containDAO.findCountIDByKindOfKeyID(saveOrTake);
-////		return containDAO.findw();
-//	}
 	
 	/**
 	 * 按KindOfKeyID算取各种锁的剩余数量
@@ -86,8 +75,38 @@ public class ContainServiceImpl implements ContainService {
 				}
 			}
 		}
-		
 		return countObjectList;
+	}
+	
+	/**
+	 * 按KindOfKeyID和批号算取各种锁的剩余数量
+	 * */
+	public List<CountObject> findLastKey(String kindOfKeyID){
+		List<CountObject> countObjectList = containDAO.findCountLotNumberByKindOfKeyID("0", kindOfKeyID);
+		List<CountObject> countTokenList = containDAO.findCountLotNumberByKindOfKeyID("1", kindOfKeyID);
+		for(int i=0;i<countObjectList.size();i++){
+		//往CountObject中添加name与备注
+			CountObject addItem = countObjectList.get(i);
+			for(CountObject c:countTokenList){
+				if(addItem.getItem().equals(c.getItem())){
+				//入库减去出库
+					addItem.setNum(addItem.getNum()-c.getNum());
+				}
+			}
+		}
+		return countObjectList;
+	}
+	
+	@Override
+	public void addAllContain(List<Contain> ContainList) {
+		containDAO.insertAllContain(ContainList);
+	}
+	
+	/**
+	 * 按请求锁的id查询锁的剩余数量
+	 * */
+	public Integer findCountNumByKeyAskID(String keyAskID,String isDelete){
+		return containDAO.findCountNumByKeyAskID(keyAskID, isDelete);
 	}
 	
 	public ContainDAO getContainDAO() {

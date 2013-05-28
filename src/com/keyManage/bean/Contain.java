@@ -18,10 +18,13 @@ public class Contain implements java.io.Serializable {
 	private String lotNumber;
 	private Timestamp containDate;
 	private Integer keyNum;
+	private String remark;
 	private String saveOrTake;
 	private String isDelete;
 	private Timestamp createDate;
 	private Timestamp updateDate;
+	
+	
 
 	// Constructors
 
@@ -37,8 +40,9 @@ public class Contain implements java.io.Serializable {
 	/** full constructor */
 	public Contain(String id, KindOfKey kindOfKey, Manager managerByUpdateBy,
 			KeyAsk keyAsk, Manager managerByCreateBy, String lotNumber,
-			Timestamp containDate, Integer keyNum, String saveOrTake,
-			String isDelete, Timestamp createDate, Timestamp updateDate) {
+			Timestamp containDate, Integer keyNum, String remark,
+			String saveOrTake, String isDelete, Timestamp createDate,
+			Timestamp updateDate) {
 		this.id = id;
 		this.kindOfKey = kindOfKey;
 		this.managerByUpdateBy = managerByUpdateBy;
@@ -47,6 +51,7 @@ public class Contain implements java.io.Serializable {
 		this.lotNumber = lotNumber;
 		this.containDate = containDate;
 		this.keyNum = keyNum;
+		this.remark = remark;
 		this.saveOrTake = saveOrTake;
 		this.isDelete = isDelete;
 		this.createDate = createDate;
@@ -117,6 +122,14 @@ public class Contain implements java.io.Serializable {
 
 	public void setKeyNum(Integer keyNum) {
 		this.keyNum = keyNum;
+	}
+
+	public String getRemark() {
+		return this.remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 	public String getSaveOrTake() {

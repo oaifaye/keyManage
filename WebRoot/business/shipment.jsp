@@ -16,9 +16,10 @@
 <title>锁仓库</title>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/list.js"></script>
-<link rel="stylesheet" href="css/list.css" type="text/css"></link>
-<script type="text/javascript" src="js/keyAsk.js"></script>
 <script type="text/javascript" src="js/Calendar3.js"></script>
+<script type="text/javascript" src="js/shipment.js"></script>
+
+<link rel="stylesheet" href="css/list.css" type="text/css"></link>
 </head>
 
 <body>
@@ -31,13 +32,14 @@
 					<th width="">密码锁名称</th>
 					<th width="">需求时间</th>
 					<th width="">需求锁数量</th>
+					<th width="">满足数量</th>
 					<th width="">备注</th>
 					<th width="">申请人</th>
 					<th width="">响应状态</th>
 					<th width="">操作</th>
 				</thead>
 				<tbody>
-					<s:iterator value="keyAskList">
+					<s:iterator value="paginationSupport.items">
 						<tr>
 							<td><s:property value="kindOfKey.kindName" />
 							</td>
@@ -45,30 +47,34 @@
 							</td>
 							<td><s:property value="askNum" />
 							</td>
+							<td><s:property value="lastNum" />
+							</td>
 							<td><s:property value="askRemark" />
 							</td>
 							<td><s:property value="managerByCreateBy.name" />
 							</td>
-							<td><s:property value="isFinished" />
+							<td>
+								<s:if test='isFinished=="0"'>已完结</s:if>
+								<s:else>未完结</s:else>
 							</td>
 							<td>
-								<a id="askKey"></a>
-								<input type="hidden" id="id" value="${item}" />
+								<s:if test='isFinished=="0"'>回应</s:if>
+								<s:else>
+									<s:a action="/contain_initEditShipment" >
+										<s:param name="keyAskId" value="id"></s:param>
+										回应
+									</s:a>
+								</s:else>
 							</td>
 						</tr>
 					</s:iterator>
+					<tr>
+						<td colspan="8" class="pageControl">
+							<%@ include file="../include/pageControl.jsp" %>
+						</td>
+					</tr>
 				</tbody>
 			</table>
-	</div>
-	<div id="askKeySubmit">
-		<form action="keyAsk_addKeyAsk">
-			密码锁名称：<a id="keyName"></a>
-			申请数量：<s:textfield id="askNum" name="keyAsk.askNum" cssClass="text"></s:textfield>
-			需求时间：<s:textfield id="askDate" name="askDate" onclick="new Calendar().show(this)" readonly="true" cssClass="text"></s:textfield>
-			需求备注：<s:textfield id="askRemark" name="keyAsk.askRemark" cssClass="text"></s:textfield>
-			<input type="hidden" id="kindOfKeyId" name="kindOfKey.id" />
-			<input type="submit" value="提交" class="button2" />
-		</form>
 	</div>
 </body>
 </html>

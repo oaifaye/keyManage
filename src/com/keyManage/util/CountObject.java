@@ -5,6 +5,7 @@ public class CountObject {
 	private String name;
 	private String remark;
 	private Integer num;
+	private Integer tokenNum;
 	
 	public String getItem() {
 		return item;
@@ -29,6 +30,12 @@ public class CountObject {
 	}
 	public void setNum(Integer num) {
 		this.num = num;
+	}
+	public Integer getTokenNum() {
+		return tokenNum;
+	}
+	public void setTokenNum(Integer tokenNum) {
+		this.tokenNum = tokenNum;
 	}
 	
 }
