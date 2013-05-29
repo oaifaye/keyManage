@@ -175,6 +175,17 @@ public class ContainServiceImpl implements ContainService {
 		return num;
 	}
 	
+	/**按锁种类id查询*/
+	public Integer findNumByKindOfKeyID(String kindOfKeyID){
+		Integer num=0;
+		List<CountObject> countObjectList= this.findLastKey();
+		for(CountObject countObject:countObjectList){
+			if(countObject.getItem().equals(kindOfKeyID)){
+				num=countObject.getNum();
+			}
+		}
+		return num;
+	}
 	
 	public ContainDAO getContainDAO() {
 		return containDAO;

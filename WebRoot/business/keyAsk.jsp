@@ -19,6 +19,9 @@
 <link rel="stylesheet" href="css/list.css" type="text/css"></link>
 <script type="text/javascript" src="js/keyAsk.js"></script>
 <script type="text/javascript" src="js/Calendar3.js"></script>
+<script type='text/javascript' src='<%=basePath%>dwr/engine.js'></script> 
+<script type='text/javascript' src='<%=basePath%>dwr/util.js'></script> 
+<script type='text/javascript' src='<%=basePath%>dwr/interface/containService.js'></script> 
 </head>
 
 <body>
@@ -36,11 +39,11 @@
 				<tbody>
 					<s:iterator value="CountObjectList">
 						<tr>
-							<td><s:property value="name" />
+							<td><div id="countObjectName"><s:property value="name" /></div>
 							</td>
 							<td><s:property value="remark" />
 							</td>
-							<td><s:property value="num" />
+							<td><div id="countObjectNum"><s:property value="num" /></div>
 							</td>
 							<td>
 								<a class="askKey">申请取锁</a>
@@ -52,13 +55,41 @@
 			</table>
 	</div>
 	<div id="askKeySubmit">
-		<s:form action="keyAsk_addKeyAsk" theme="simple">
-			密码锁名称：<a id="keyName"></a>
-			申请数量：<s:textfield id="askNum" name="keyAsk.askNum" cssClass="text"></s:textfield>
-			需求时间：<s:textfield id="askDate" name="askDate" onclick="new Calendar().show(this)" readonly="true" cssClass="text"></s:textfield>
-			需求备注：<s:textfield id="askRemark" name="keyAsk.askRemark" cssClass="text"></s:textfield>
-			<input type="hidden" id="kindOfKeyId" name="kindOfKey.id" />
-			<input type="submit" value="提交" class="button2" />
+		<s:form id="addKeyAsk" action="keyAsk_addKeyAsk" theme="simple" name="addKeyAsk">
+			<table class="table1">
+				<tr>
+					<td width="24%">密码锁名称</td>
+					<td><span id="keyName" class="text"></span></td>
+				</tr>
+				<tr>
+					<td>剩余锁数量</td>
+					<td><span id="num" class="text"></span></td>
+				</tr>
+				<tr>
+					<td>申请数量</td>
+					<td>
+						<s:textfield id="askNum" name="keyAsk.askNum" cssClass="text" maxLength="6"></s:textfield>
+					</td>
+				</tr>
+				<tr>
+					<td>需求时间</td>
+					<td>
+						<s:textfield id="askDate" name="askDate" onclick="new Calendar().show(this)" readonly="true" cssClass="text"></s:textfield>
+					</td>
+				</tr>
+				<tr>
+					<td>需求备注</td>
+					<td>
+						<s:textfield id="askRemark" name="keyAsk.askRemark" cssClass="text" maxLength="85"></s:textfield>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<input type="hidden" id="kindOfKeyId" name="kindOfKey.id" />
+						<input id="submit" type="submit" value="提交" class="button2" />
+					</td>
+				</tr>
+			</table>
 		</s:form>
 	</div>
 </body>

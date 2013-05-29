@@ -41,4 +41,7 @@ public interface ContainService {
 	public List<Contain> findLastNumOfContain(String keyAskId);
 	/**计算一个请求单中的已经用掉的所得数量*/
 	public Integer findNumOfUsed(String keyAskId);
+	/**按锁种类id查询剩余数量*/
+	public Integer findNumByKindOfKeyID(String kindOfKeyID);
+	
 }

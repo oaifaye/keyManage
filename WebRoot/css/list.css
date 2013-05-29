@@ -46,7 +46,30 @@ a:hover {
 	height: 25px;
 }
 
-.pageColumn thead {
+.table1{
+	margin: auto;
+	width: 85%;
+	border-collapse: collapse;
+	table-layout: fixed;
+	cursor: default;
+	text-align: center;
+}
+
+.table1 th,.table1 tr td{
+	border: solid #ccc 1px;
+	height: 35px;
+}
+
+#askRemark{
+	width: 350px;
+}
+
+.text{
+	float: left;
+	margin-left: 5px;
+}
+
+.pageColumn thead,.table1 thead {
 	color: #075587;
 	background: url(../images/page-thead-bg.gif);
 }
@@ -82,7 +105,7 @@ a:hover {
 
 #greybackground {
 	background: #000;
-	filter: Alpha(opacity =   30);
+	filter: Alpha(opacity = 30);
 	-moz-opacity: .3;
 	opacity: 0.5;
 	display: block;
@@ -97,9 +120,9 @@ a:hover {
 #askKeySubmit {
 	position: absolute;
 	top: 50px;
-	left: 200px;
-	height: 380px;
-	width: 700px;
+	left: 250px;
+	height: 280px;
+	width: 600px;
 	background-color: #ffffff;
 	text-align: center;
 	padding-top: 50px;
