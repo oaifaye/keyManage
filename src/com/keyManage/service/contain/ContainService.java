@@ -31,5 +31,14 @@ public interface ContainService {
 	 * 按请求锁的id查询锁的已满足数量
 	 * */
 	public Integer findCountNumByKeyAskID(String keyAskID,String isDelete);
-	
+	/**
+	 * 按KindOfKeyID和批号算取各种锁的数量
+	 * */
+	public List<CountObject> findCountLotNumberByKindOfKeyID(String saveOrTake,String kindOfKeyID);
+	/**
+	 * 计算锁用途中减去已经填写用途的锁的每批锁的数量
+	 * */
+	public List<Contain> findLastNumOfContain(String keyAskId);
+	/**计算一个请求单中的已经用掉的所得数量*/
+	public Integer findNumOfUsed(String keyAskId);
 }

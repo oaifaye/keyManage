@@ -21,7 +21,9 @@ public class KindOfKey implements java.io.Serializable {
 	private String isDelete;
 	private Timestamp createDate;
 	private Timestamp updateDate;
-	private Set keies = new HashSet(0);
+	private Set contains = new HashSet(0);
+	private Set keyMessages = new HashSet(0);
+	private Set keyAsks = new HashSet(0);
 	private Set kindOfKeies = new HashSet(0);
 
 	// Constructors
@@ -40,7 +42,7 @@ public class KindOfKey implements java.io.Serializable {
 	public KindOfKey(String id, Manager managerByUpdateBy, KindOfKey kindOfKey,
 			Manager managerByCreateBy, String kindName, String remark,
 			String isDelete, Timestamp createDate, Timestamp updateDate,
-			Set keies, Set kindOfKeies) {
+			Set contains, Set keyMessages, Set keyAsks, Set kindOfKeies) {
 		this.id = id;
 		this.managerByUpdateBy = managerByUpdateBy;
 		this.kindOfKey = kindOfKey;
@@ -50,7 +52,9 @@ public class KindOfKey implements java.io.Serializable {
 		this.isDelete = isDelete;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
-		this.keies = keies;
+		this.contains = contains;
+		this.keyMessages = keyMessages;
+		this.keyAsks = keyAsks;
 		this.kindOfKeies = kindOfKeies;
 	}
 
@@ -128,12 +132,28 @@ public class KindOfKey implements java.io.Serializable {
 		this.updateDate = updateDate;
 	}
 
-	public Set getKeies() {
-		return this.keies;
+	public Set getContains() {
+		return this.contains;
 	}
 
-	public void setKeies(Set keies) {
-		this.keies = keies;
+	public void setContains(Set contains) {
+		this.contains = contains;
+	}
+
+	public Set getKeyMessages() {
+		return this.keyMessages;
+	}
+
+	public void setKeyMessages(Set keyMessages) {
+		this.keyMessages = keyMessages;
+	}
+
+	public Set getKeyAsks() {
+		return this.keyAsks;
+	}
+
+	public void setKeyAsks(Set keyAsks) {
+		this.keyAsks = keyAsks;
 	}
 
 	public Set getKindOfKeies() {

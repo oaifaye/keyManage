@@ -1,5 +1,6 @@
 package com.keyManage.service.contain;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,6 +8,7 @@ import com.keyManage.base.PaginationSupport;
 import com.keyManage.bean.Contain;
 import com.keyManage.bean.KindOfKey;
 import com.keyManage.dao.contain.ContainDAO;
+import com.keyManage.dao.keyMessage.KeyMessageDAO;
 import com.keyManage.dao.kindOfKey.KindOfKeyDAO;
 import com.keyManage.util.CountObject;
 
@@ -14,6 +16,7 @@ public class ContainServiceImpl implements ContainService {
 	
 	private ContainDAO containDAO;
 	private KindOfKeyDAO kindOfKeyDAO;
+	private KeyMessageDAO keyMessageDAO;
 
 	@Override
 	public void addContain(Contain contain) {
@@ -61,17 +64,19 @@ public class ContainServiceImpl implements ContainService {
 		for(int i=0;i<countObjectList.size();i++){
 			ids[i]=countObjectList.get(i).getItem();
 		}
-		List<KindOfKey> kindOfKeyList=kindOfKeyDAO.findByIds(ids);
+		if(ids.length>0){
+			List<KindOfKey> kindOfKeyList=kindOfKeyDAO.findByIds(ids);
 		
-		for(int i=0;i<countObjectList.size();i++){
-		//往CountObject中添加name与备注
-			CountObject addItem = countObjectList.get(i);
-			addItem.setName(kindOfKeyList.get(i).getKindName());
-			addItem.setRemark(kindOfKeyList.get(i).getRemark());
-			for(CountObject c:countTokenList){
-				if(addItem.getItem().equals(c.getItem())){
-				//入库减去出库
-					addItem.setNum(addItem.getNum()-c.getNum());
+			for(int i=0;i<countObjectList.size();i++){
+			//往CountObject中添加name与备注
+				CountObject addItem = countObjectList.get(i);
+				addItem.setName(kindOfKeyList.get(i).getKindName());
+				addItem.setRemark(kindOfKeyList.get(i).getRemark());
+				for(CountObject c:countTokenList){
+					if(addItem.getItem().equals(c.getItem())){
+						//入库减去出库
+						addItem.setNum(addItem.getNum()-c.getNum());
+					}
 				}
 			}
 		}
@@ -109,6 +114,68 @@ public class ContainServiceImpl implements ContainService {
 		return containDAO.findCountNumByKeyAskID(keyAskID, isDelete);
 	}
 	
+	/**
+	 * 按KindOfKeyID和批号算取各种锁的数量
+	 * */
+	public List<CountObject> findCountLotNumberByKindOfKeyID(String saveOrTake,String kindOfKeyID){
+		return containDAO.findCountLotNumberByKindOfKeyID(saveOrTake,kindOfKeyID);
+	}
+	
+	/**
+	 * 计算锁用途中减去已经填写用途的锁的每批锁的数量
+	 * */
+	public List<Contain> findLastNumOfContain(String keyAskId){
+		Map<String, Object> params=new HashMap<String, Object>();
+		params.put("isDelete", "1");
+		params.put("keyAsk.id", keyAskId);
+		//未减去已经填写用途的锁前的每批锁的数量
+		List<Contain> containList = containDAO.findListByParams(params);
+		if(containList!=null&&containList.size()!=0){
+			String[] containIds=new String[containList.size()];
+			for(int i= 0;i<containList.size();i++){
+				containIds[i]=containList.get(i).getId();
+			}
+			List<CountObject> countObjectList=keyMessageDAO.findNumByContainIds(containIds);
+			//每批总数减去已经填写用途的锁的每批锁的数量
+			if(countObjectList!=null&&countObjectList.size()!=0){
+				for(Contain contain:containList){
+					for(CountObject countObject:countObjectList){
+						if(contain.getId().equals(countObject.getItem())){
+							int num = contain.getKeyNum()-countObject.getNum();
+							contain.setKeyNum(num);
+						}
+					}
+				}
+			}
+		}
+		return containList;
+	}
+	
+	//计算一个请求单中的已经用掉的锁得数量
+	public Integer findNumOfUsed(String keyAskId){
+		Integer num=0;
+		Map<String, Object> params=new HashMap<String, Object>();
+		params.put("isDelete", "1");
+		params.put("keyAsk.id", keyAskId);
+		//未减去已经填写用途的锁前的每批锁的数量
+		List<Contain> containList = containDAO.findListByParams(params);
+		if(containList!=null&&containList.size()!=0){
+			String[] containIds=new String[containList.size()];
+			for(int i= 0;i<containList.size();i++){
+				containIds[i]=containList.get(i).getId();
+			}
+			List<CountObject> countObjectList=keyMessageDAO.findNumByContainIds(containIds);
+			//每批总数减去已经填写用途的锁的每批锁的数量
+			if(countObjectList!=null&&countObjectList.size()!=0){
+				for(CountObject countObject:countObjectList){
+					num=countObject.getNum()+num;
+				}
+			}
+		}
+		return num;
+	}
+	
+	
 	public ContainDAO getContainDAO() {
 		return containDAO;
 	}
@@ -123,6 +190,14 @@ public class ContainServiceImpl implements ContainService {
 
 	public void setKindOfKeyDAO(KindOfKeyDAO kindOfKeyDAO) {
 		this.kindOfKeyDAO = kindOfKeyDAO;
+	}
+
+	public KeyMessageDAO getKeyMessageDAO() {
+		return keyMessageDAO;
+	}
+
+	public void setKeyMessageDAO(KeyMessageDAO keyMessageDAO) {
+		this.keyMessageDAO = keyMessageDAO;
 	}
 
 }

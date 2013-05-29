@@ -1,6 +1,8 @@
 package com.keyManage.bean;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Contain entity. @author MyEclipse Persistence Tools
@@ -23,8 +25,7 @@ public class Contain implements java.io.Serializable {
 	private String isDelete;
 	private Timestamp createDate;
 	private Timestamp updateDate;
-	
-	
+	private Set keyMessages = new HashSet(0);
 
 	// Constructors
 
@@ -42,7 +43,7 @@ public class Contain implements java.io.Serializable {
 			KeyAsk keyAsk, Manager managerByCreateBy, String lotNumber,
 			Timestamp containDate, Integer keyNum, String remark,
 			String saveOrTake, String isDelete, Timestamp createDate,
-			Timestamp updateDate) {
+			Timestamp updateDate, Set keyMessages) {
 		this.id = id;
 		this.kindOfKey = kindOfKey;
 		this.managerByUpdateBy = managerByUpdateBy;
@@ -56,6 +57,7 @@ public class Contain implements java.io.Serializable {
 		this.isDelete = isDelete;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
+		this.keyMessages = keyMessages;
 	}
 
 	// Property accessors
@@ -162,6 +164,14 @@ public class Contain implements java.io.Serializable {
 
 	public void setUpdateDate(Timestamp updateDate) {
 		this.updateDate = updateDate;
+	}
+
+	public Set getKeyMessages() {
+		return this.keyMessages;
+	}
+
+	public void setKeyMessages(Set keyMessages) {
+		this.keyMessages = keyMessages;
 	}
 
 }

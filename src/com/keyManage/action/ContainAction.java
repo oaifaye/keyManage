@@ -9,7 +9,6 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.util.Assert;
 
-import com.keyManage.base.DaoException;
 import com.keyManage.base.PaginationSupport;
 import com.keyManage.bean.Contain;
 import com.keyManage.bean.KeyAsk;
@@ -87,7 +86,7 @@ public class ContainAction extends ActionSupport {
 		}
 	}
 	
-	//初始化shipment.jsp
+	//初始化shipment.jsp(锁出库)
 		@SuppressWarnings("unchecked")
 		public String initShipment(){
 			if(currentPage<=1){
@@ -101,7 +100,9 @@ public class ContainAction extends ActionSupport {
 					if(tokenNum==null){
 						tokenNum=0;
 					}
-					keyAsk.setLastNum(tokenNum);
+					Integer usedNum=containService.findNumOfUsed(keyAsk.getId());
+					keyAsk.setTokenNum(tokenNum);
+					keyAsk.setUsedNum(usedNum);
 				}
 				return "initShipment";
 			} catch (Exception e) {
@@ -109,7 +110,7 @@ public class ContainAction extends ActionSupport {
 			}
 		}
 		
-	//根据所得种类的id初始化editShipment.jsp
+	//根据所得种类的id初始化editShipment.jsp（编辑锁出库）
 	public String initEditShipment(){
 		try {
 			keyAsk=keyAskService.findByPrimaryKey(keyAskId);
@@ -127,6 +128,7 @@ public class ContainAction extends ActionSupport {
 		}
 	}
 	
+	//锁出库处理
 	public String shipment(){
 		try {
 		//向Contain中插入出库信息

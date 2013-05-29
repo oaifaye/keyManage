@@ -66,7 +66,7 @@ public class ContainDAOImpl extends HibernateGenericDAOImpl<Contain> implements
 	@SuppressWarnings("unchecked")
 	public Integer findCountNumByKeyAskID(String keyAskID,String isDelete) {
 		Integer num = null;
-		String hql = "SELECT SUM(KeyNum) FROM Contain WHERE KeyAskID=? AND IsDelete=? GROUP BY KeyAskID ORDER BY SUM(KeyNum)";
+		String hql = "SELECT SUM(KeyNum) FROM Contain WHERE KeyAskID=? AND IsDelete=? AND SaveOrTake='1' GROUP BY KeyAskID ORDER BY SUM(KeyNum)";
 		Session session = this.getSession();
 		List<Object> list =session.createSQLQuery(hql)
 								.setString(0, keyAskID)

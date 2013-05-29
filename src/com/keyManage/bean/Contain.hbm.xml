@@ -46,5 +46,11 @@
         <property name="updateDate" type="java.sql.Timestamp">
             <column name="UpdateDate" length="23" />
         </property>
+        <set name="keyMessages" inverse="true">
+            <key>
+                <column name="ContainID" length="32" />
+            </key>
+            <one-to-many class="com.keyManage.bean.KeyMessage" />
+        </set>
     </class>
 </hibernate-mapping>

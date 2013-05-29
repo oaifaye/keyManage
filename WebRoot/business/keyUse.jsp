@@ -16,9 +16,9 @@
 <title>锁仓库</title>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/list.js"></script>
-<script type="text/javascript" src="js/keyAsk.js"></script>
 <script type="text/javascript" src="js/Calendar3.js"></script>
-<script type="text/javascript" src="js/listKeyAsk.js"></script>
+<script type="text/javascript" src="js/shipment.js"></script>
+
 <link rel="stylesheet" href="css/list.css" type="text/css"></link>
 </head>
 
@@ -27,49 +27,38 @@
 	<div class="pageTitle">密码锁仓库管理—密码锁种类管理</div>
 	<div class="pageColumn">
 		<div class="add"></div>
+		<s:property value="lastNum" />
+		<s:form action="/contain_shipment">
 			<table class="table">
 				<thead>
-					<th width="">密码锁名称</th>
-					<th width="">需求时间</th>
-					<th width="">需求锁数量</th>
-					<th width="">满足锁数量</th>
-					<th width="">已用锁数量</th>
-					<th width="">备注</th>
-					<th width="">响应状态</th>
+					<th width="">密码锁批号</th>
+					<th width="">空闲数量</th>
+					<th width="">获批时间</th>
 					<th width="">操作</th>
 				</thead>
 				<tbody>
-					<s:iterator value="paginationSupport.items">
+					<s:iterator value="containList">
 						<tr>
-							<td><s:property value="kindOfKey.kindName" />
+							<td><s:property value="lotNumber" />
 							</td>
-							<td><s:date name="askDate" format="yyyy-MM-dd" />
+							<td><s:property value="keyNum" />
 							</td>
-							<td><s:property value="askNum" />
-							</td>
-							<td><s:property value="tokenNum" />
-							</td>
-							<td><s:property value="usedNum" />
-							</td>
-							<td><s:property value="askRemark" />
-							</td>
-							<td><s:property value="isFinished" />
+							<td><s:date name="createDate" format="yyyy-MM-dd hh:mm:ss"/>
 							</td>
 							<td>
-								<s:a action="keyAsk_initKeyUse" >
-									<s:param name="keyAskId" value="id"></s:param>
+								<s:a action="keyMessage_initAddKey" >
+									<s:param name="containId" value="id"></s:param>
 									填写用途
 								</s:a>
 							</td>
 						</tr>
 					</s:iterator>
-					<tr>
-						<td colspan="8" class="pageControl">
-							<%@ include file="../include/pageControl.jsp" %>
-						</td>
-					</tr>
 				</tbody>
 			</table>
+			<input type="submit" value="提交" class="button2" />
+			<s:hidden name="keyAsk.id" value="%{keyAsk.id}"/>
+			<s:hidden name="kindOfKey.id" value="%{keyAsk.kindOfKey.id}"/>
+		</s:form>
 	</div>
 </body>
 </html>

@@ -33,6 +33,7 @@
 					<th width="">需求时间</th>
 					<th width="">需求锁数量</th>
 					<th width="">满足数量</th>
+					<th width="">已用锁数量</th>
 					<th width="">备注</th>
 					<th width="">申请人</th>
 					<th width="">响应状态</th>
@@ -47,7 +48,9 @@
 							</td>
 							<td><s:property value="askNum" />
 							</td>
-							<td><s:property value="lastNum" />
+							<td><s:property value="tokenNum" />
+							</td>
+							<td><s:property value="usedNum" />
 							</td>
 							<td><s:property value="askRemark" />
 							</td>
@@ -69,7 +72,7 @@
 						</tr>
 					</s:iterator>
 					<tr>
-						<td colspan="8" class="pageControl">
+						<td colspan="9" class="pageControl">
 							<%@ include file="../include/pageControl.jsp" %>
 						</td>
 					</tr>

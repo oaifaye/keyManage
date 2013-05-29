@@ -3,10 +3,10 @@ package com.keyManage.bean;
 import java.sql.Timestamp;
 
 /**
- * Key entity. @author MyEclipse Persistence Tools
+ * KeyMessage entity. @author MyEclipse Persistence Tools
  */
 
-public class Key implements java.io.Serializable {
+public class KeyMessage implements java.io.Serializable {
 
 	// Fields
 
@@ -14,14 +14,16 @@ public class Key implements java.io.Serializable {
 	private KindOfKey kindOfKey;
 	private Version version;
 	private Manager managerByUpdateBy;
-	private LotNumber lotNumber;
 	private Department department;
 	private ExpressType expressType;
 	private Manager managerByCreateBy;
+	private Contain contain;
 	private String userName;
+	private Integer keyNum;
 	private String expressCode;
 	private String postCode;
 	private Timestamp expressDate;
+	private String remark;
 	private String isDelete;
 	private Timestamp createDate;
 	private Timestamp updateDate;
@@ -29,33 +31,36 @@ public class Key implements java.io.Serializable {
 	// Constructors
 
 	/** default constructor */
-	public Key() {
+	public KeyMessage() {
 	}
 
 	/** minimal constructor */
-	public Key(String id) {
+	public KeyMessage(String id) {
 		this.id = id;
 	}
 
 	/** full constructor */
-	public Key(String id, KindOfKey kindOfKey, Version version,
-			Manager managerByUpdateBy, LotNumber lotNumber,
-			Department department, ExpressType expressType,
-			Manager managerByCreateBy, String userName, String expressCode,
-			String postCode, Timestamp expressDate, String isDelete,
-			Timestamp createDate, Timestamp updateDate) {
+	public KeyMessage(String id, KindOfKey kindOfKey, Version version,
+			Manager managerByUpdateBy, Department department,
+			ExpressType expressType, Manager managerByCreateBy,
+			Contain contain, String userName, Integer keyNum,
+			String expressCode, String postCode, Timestamp expressDate,
+			String remark, String isDelete, Timestamp createDate,
+			Timestamp updateDate) {
 		this.id = id;
 		this.kindOfKey = kindOfKey;
 		this.version = version;
 		this.managerByUpdateBy = managerByUpdateBy;
-		this.lotNumber = lotNumber;
 		this.department = department;
 		this.expressType = expressType;
 		this.managerByCreateBy = managerByCreateBy;
+		this.contain = contain;
 		this.userName = userName;
+		this.keyNum = keyNum;
 		this.expressCode = expressCode;
 		this.postCode = postCode;
 		this.expressDate = expressDate;
+		this.remark = remark;
 		this.isDelete = isDelete;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
@@ -95,14 +100,6 @@ public class Key implements java.io.Serializable {
 		this.managerByUpdateBy = managerByUpdateBy;
 	}
 
-	public LotNumber getLotNumber() {
-		return this.lotNumber;
-	}
-
-	public void setLotNumber(LotNumber lotNumber) {
-		this.lotNumber = lotNumber;
-	}
-
 	public Department getDepartment() {
 		return this.department;
 	}
@@ -127,12 +124,28 @@ public class Key implements java.io.Serializable {
 		this.managerByCreateBy = managerByCreateBy;
 	}
 
+	public Contain getContain() {
+		return this.contain;
+	}
+
+	public void setContain(Contain contain) {
+		this.contain = contain;
+	}
+
 	public String getUserName() {
 		return this.userName;
 	}
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public Integer getKeyNum() {
+		return this.keyNum;
+	}
+
+	public void setKeyNum(Integer keyNum) {
+		this.keyNum = keyNum;
 	}
 
 	public String getExpressCode() {
@@ -157,6 +170,14 @@ public class Key implements java.io.Serializable {
 
 	public void setExpressDate(Timestamp expressDate) {
 		this.expressDate = expressDate;
+	}
+
+	public String getRemark() {
+		return this.remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 	public String getIsDelete() {

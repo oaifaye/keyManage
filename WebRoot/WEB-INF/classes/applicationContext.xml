@@ -23,10 +23,9 @@
 				<value>com/keyManage/bean/Manager.hbm.xml</value>
 				<value>com/keyManage/bean/Contain.hbm.xml</value>
 				<value>com/keyManage/bean/KindOfKey.hbm.xml</value>
-				<value>com/keyManage/bean/LotNumber.hbm.xml</value>
 				<value>com/keyManage/bean/Department.hbm.xml</value>
 				<value>com/keyManage/bean/ExpressType.hbm.xml</value>
-				<value>com/keyManage/bean/Key.hbm.xml</value>
+				<value>com/keyManage/bean/KeyMessage.hbm.xml</value>
 				<value>com/keyManage/bean/Procedure.hbm.xml</value>
 				<value>com/keyManage/bean/Province.hbm.xml</value>
 				<value>com/keyManage/bean/Version.hbm.xml</value>
@@ -107,6 +106,7 @@
 	<bean id="containService" class="com.keyManage.service.contain.ContainServiceImpl">
 		<property name="kindOfKeyDAO" ref="kindOfKeyDAO"></property>
 		<property name="containDAO" ref="containDAOProxy"></property>
+		<property name="keyMessageDAO" ref="keyMessageDAO"></property>
 	</bean>
 	<bean id="containAction" class="com.keyManage.action.ContainAction" scope="prototype">
 		<property name="keyAskService" ref="keyAskService"></property>
@@ -130,5 +130,22 @@
 		<property name="keyAskService" ref="keyAskService"></property>
 		<property name="containService" ref="containService"></property>
 		<property name="kindOfKeyService" ref="kindOfKeyService"></property>
+	</bean>
+	
+	<!-- 锁信息 -->
+	<bean id="keyMessageDAO" class="com.keyManage.dao.keyMessage.KeyMessageDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="keyMessageDAOProxy" parent="txProxyTemplate">
+		<property name="target">
+			<ref local="keyMessageDAO" />
+		</property>
+	</bean>
+	<bean id="keyMessageService" class="com.keyManage.service.keyMessage.KeyMessageServiceImpl">
+		<property name="keyMessageDAO" ref="keyMessageDAOProxy"></property>
+	</bean>
+	<bean id="keyMessageAction" class="com.keyManage.action.KeyMessageAction" scope="prototype">
+		<property name="keyMessageService" ref="keyMessageService"></property>
+		<property name="containService" ref="containService"></property>
 	</bean>
 </beans>

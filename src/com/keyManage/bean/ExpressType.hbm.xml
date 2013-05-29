@@ -28,11 +28,11 @@
         <property name="updateDate" type="java.sql.Timestamp">
             <column name="UpdateDate" length="23" />
         </property>
-        <set name="keies" inverse="true">
+        <set name="keyMessages" inverse="true">
             <key>
                 <column name="ExpressTypeID" length="32" />
             </key>
-            <one-to-many class="com.keyManage.bean.Key" />
+            <one-to-many class="com.keyManage.bean.KeyMessage" />
         </set>
     </class>
 </hibernate-mapping>

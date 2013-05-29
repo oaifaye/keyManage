@@ -26,7 +26,9 @@ public class KeyAsk implements java.io.Serializable {
 	private Timestamp updateDate;
 	private Set contains = new HashSet(0);
 	//此属性不参与数据库
-	private Integer lastNum;
+	private Integer tokenNum;
+	//此属性不参与数据库
+	private Integer usedNum;
 
 	// Constructors
 
@@ -165,12 +167,21 @@ public class KeyAsk implements java.io.Serializable {
 	public void setContains(Set contains) {
 		this.contains = contains;
 	}
-	public Integer getLastNum() {
-		return lastNum;
+
+	public Integer getTokenNum() {
+		return tokenNum;
 	}
 
-	public void setLastNum(Integer lastNum) {
-		this.lastNum = lastNum;
+	public void setTokenNum(Integer tokenNum) {
+		this.tokenNum = tokenNum;
+	}
+
+	public Integer getUsedNum() {
+		return usedNum;
+	}
+
+	public void setUsedNum(Integer usedNum) {
+		this.usedNum = usedNum;
 	}
 
 }

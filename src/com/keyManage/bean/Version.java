@@ -20,7 +20,7 @@ public class Version implements java.io.Serializable {
 	private Timestamp createDate;
 	private String updateBy;
 	private Timestamp updateDate;
-	private Set keies = new HashSet(0);
+	private Set keyMessages = new HashSet(0);
 
 	// Constructors
 
@@ -36,7 +36,7 @@ public class Version implements java.io.Serializable {
 	/** full constructor */
 	public Version(String id, Procedure procedure, String versionName,
 			String isDelete, String createBy, Timestamp createDate,
-			String updateBy, Timestamp updateDate, Set keies) {
+			String updateBy, Timestamp updateDate, Set keyMessages) {
 		this.id = id;
 		this.procedure = procedure;
 		this.versionName = versionName;
@@ -45,7 +45,7 @@ public class Version implements java.io.Serializable {
 		this.createDate = createDate;
 		this.updateBy = updateBy;
 		this.updateDate = updateDate;
-		this.keies = keies;
+		this.keyMessages = keyMessages;
 	}
 
 	// Property accessors
@@ -114,12 +114,12 @@ public class Version implements java.io.Serializable {
 		this.updateDate = updateDate;
 	}
 
-	public Set getKeies() {
-		return this.keies;
+	public Set getKeyMessages() {
+		return this.keyMessages;
 	}
 
-	public void setKeies(Set keies) {
-		this.keies = keies;
+	public void setKeyMessages(Set keyMessages) {
+		this.keyMessages = keyMessages;
 	}
 
 }

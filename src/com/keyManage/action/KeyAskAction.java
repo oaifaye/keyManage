@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 
 import com.keyManage.base.PaginationSupport;
+import com.keyManage.bean.Contain;
 import com.keyManage.bean.KeyAsk;
 import com.keyManage.bean.KindOfKey;
 import com.keyManage.bean.Manager;
@@ -28,7 +29,9 @@ public class KeyAskAction extends ActionSupport {
 	private KeyAsk keyAsk;
 	private KindOfKey kindOfKey;
 	private String askDate;
+	private String keyAskId;
 	private int currentPage;
+	private List<Contain> containList;
 	private PaginationSupport paginationSupport;
 
 	//==============================================锁申请用户===========================================================
@@ -64,7 +67,8 @@ public class KeyAskAction extends ActionSupport {
 		}
 	}
 	
-	//初始化listKeyAsk.jsp
+	//初始化listKeyAsk.jsp（申请管理）
+	@SuppressWarnings("unchecked")
 	public String initListKeyAsk(){
 		if(currentPage<=1){
 			currentPage=1;
@@ -72,12 +76,38 @@ public class KeyAskAction extends ActionSupport {
 		try {
 			Manager manager = (Manager)ActionContext.getContext().getSession().get("manager");
 			paginationSupport=keyAskService.findKeyAskByPage(manager.getId(),currentPage, 2);
+			List<KeyAsk> keyAskList = (List<KeyAsk>)paginationSupport.getItems();
+			for(KeyAsk keyAsk:keyAskList){
+				Integer tokenNum = containService.findCountNumByKeyAskID(keyAsk.getId(), "1");
+				if(tokenNum==null){
+					tokenNum=0;
+				}
+				Integer usedNum=containService.findNumOfUsed(keyAsk.getId());
+				keyAsk.setTokenNum(tokenNum);
+				keyAsk.setUsedNum(usedNum);
+			}
 			return "initListKeyAsk";
 		} catch (Exception e) {
 			return ERROR;
 		}
 		
 	}
+	
+	//初始化锁的用途页面keyUse.jsp
+	public String initKeyUse(){
+		keyAsk=keyAskService.findByPrimaryKey(keyAskId);
+//		countObjectList=containService.findLastKey(keyAsk.getKindOfKey().getId());
+//		Integer tokenNum = containService.findCountNumByKeyAskID(keyAskId, "1");
+//		countObjectList=containService.findCountLotNumberByKindOfKeyID("1", keyAsk.getKindOfKey().getId());
+		
+//		Map<String, Object> params=new HashMap<String, Object>();
+//		params.put("isDelete", "1");
+//		params.put("kindOfKey.id", keyAsk.getKindOfKey().getId());
+//		containList = containService.findListByParams(params);
+		containList=containService.findLastNumOfContain(keyAsk.getId());
+		return "initKeyUse";
+	}
+	
 	
 	//==========================================================================================================
 	public KeyAskService getKeyAskService() {
@@ -158,5 +188,21 @@ public class KeyAskAction extends ActionSupport {
 
 	public void setPaginationSupport(PaginationSupport paginationSupport) {
 		this.paginationSupport = paginationSupport;
+	}
+
+	public String getKeyAskId() {
+		return keyAskId;
+	}
+
+	public void setKeyAskId(String keyAskId) {
+		this.keyAskId = keyAskId;
+	}
+
+	public List<Contain> getContainList() {
+		return containList;
+	}
+
+	public void setContainList(List<Contain> containList) {
+		this.containList = containList;
 	}
 }

@@ -21,7 +21,7 @@ public class Department implements java.io.Serializable {
 	private String isDelete;
 	private Timestamp createDate;
 	private Timestamp updateDate;
-	private Set keies = new HashSet(0);
+	private Set keyMessages = new HashSet(0);
 
 	// Constructors
 
@@ -38,7 +38,7 @@ public class Department implements java.io.Serializable {
 	public Department(String id, Province province, Manager managerByUpdateBy,
 			Manager managerByCreateBy, String departmentName,
 			String departmentCode, String isDelete, Timestamp createDate,
-			Timestamp updateDate, Set keies) {
+			Timestamp updateDate, Set keyMessages) {
 		this.id = id;
 		this.province = province;
 		this.managerByUpdateBy = managerByUpdateBy;
@@ -48,7 +48,7 @@ public class Department implements java.io.Serializable {
 		this.isDelete = isDelete;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
-		this.keies = keies;
+		this.keyMessages = keyMessages;
 	}
 
 	// Property accessors
@@ -125,12 +125,12 @@ public class Department implements java.io.Serializable {
 		this.updateDate = updateDate;
 	}
 
-	public Set getKeies() {
-		return this.keies;
+	public Set getKeyMessages() {
+		return this.keyMessages;
 	}
 
-	public void setKeies(Set keies) {
-		this.keies = keies;
+	public void setKeyMessages(Set keyMessages) {
+		this.keyMessages = keyMessages;
 	}
 
 }

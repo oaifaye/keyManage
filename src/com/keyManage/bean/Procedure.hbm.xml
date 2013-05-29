@@ -8,7 +8,7 @@
     <class name="com.keyManage.bean.Procedure" table="Procedure" schema="dbo" catalog="keyManagedb">
         <id name="id" type="java.lang.String">
             <column name="ID" length="32" />
-            <generator class="assigned" />
+            <generator class="uuid.hex" />
         </id>
         <property name="procedureName" type="java.lang.String">
             <column name="ProcedureName" length="100" />

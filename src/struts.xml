@@ -63,6 +63,13 @@
 			<result name="success" type="redirect" >keyAsk_initKeyAsk</result>
 			<result name="initKeyAsk">/business/keyAsk.jsp</result>
 			<result name="initListKeyAsk">/business/listKeyAsk.jsp</result>
+			<result name="initKeyUse">/business/keyUse.jsp</result>
+			<result name="error">/404.jsp</result>
+		</action>
+		
+		<!-- 锁情况 -->
+		<action name="keyMessage_*" class="keyMessageAction" method="{1}">
+			<result name="initAddKey">/business/keyMessage.jsp</result>
 			<result name="error">/404.jsp</result>
 		</action>
 	</package>
