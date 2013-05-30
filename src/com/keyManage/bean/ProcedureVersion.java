@@ -13,12 +13,12 @@ public class ProcedureVersion implements java.io.Serializable {
 	// Fields
 
 	private String id;
+	private Manager managerByUpdateBy;
 	private ProcedureMessage procedureMessage;
+	private Manager managerByCreateBy;
 	private String versionName;
 	private String isDelete;
-	private String createBy;
 	private Timestamp createDate;
-	private String updateBy;
 	private Timestamp updateDate;
 	private Set keyMessages = new HashSet(0);
 
@@ -34,17 +34,17 @@ public class ProcedureVersion implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public ProcedureVersion(String id, ProcedureMessage procedureMessage,
-			String versionName, String isDelete, String createBy,
-			Timestamp createDate, String updateBy, Timestamp updateDate,
-			Set keyMessages) {
+	public ProcedureVersion(String id, Manager managerByUpdateBy,
+			ProcedureMessage procedureMessage, Manager managerByCreateBy,
+			String versionName, String isDelete, Timestamp createDate,
+			Timestamp updateDate, Set keyMessages) {
 		this.id = id;
+		this.managerByUpdateBy = managerByUpdateBy;
 		this.procedureMessage = procedureMessage;
+		this.managerByCreateBy = managerByCreateBy;
 		this.versionName = versionName;
 		this.isDelete = isDelete;
-		this.createBy = createBy;
 		this.createDate = createDate;
-		this.updateBy = updateBy;
 		this.updateDate = updateDate;
 		this.keyMessages = keyMessages;
 	}
@@ -59,12 +59,28 @@ public class ProcedureVersion implements java.io.Serializable {
 		this.id = id;
 	}
 
+	public Manager getManagerByUpdateBy() {
+		return this.managerByUpdateBy;
+	}
+
+	public void setManagerByUpdateBy(Manager managerByUpdateBy) {
+		this.managerByUpdateBy = managerByUpdateBy;
+	}
+
 	public ProcedureMessage getProcedureMessage() {
 		return this.procedureMessage;
 	}
 
 	public void setProcedureMessage(ProcedureMessage procedureMessage) {
 		this.procedureMessage = procedureMessage;
+	}
+
+	public Manager getManagerByCreateBy() {
+		return this.managerByCreateBy;
+	}
+
+	public void setManagerByCreateBy(Manager managerByCreateBy) {
+		this.managerByCreateBy = managerByCreateBy;
 	}
 
 	public String getVersionName() {
@@ -83,28 +99,12 @@ public class ProcedureVersion implements java.io.Serializable {
 		this.isDelete = isDelete;
 	}
 
-	public String getCreateBy() {
-		return this.createBy;
-	}
-
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
-	}
-
 	public Timestamp getCreateDate() {
 		return this.createDate;
 	}
 
 	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
-	}
-
-	public String getUpdateBy() {
-		return this.updateBy;
-	}
-
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
 	}
 
 	public Timestamp getUpdateDate() {

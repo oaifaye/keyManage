@@ -28,7 +28,6 @@
 	<div class="pageColumn">
 		<div class="add"></div>
 		<s:property value="lastNum" />
-		<s:form action="/contain_shipment">
 			<table class="table">
 				<thead>
 					<th width="">密码锁批号</th>
@@ -55,10 +54,6 @@
 					</s:iterator>
 				</tbody>
 			</table>
-			<input type="submit" value="提交" class="button2" />
-			<s:hidden name="keyAsk.id" value="%{keyAsk.id}"/>
-			<s:hidden name="kindOfKey.id" value="%{keyAsk.kindOfKey.id}"/>
-		</s:form>
 	</div>
 </body>
 </html>

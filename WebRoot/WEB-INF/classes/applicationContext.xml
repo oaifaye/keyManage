@@ -165,4 +165,21 @@
 	<bean id="procedureMessageAction" class="com.keyManage.action.ProcedureMessageAction" scope="prototype">
 		<property name="procedureMessageService" ref="procedureMessageService"></property>
 	</bean>
+	
+	<!-- 程序版本 -->
+	<bean id="procedureVersionDAO" class="com.keyManage.dao.procedureVersion.ProcedureVersionDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="procedureVersionDAOProxy" parent="txProxyTemplate">
+		<property name="target">
+			<ref local="procedureVersionDAO" />
+		</property>
+	</bean>
+	<bean id="procedureVersionService" class="com.keyManage.service.procedureVersion.ProcedureVersionServiceImpl">
+		<property name="procedureVersionDAO" ref="procedureVersionDAOProxy"></property>
+	</bean>
+	<bean id="procedureVersionAction" class="com.keyManage.action.ProcedureVersionAction" scope="prototype">
+		<property name="procedureVersionService" ref="procedureVersionService"></property>
+		<property name="procedureMessageService" ref="procedureMessageService"></property>
+	</bean>
 </beans>

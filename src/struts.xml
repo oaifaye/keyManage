@@ -79,5 +79,12 @@
 			<result name="init">/business/procedureMessage.jsp</result>
 			<result name="error">/404.jsp</result>
 		</action>
+		
+		<!-- 程序版本 -->
+		<action name="procedureVersion_*" class="procedureVersionAction" method="{1}">
+			<result name="success" type="redirect" >procedureVersion_init</result>
+			<result name="init">/business/procedureVersion.jsp</result>
+			<result name="error">/404.jsp</result>
+		</action>
 	</package>
 </struts>

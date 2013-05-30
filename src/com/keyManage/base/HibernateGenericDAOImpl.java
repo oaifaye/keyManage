@@ -141,7 +141,7 @@ public class HibernateGenericDAOImpl<T> extends HibernateDaoSupport implements
 							.list();
 			if (list == null || list.size() == 0) {
 				return null;
-			} else if (list.size() > 1) {
+			} else if (list.size() > 0) {
 				return list;
 			} else {
 				throw new DaoException(

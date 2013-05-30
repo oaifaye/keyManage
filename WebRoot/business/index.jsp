@@ -42,7 +42,7 @@
 						<li class="subMenu"><a href="#">程序管理</a>
 						<ul>
 							<li><a href="<%=basePath%>procedureMessage_init" target="right">程序管理</a></li>
-							<li><a href="<%=basePath%>keyAsk_initListKeyAsk" target="right">程序版本管理</a>
+							<li><a href="<%=basePath%>procedureVersion_init" target="right">程序版本管理</a>
 							</li>
 						</ul>
 					</li>
