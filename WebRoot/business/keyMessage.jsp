@@ -31,47 +31,47 @@
 		<s:form action="/keyMessage_addKey">
 			<table class="table">
 				<thead>
-					<th width="" colspan="4">密码锁信息添加</th>
+					<th width="" colspan="6">密码锁信息添加</th>
 				</thead>
 				<tbody>
 					<tr>
 						<td>锁种类</td>
-						<td></td>
+						<td colspan="2"></td>
 						<td>锁批号</td>
-						<td></td>
+						<td colspan="2"></td>
 					</tr>
 					<tr>
 						<td>程序</td>
-						<td></td>
+						<td colspan="2"></td>
 						<td>版本</td>
-						<td></td>
+						<td colspan="2"></td>
 					</tr>
 					<tr>
 						<td>省</td>
-						<td></td>
+						<td colspan="2"></td>
 						<td>市</td>
-						<td></td>
+						<td colspan="2"></td>
 					</tr>
 					<tr>
 						<td>锁数量</td>
-						<td><s:textfield name="keyMessage.keyNum" theme="simple"/></td>
+						<td colspan="2"><s:textfield name="keyMessage.keyNum" theme="simple"/></td>
 						<td>用户名</td>
-						<td></td>
+						<td colspan="2"></td>
 					</tr>
 					<tr>
 						<td>送锁方式</td>
-						<td></td>
+						<td colspan="2"></td>
 						<td>快递编号</td>
-						<td></td>
+						<td colspan="2"></td>
 					</tr>
 					<tr>
 						<td>邮编</td>
-						<td></td>
+						<td colspan="2"></td>
 						<td>递送日期</td>
-						<td></td>
+						<td colspan="2"></td>
 					</tr>
 					<tr>
-						<td colspan="4">备注</td>
+						<td colspan="6">备注</td>
 					</tr>
 				</tbody>
 			</table>

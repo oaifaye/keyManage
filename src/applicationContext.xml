@@ -26,10 +26,11 @@
 				<value>com/keyManage/bean/Department.hbm.xml</value>
 				<value>com/keyManage/bean/ExpressType.hbm.xml</value>
 				<value>com/keyManage/bean/KeyMessage.hbm.xml</value>
-				<value>com/keyManage/bean/Procedure.hbm.xml</value>
+				<value>com/keyManage/bean/ProcedureMessage.hbm.xml</value>
 				<value>com/keyManage/bean/Province.hbm.xml</value>
-				<value>com/keyManage/bean/Version.hbm.xml</value>
+				<value>com/keyManage/bean/ProcedureVersion.hbm.xml</value>
 				<value>com/keyManage/bean/KeyAsk.hbm.xml</value>
+				<value>com/keyManage/bean/Purpose.hbm.xml</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
@@ -147,5 +148,21 @@
 	<bean id="keyMessageAction" class="com.keyManage.action.KeyMessageAction" scope="prototype">
 		<property name="keyMessageService" ref="keyMessageService"></property>
 		<property name="containService" ref="containService"></property>
+	</bean>
+	
+	<!-- 程序 -->
+	<bean id="procedureMessageDAO" class="com.keyManage.dao.procedureMessage.ProcedureMessageDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="procedureMessageDAOProxy" parent="txProxyTemplate">
+		<property name="target">
+			<ref local="procedureMessageDAO" />
+		</property>
+	</bean>
+	<bean id="procedureMessageService" class="com.keyManage.service.procedureMessage.ProcedureMessageServiceImpl">
+		<property name="procedureMessageDAO" ref="procedureMessageDAOProxy"></property>
+	</bean>
+	<bean id="procedureMessageAction" class="com.keyManage.action.ProcedureMessageAction" scope="prototype">
+		<property name="procedureMessageService" ref="procedureMessageService"></property>
 	</bean>
 </beans>

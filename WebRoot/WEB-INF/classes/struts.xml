@@ -72,5 +72,12 @@
 			<result name="initAddKey">/business/keyMessage.jsp</result>
 			<result name="error">/404.jsp</result>
 		</action>
+		
+		<!-- 程序 -->
+		<action name="procedureMessage_*" class="procedureMessageAction" method="{1}">
+			<result name="success" type="redirect" >procedureMessage_init</result>
+			<result name="init">/business/procedureMessage.jsp</result>
+			<result name="error">/404.jsp</result>
+		</action>
 	</package>
 </struts>

@@ -31,7 +31,7 @@
 			锁之种类：<s:select id="kindOfKey" name="contain.kindOfKey.id" list="kindOfKeyList" listKey="id" listValue="kindName" headerKey="" headerValue="--请选择--"></s:select><br />
 			锁之批号：<s:textfield id="lotNumber" name="contain.lotNumber" maxLength="85" cssClass="lotNumber"></s:textfield><br />
 			锁之数量：<s:textfield id="keyNum" name="contain.keyNum" maxLength="5" cssClass="keyNum" ></s:textfield><br />
-			入库时间：<s:textfield id="containDate" name="containDate" onclick="new Calendar().show(this)" readonly="true" cssClass="text"></s:textfield>
+			入库时间：<s:textfield id="containDate" name="containDate" onclick="new Calendar().show(this)" readonly="true"></s:textfield>
 			
 			<input type="hidden" id="containId" name="contain.id" value="${contain.id}" />
 			<!-- 文本框不可用后传值 -->

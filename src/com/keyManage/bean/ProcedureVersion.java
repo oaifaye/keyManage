@@ -5,45 +5,48 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Procedure entity. @author MyEclipse Persistence Tools
+ * ProcedureVersion entity. @author MyEclipse Persistence Tools
  */
 
-public class Procedure implements java.io.Serializable {
+public class ProcedureVersion implements java.io.Serializable {
 
 	// Fields
 
 	private String id;
-	private String procedureName;
+	private ProcedureMessage procedureMessage;
+	private String versionName;
 	private String isDelete;
 	private String createBy;
 	private Timestamp createDate;
 	private String updateBy;
 	private Timestamp updateDate;
-	private Set versions = new HashSet(0);
+	private Set keyMessages = new HashSet(0);
 
 	// Constructors
 
 	/** default constructor */
-	public Procedure() {
+	public ProcedureVersion() {
 	}
 
 	/** minimal constructor */
-	public Procedure(String id) {
+	public ProcedureVersion(String id) {
 		this.id = id;
 	}
 
 	/** full constructor */
-	public Procedure(String id, String procedureName, String isDelete,
-			String createBy, Timestamp createDate, String updateBy,
-			Timestamp updateDate, Set versions) {
+	public ProcedureVersion(String id, ProcedureMessage procedureMessage,
+			String versionName, String isDelete, String createBy,
+			Timestamp createDate, String updateBy, Timestamp updateDate,
+			Set keyMessages) {
 		this.id = id;
-		this.procedureName = procedureName;
+		this.procedureMessage = procedureMessage;
+		this.versionName = versionName;
 		this.isDelete = isDelete;
 		this.createBy = createBy;
 		this.createDate = createDate;
 		this.updateBy = updateBy;
 		this.updateDate = updateDate;
-		this.versions = versions;
+		this.keyMessages = keyMessages;
 	}
 
 	// Property accessors
@@ -56,12 +59,20 @@ public class Procedure implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public String getProcedureName() {
-		return this.procedureName;
+	public ProcedureMessage getProcedureMessage() {
+		return this.procedureMessage;
 	}
 
-	public void setProcedureName(String procedureName) {
-		this.procedureName = procedureName;
+	public void setProcedureMessage(ProcedureMessage procedureMessage) {
+		this.procedureMessage = procedureMessage;
+	}
+
+	public String getVersionName() {
+		return this.versionName;
+	}
+
+	public void setVersionName(String versionName) {
+		this.versionName = versionName;
 	}
 
 	public String getIsDelete() {
@@ -104,12 +115,12 @@ public class Procedure implements java.io.Serializable {
 		this.updateDate = updateDate;
 	}
 
-	public Set getVersions() {
-		return this.versions;
+	public Set getKeyMessages() {
+		return this.keyMessages;
 	}
 
-	public void setVersions(Set versions) {
-		this.versions = versions;
+	public void setKeyMessages(Set keyMessages) {
+		this.keyMessages = keyMessages;
 	}
 
 }

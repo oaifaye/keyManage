@@ -13,14 +13,17 @@
         <many-to-one name="kindOfKey" class="com.keyManage.bean.KindOfKey" fetch="select" lazy="false">
             <column name="KindOfKeyID" length="32" />
         </many-to-one>
-        <many-to-one name="version" class="com.keyManage.bean.Version" fetch="select" lazy="false">
-            <column name="VersionID" length="32" />
-        </many-to-one>
         <many-to-one name="managerByUpdateBy" class="com.keyManage.bean.Manager" fetch="select" lazy="false">
             <column name="UpdateBy" length="32" />
         </many-to-one>
+        <many-to-one name="procedureMessage" class="com.keyManage.bean.ProcedureMessage" fetch="select" lazy="false">
+            <column name="ProcedureID" length="32" />
+        </many-to-one>
         <many-to-one name="department" class="com.keyManage.bean.Department" fetch="select" lazy="false">
             <column name="DepartmentID" length="32" />
+        </many-to-one>
+        <many-to-one name="procedureVersion" class="com.keyManage.bean.ProcedureVersion" fetch="select" lazy="false">
+            <column name="ProcedureVersionID" length="32" />
         </many-to-one>
         <many-to-one name="expressType" class="com.keyManage.bean.ExpressType" fetch="select" lazy="false">
             <column name="ExpressTypeID" length="32" />
@@ -36,6 +39,9 @@
         </property>
         <property name="keyNum" type="java.lang.Integer">
             <column name="KeyNum" />
+        </property>
+        <property name="purposeId" type="java.lang.String">
+            <column name="PurposeID" length="32" />
         </property>
         <property name="expressCode" type="java.lang.String">
             <column name="ExpressCode" length="100" />

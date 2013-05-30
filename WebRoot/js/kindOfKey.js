@@ -1,6 +1,7 @@
 function paginate(currentPage) {
 			window.location.href="kindOfKey_init.action?currentPage="+currentPage;
 		}
+
 $(function(){
 	$("#add").submit(function(){
 		if($("#kindName").val().replace(/[ ]/g,"")==""){

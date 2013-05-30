@@ -12,14 +12,16 @@ public class KeyMessage implements java.io.Serializable {
 
 	private String id;
 	private KindOfKey kindOfKey;
-	private Version version;
 	private Manager managerByUpdateBy;
+	private ProcedureMessage procedureMessage;
 	private Department department;
+	private ProcedureVersion procedureVersion;
 	private ExpressType expressType;
 	private Manager managerByCreateBy;
 	private Contain contain;
 	private String userName;
 	private Integer keyNum;
+	private String purposeId;
 	private String expressCode;
 	private String postCode;
 	private Timestamp expressDate;
@@ -40,23 +42,26 @@ public class KeyMessage implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public KeyMessage(String id, KindOfKey kindOfKey, Version version,
-			Manager managerByUpdateBy, Department department,
+	public KeyMessage(String id, KindOfKey kindOfKey,
+			Manager managerByUpdateBy, ProcedureMessage procedureMessage,
+			Department department, ProcedureVersion procedureVersion,
 			ExpressType expressType, Manager managerByCreateBy,
-			Contain contain, String userName, Integer keyNum,
+			Contain contain, String userName, Integer keyNum, String purposeId,
 			String expressCode, String postCode, Timestamp expressDate,
 			String remark, String isDelete, Timestamp createDate,
 			Timestamp updateDate) {
 		this.id = id;
 		this.kindOfKey = kindOfKey;
-		this.version = version;
 		this.managerByUpdateBy = managerByUpdateBy;
+		this.procedureMessage = procedureMessage;
 		this.department = department;
+		this.procedureVersion = procedureVersion;
 		this.expressType = expressType;
 		this.managerByCreateBy = managerByCreateBy;
 		this.contain = contain;
 		this.userName = userName;
 		this.keyNum = keyNum;
+		this.purposeId = purposeId;
 		this.expressCode = expressCode;
 		this.postCode = postCode;
 		this.expressDate = expressDate;
@@ -84,14 +89,6 @@ public class KeyMessage implements java.io.Serializable {
 		this.kindOfKey = kindOfKey;
 	}
 
-	public Version getVersion() {
-		return this.version;
-	}
-
-	public void setVersion(Version version) {
-		this.version = version;
-	}
-
 	public Manager getManagerByUpdateBy() {
 		return this.managerByUpdateBy;
 	}
@@ -100,12 +97,28 @@ public class KeyMessage implements java.io.Serializable {
 		this.managerByUpdateBy = managerByUpdateBy;
 	}
 
+	public ProcedureMessage getProcedureMessage() {
+		return this.procedureMessage;
+	}
+
+	public void setProcedureMessage(ProcedureMessage procedureMessage) {
+		this.procedureMessage = procedureMessage;
+	}
+
 	public Department getDepartment() {
 		return this.department;
 	}
 
 	public void setDepartment(Department department) {
 		this.department = department;
+	}
+
+	public ProcedureVersion getProcedureVersion() {
+		return this.procedureVersion;
+	}
+
+	public void setProcedureVersion(ProcedureVersion procedureVersion) {
+		this.procedureVersion = procedureVersion;
 	}
 
 	public ExpressType getExpressType() {
@@ -146,6 +159,14 @@ public class KeyMessage implements java.io.Serializable {
 
 	public void setKeyNum(Integer keyNum) {
 		this.keyNum = keyNum;
+	}
+
+	public String getPurposeId() {
+		return this.purposeId;
+	}
+
+	public void setPurposeId(String purposeId) {
+		this.purposeId = purposeId;
 	}
 
 	public String getExpressCode() {

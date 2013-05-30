@@ -173,7 +173,6 @@ public class HibernateGenericDAOImpl<T> extends HibernateDaoSupport implements
 								Session session) throws HibernateException,
 								SQLException {
 							Criteria crit = session.createCriteria(entityClass);
-							session.createCriteria(entityClass);
 							// 获取params全部的key
 							Set<String> keySet = params.keySet();
 							Iterator<String> keyIterator = keySet.iterator();
@@ -182,14 +181,15 @@ public class HibernateGenericDAOImpl<T> extends HibernateDaoSupport implements
 								crit.add(Restrictions.eq(key, params.get(key)));
 							}
 							//总条数
-							int totalCount = crit.list().size();
-							List<T> result = crit
+							PaginationSupport ps=null;
+								int totalCount = crit.list().size();
+								List<T> result = crit
 									.setFirstResult(
 											(currentPage - 1) * pageSize)
 									.setMaxResults(pageSize)
 									.addOrder( Property.forName("createDate").desc())
 									.list();
-							PaginationSupport ps = new PaginationSupport(
+								ps = new PaginationSupport(
 									result, totalCount, currentPage, pageSize);
 							return ps;
 						}

@@ -5,16 +5,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Version entity. @author MyEclipse Persistence Tools
+ * Purpose entity. @author MyEclipse Persistence Tools
  */
 
-public class Version implements java.io.Serializable {
+public class Purpose implements java.io.Serializable {
 
 	// Fields
 
 	private String id;
-	private Procedure procedure;
-	private String versionName;
+	private String name;
+	private String remark;
 	private String isDelete;
 	private String createBy;
 	private Timestamp createDate;
@@ -25,21 +25,21 @@ public class Version implements java.io.Serializable {
 	// Constructors
 
 	/** default constructor */
-	public Version() {
+	public Purpose() {
 	}
 
 	/** minimal constructor */
-	public Version(String id) {
+	public Purpose(String id) {
 		this.id = id;
 	}
 
 	/** full constructor */
-	public Version(String id, Procedure procedure, String versionName,
-			String isDelete, String createBy, Timestamp createDate,
-			String updateBy, Timestamp updateDate, Set keyMessages) {
+	public Purpose(String id, String name, String remark, String isDelete,
+			String createBy, Timestamp createDate, String updateBy,
+			Timestamp updateDate, Set keyMessages) {
 		this.id = id;
-		this.procedure = procedure;
-		this.versionName = versionName;
+		this.name = name;
+		this.remark = remark;
 		this.isDelete = isDelete;
 		this.createBy = createBy;
 		this.createDate = createDate;
@@ -58,20 +58,20 @@ public class Version implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Procedure getProcedure() {
-		return this.procedure;
+	public String getName() {
+		return this.name;
 	}
 
-	public void setProcedure(Procedure procedure) {
-		this.procedure = procedure;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getVersionName() {
-		return this.versionName;
+	public String getRemark() {
+		return this.remark;
 	}
 
-	public void setVersionName(String versionName) {
-		this.versionName = versionName;
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 
 	public String getIsDelete() {

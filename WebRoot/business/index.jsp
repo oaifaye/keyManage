@@ -37,6 +37,17 @@
 			<div class="menu">
 				<ul>
 					<li class="subMenuTitle">功能菜单</li>
+				<!-- 管理员start -->
+					<s:if test='#session.manager.role=="0"'>
+						<li class="subMenu"><a href="#">程序管理</a>
+						<ul>
+							<li><a href="<%=basePath%>procedureMessage_init" target="right">程序管理</a></li>
+							<li><a href="<%=basePath%>keyAsk_initListKeyAsk" target="right">程序版本管理</a>
+							</li>
+						</ul>
+					</li>
+					</s:if>
+				<!-- 管理员end -->
 				<!-- 锁管理员start -->
 					<s:if test='#session.manager.role=="1"'>
 					<li class="subMenu"><a href="#">密码锁仓库管理</a>
@@ -59,10 +70,7 @@
 					</li>
 					</s:if>
 				<!-- 锁领用者end -->
-					<li class="subMenu"><a href="#">单页实例</a></li>
-					<li class="subMenu"><a href="#">综合实例</a></li>
-					<li class="subMenu"><a href="#">其他组件</a></li>
-
+				
 				</ul>
 			</div>
 			<div class="sidebar fleft"></div>
