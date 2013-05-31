@@ -42,7 +42,6 @@ public class KindOfKeyServiceImpl implements KindOfKeyService {
 	public PaginationSupport findByPage(Map<String, Object> params,int currentPage, int pageSize){
 		return kindOfKeyDAO.findByPage(params, currentPage, pageSize);
 	}
-	
 
 	public KindOfKeyDAO getKindOfKeyDAO() {
 		return kindOfKeyDAO;
@@ -51,5 +50,4 @@ public class KindOfKeyServiceImpl implements KindOfKeyService {
 	public void setKindOfKeyDAO(KindOfKeyDAO kindOfKeyDAO) {
 		this.kindOfKeyDAO = kindOfKeyDAO;
 	}
-
 }

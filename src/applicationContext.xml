@@ -182,4 +182,20 @@
 		<property name="procedureVersionService" ref="procedureVersionService"></property>
 		<property name="procedureMessageService" ref="procedureMessageService"></property>
 	</bean>
+	
+	<!-- 程序版本 -->
+	<bean id="departmentDAO" class="com.keyManage.dao.department.DepartmentDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="departmentDAOProxy" parent="txProxyTemplate">
+		<property name="target">
+			<ref local="departmentDAO" />
+		</property>
+	</bean>
+	<bean id="departmentService" class="com.keyManage.service.department.DepartmentServiceImpl">
+		<property name="departmentDAO" ref="departmentDAOProxy"></property>
+	</bean>
+	<bean id="departmentAction" class="com.keyManage.action.DepartmentAction" scope="prototype">
+		<property name="departmentService" ref="departmentService"></property>
+	</bean>
 </beans>

@@ -13,11 +13,12 @@ public class Department implements java.io.Serializable {
 	// Fields
 
 	private String id;
-	private Province province;
 	private Manager managerByUpdateBy;
 	private Manager managerByCreateBy;
+	private String parentId;
 	private String departmentName;
 	private String departmentCode;
+	private Integer level;
 	private String isDelete;
 	private Timestamp createDate;
 	private Timestamp updateDate;
@@ -35,16 +36,17 @@ public class Department implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Department(String id, Province province, Manager managerByUpdateBy,
-			Manager managerByCreateBy, String departmentName,
-			String departmentCode, String isDelete, Timestamp createDate,
-			Timestamp updateDate, Set keyMessages) {
+	public Department(String id, Manager managerByUpdateBy,
+			Manager managerByCreateBy, String parentId, String departmentName,
+			String departmentCode, Integer level, String isDelete,
+			Timestamp createDate, Timestamp updateDate, Set keyMessages) {
 		this.id = id;
-		this.province = province;
 		this.managerByUpdateBy = managerByUpdateBy;
 		this.managerByCreateBy = managerByCreateBy;
+		this.parentId = parentId;
 		this.departmentName = departmentName;
 		this.departmentCode = departmentCode;
+		this.level = level;
 		this.isDelete = isDelete;
 		this.createDate = createDate;
 		this.updateDate = updateDate;
@@ -59,14 +61,6 @@ public class Department implements java.io.Serializable {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public Province getProvince() {
-		return this.province;
-	}
-
-	public void setProvince(Province province) {
-		this.province = province;
 	}
 
 	public Manager getManagerByUpdateBy() {
@@ -85,6 +79,14 @@ public class Department implements java.io.Serializable {
 		this.managerByCreateBy = managerByCreateBy;
 	}
 
+	public String getParentId() {
+		return this.parentId;
+	}
+
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
+
 	public String getDepartmentName() {
 		return this.departmentName;
 	}
@@ -99,6 +101,14 @@ public class Department implements java.io.Serializable {
 
 	public void setDepartmentCode(String departmentCode) {
 		this.departmentCode = departmentCode;
+	}
+
+	public Integer getLevel() {
+		return this.level;
+	}
+
+	public void setLevel(Integer level) {
+		this.level = level;
 	}
 
 	public String getIsDelete() {

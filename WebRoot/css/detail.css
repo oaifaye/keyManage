@@ -80,3 +80,11 @@ a:hover {
 	display: none;
 }
 
+.text{
+	width: 130px;
+}
+
+.addDepartment{
+	text-align: left;
+	margin-left: 40px;
+}

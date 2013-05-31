@@ -10,20 +10,23 @@
             <column name="ID" length="32" />
             <generator class="uuid.hex" />
         </id>
-        <many-to-one name="province" class="com.keyManage.bean.Province" fetch="select" lazy="false">
-            <column name="ProvinceID" length="32" />
-        </many-to-one>
         <many-to-one name="managerByUpdateBy" class="com.keyManage.bean.Manager" fetch="select" lazy="false">
             <column name="UpdateBy" length="32" />
         </many-to-one>
         <many-to-one name="managerByCreateBy" class="com.keyManage.bean.Manager" fetch="select" lazy="false">
             <column name="CreateBy" length="32" />
         </many-to-one>
+        <property name="parentId" type="java.lang.String">
+            <column name="ParentID" length="200" />
+        </property>
         <property name="departmentName" type="java.lang.String">
             <column name="DepartmentName" length="100" />
         </property>
         <property name="departmentCode" type="java.lang.String">
             <column name="DepartmentCode" length="100" />
+        </property>
+        <property name="level" type="java.lang.Integer">
+            <column name="Level" />
         </property>
         <property name="isDelete" type="java.lang.String">
             <column name="IsDelete" length="1" />

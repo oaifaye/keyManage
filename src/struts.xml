@@ -86,5 +86,12 @@
 			<result name="init">/business/procedureVersion.jsp</result>
 			<result name="error">/404.jsp</result>
 		</action>
+		
+		<!-- 单位信息 -->
+		<action name="department_*" class="departmentAction" method="{1}">
+			<result name="success" type="redirect" >department_init</result>
+			<result name="init">/business/department.jsp</result>
+			<result name="error">/404.jsp</result>
+		</action>
 	</package>
 </struts>

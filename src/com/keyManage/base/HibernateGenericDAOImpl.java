@@ -137,8 +137,7 @@ public class HibernateGenericDAOImpl<T> extends HibernateDaoSupport implements
 				crit.add(Restrictions.eq(key, params.get(key)));
 			}
 			
-			List<T> list = crit.addOrder( Property.forName("createDate").desc()) 
-							.list();
+			List<T> list = crit.addOrder( Property.forName("createDate").desc()).list();
 			if (list == null || list.size() == 0) {
 				return null;
 			} else if (list.size() > 0) {

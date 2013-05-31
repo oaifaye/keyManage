@@ -1,10 +1,14 @@
 package com.keyManage.action;
 
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
 import org.springframework.dao.DataAccessException;
 
 import com.keyManage.base.PaginationSupport;
@@ -49,9 +53,16 @@ public class KeyAskAction extends ActionSupport {
 	public String addKeyAsk(){
 		try {
 			if(!kindOfKey.getId().equals("")&&kindOfKey.getId()!=null){
-			//kindOfKey=kindOfKeyService.findByPrimaryKey(kindOfKey.getId());
-			//KindOfKey kindOfKey = new KindOfKey();
-			//kindOfKey.setId(kindOfKeyId);
+				Integer lastNum = containService.findNumByKindOfKeyID(kindOfKey.getId());
+				if(keyAsk.getAskNum()>lastNum){
+				//请求锁数量超过数据库中的
+					HttpServletResponse response=ServletActionContext.getResponse();
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=utf-8");
+					PrintWriter out=response.getWriter();
+					out.print("<script>alert('申请数量不能超过"+lastNum+"!!');location='keyAsk_initKeyAsk';</script>");
+					return null;
+				}
 				keyAsk.setKindOfKey(kindOfKey);
 				keyAsk.setAskDate(TimeSupport.parseTime(askDate, "yyyy-MM-dd"));
 				keyAsk.setIsFinished("1");
@@ -96,14 +107,6 @@ public class KeyAskAction extends ActionSupport {
 	//初始化锁的用途页面keyUse.jsp
 	public String initKeyUse(){
 		keyAsk=keyAskService.findByPrimaryKey(keyAskId);
-//		countObjectList=containService.findLastKey(keyAsk.getKindOfKey().getId());
-//		Integer tokenNum = containService.findCountNumByKeyAskID(keyAskId, "1");
-//		countObjectList=containService.findCountLotNumberByKindOfKeyID("1", keyAsk.getKindOfKey().getId());
-		
-//		Map<String, Object> params=new HashMap<String, Object>();
-//		params.put("isDelete", "1");
-//		params.put("kindOfKey.id", keyAsk.getKindOfKey().getId());
-//		containList = containService.findListByParams(params);
 		containList=containService.findLastNumOfContain(keyAsk.getId());
 		return "initKeyUse";
 	}

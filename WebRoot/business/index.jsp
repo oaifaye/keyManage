@@ -39,13 +39,13 @@
 					<li class="subMenuTitle">功能菜单</li>
 				<!-- 管理员start -->
 					<s:if test='#session.manager.role=="0"'>
-						<li class="subMenu"><a href="#">程序管理</a>
-						<ul>
-							<li><a href="<%=basePath%>procedureMessage_init" target="right">程序管理</a></li>
-							<li><a href="<%=basePath%>procedureVersion_init" target="right">程序版本管理</a>
-							</li>
-						</ul>
-					</li>
+						<li class="subMenu"><a href="#">基础信息管理</a>
+							<ul>
+								<li><a href="<%=basePath%>procedureMessage_init" target="right">程序信息管理</a></li>
+								<li><a href="<%=basePath%>procedureVersion_init" target="right">程序版本管理</a></li>
+								<li><a href="<%=basePath%>department_init" target="right">单位信息管理</a></li>
+							</ul>
+						</li>
 					</s:if>
 				<!-- 管理员end -->
 				<!-- 锁管理员start -->
