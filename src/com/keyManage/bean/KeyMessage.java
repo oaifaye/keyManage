@@ -17,11 +17,11 @@ public class KeyMessage implements java.io.Serializable {
 	private Department department;
 	private ProcedureVersion procedureVersion;
 	private ExpressType expressType;
+	private Purpose purpose;
 	private Manager managerByCreateBy;
 	private Contain contain;
 	private String userName;
 	private Integer keyNum;
-	private String purposeId;
 	private String expressCode;
 	private String postCode;
 	private Timestamp expressDate;
@@ -45,11 +45,11 @@ public class KeyMessage implements java.io.Serializable {
 	public KeyMessage(String id, KindOfKey kindOfKey,
 			Manager managerByUpdateBy, ProcedureMessage procedureMessage,
 			Department department, ProcedureVersion procedureVersion,
-			ExpressType expressType, Manager managerByCreateBy,
-			Contain contain, String userName, Integer keyNum, String purposeId,
-			String expressCode, String postCode, Timestamp expressDate,
-			String remark, String isDelete, Timestamp createDate,
-			Timestamp updateDate) {
+			ExpressType expressType, Purpose purpose,
+			Manager managerByCreateBy, Contain contain, String userName,
+			Integer keyNum, String expressCode, String postCode,
+			Timestamp expressDate, String remark, String isDelete,
+			Timestamp createDate, Timestamp updateDate) {
 		this.id = id;
 		this.kindOfKey = kindOfKey;
 		this.managerByUpdateBy = managerByUpdateBy;
@@ -57,11 +57,11 @@ public class KeyMessage implements java.io.Serializable {
 		this.department = department;
 		this.procedureVersion = procedureVersion;
 		this.expressType = expressType;
+		this.purpose = purpose;
 		this.managerByCreateBy = managerByCreateBy;
 		this.contain = contain;
 		this.userName = userName;
 		this.keyNum = keyNum;
-		this.purposeId = purposeId;
 		this.expressCode = expressCode;
 		this.postCode = postCode;
 		this.expressDate = expressDate;
@@ -129,6 +129,14 @@ public class KeyMessage implements java.io.Serializable {
 		this.expressType = expressType;
 	}
 
+	public Purpose getPurpose() {
+		return this.purpose;
+	}
+
+	public void setPurpose(Purpose purpose) {
+		this.purpose = purpose;
+	}
+
 	public Manager getManagerByCreateBy() {
 		return this.managerByCreateBy;
 	}
@@ -159,14 +167,6 @@ public class KeyMessage implements java.io.Serializable {
 
 	public void setKeyNum(Integer keyNum) {
 		this.keyNum = keyNum;
-	}
-
-	public String getPurposeId() {
-		return this.purposeId;
-	}
-
-	public void setPurposeId(String purposeId) {
-		this.purposeId = purposeId;
 	}
 
 	public String getExpressCode() {

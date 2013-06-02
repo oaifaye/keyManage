@@ -198,4 +198,20 @@
 	<bean id="departmentAction" class="com.keyManage.action.DepartmentAction" scope="prototype">
 		<property name="departmentService" ref="departmentService"></property>
 	</bean>
+	
+	<!-- 锁的用途 -->
+	<bean id="purposeDAO" class="com.keyManage.dao.purpose.PurposeDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="purposeDAOProxy" parent="txProxyTemplate">
+		<property name="target">
+			<ref local="purposeDAO" />
+		</property>
+	</bean>
+	<bean id="purposeService" class="com.keyManage.service.purpose.PurposeServiceImpl">
+		<property name="purposeDAO" ref="purposeDAOProxy"></property>
+	</bean>
+	<bean id="purposeAction" class="com.keyManage.action.PurposeAction" scope="prototype">
+		<property name="purposeService" ref="purposeService"></property>
+	</bean>
 </beans>

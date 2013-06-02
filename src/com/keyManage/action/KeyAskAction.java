@@ -2,15 +2,10 @@ package com.keyManage.action;
 
 import java.io.PrintWriter;
 import java.sql.Timestamp;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
-import org.springframework.dao.DataAccessException;
-
 import com.keyManage.base.PaginationSupport;
 import com.keyManage.bean.Contain;
 import com.keyManage.bean.KeyAsk;

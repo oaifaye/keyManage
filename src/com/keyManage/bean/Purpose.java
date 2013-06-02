@@ -13,12 +13,12 @@ public class Purpose implements java.io.Serializable {
 	// Fields
 
 	private String id;
+	private Manager managerByUpdateBy;
+	private Manager managerByCreateBy;
 	private String name;
 	private String remark;
 	private String isDelete;
-	private String createBy;
 	private Timestamp createDate;
-	private String updateBy;
 	private Timestamp updateDate;
 	private Set keyMessages = new HashSet(0);
 
@@ -34,16 +34,17 @@ public class Purpose implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Purpose(String id, String name, String remark, String isDelete,
-			String createBy, Timestamp createDate, String updateBy,
-			Timestamp updateDate, Set keyMessages) {
+	public Purpose(String id, Manager managerByUpdateBy,
+			Manager managerByCreateBy, String name, String remark,
+			String isDelete, Timestamp createDate, Timestamp updateDate,
+			Set keyMessages) {
 		this.id = id;
+		this.managerByUpdateBy = managerByUpdateBy;
+		this.managerByCreateBy = managerByCreateBy;
 		this.name = name;
 		this.remark = remark;
 		this.isDelete = isDelete;
-		this.createBy = createBy;
 		this.createDate = createDate;
-		this.updateBy = updateBy;
 		this.updateDate = updateDate;
 		this.keyMessages = keyMessages;
 	}
@@ -56,6 +57,22 @@ public class Purpose implements java.io.Serializable {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public Manager getManagerByUpdateBy() {
+		return this.managerByUpdateBy;
+	}
+
+	public void setManagerByUpdateBy(Manager managerByUpdateBy) {
+		this.managerByUpdateBy = managerByUpdateBy;
+	}
+
+	public Manager getManagerByCreateBy() {
+		return this.managerByCreateBy;
+	}
+
+	public void setManagerByCreateBy(Manager managerByCreateBy) {
+		this.managerByCreateBy = managerByCreateBy;
 	}
 
 	public String getName() {
@@ -82,28 +99,12 @@ public class Purpose implements java.io.Serializable {
 		this.isDelete = isDelete;
 	}
 
-	public String getCreateBy() {
-		return this.createBy;
-	}
-
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
-	}
-
 	public Timestamp getCreateDate() {
 		return this.createDate;
 	}
 
 	public void setCreateDate(Timestamp createDate) {
 		this.createDate = createDate;
-	}
-
-	public String getUpdateBy() {
-		return this.updateBy;
-	}
-
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
 	}
 
 	public Timestamp getUpdateDate() {

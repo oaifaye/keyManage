@@ -31,12 +31,14 @@
 		<s:form action="department_add" theme="simple">
 			<table class="table">
 				<thead>
-					<th width="" colspan="5">单位信息管理</th>
-				</thead>
-				<tbody>
+					<th width="" colspan="5" style="border-bottom: 0px;">单位信息管理</th>
+				</thead> 
+			</table>
+			<table class="table">
+				<!-- <tbody> -->
 					<tr>
 						<td>单位父节点</td>
-						<td colspan="4">
+						<td width="80%">
 							省级：<s:select id="province" name="department.parentId" list="departmentList" listKey="id" listValue="departmentName" headerKey="" headerValue="--请选择--" theme="simple" cssClass="text"></s:select>
 							市级：<select id="city" name="department.parentId" class="text"></select>
 							区级：<select id="district" name="department.parentId" class="text"></select>
@@ -44,14 +46,14 @@
 					</tr>
 					<tr>
 						<td>添加单位</td>
-						<td colspan="4">
+						<td>
 							<div class="addDepartment">
 								<s:textfield id="departmentName" name="department.departmentName" cssClass="text"></s:textfield>
 								<s:submit id="addSubmit" value="保存" theme="simple"></s:submit>
 							</div>
 						</td>
 					</tr>
-				</tbody>
+				<!-- </tbody> -->
 			</table>
 		</s:form>
 	</div>

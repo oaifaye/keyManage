@@ -93,5 +93,12 @@
 			<result name="init">/business/department.jsp</result>
 			<result name="error">/404.jsp</result>
 		</action>
+		
+		<!-- 锁的用途 -->
+		<action name="purpose_*" class="purposeAction" method="{1}">
+			<result name="success" type="redirect" >purpose_init</result>
+			<result name="init">/business/purpose.jsp</result>
+			<result name="error">/404.jsp</result>
+		</action>
 	</package>
 </struts>

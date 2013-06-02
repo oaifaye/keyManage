@@ -8,24 +8,24 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.util.Assert;
 
 import com.keyManage.base.PaginationSupport;
-import com.keyManage.bean.ProcedureMessage;
+import com.keyManage.bean.Purpose;
 import com.keyManage.bean.Manager;
-import com.keyManage.service.procedureMessage.ProcedureMessageService;
+import com.keyManage.service.purpose.PurposeService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-public class ProcedureMessageAction extends ActionSupport {
+public class PurposeAction extends ActionSupport {
 
-	private ProcedureMessage procedureMessage;
-	private ProcedureMessageService procedureMessageService;
+	private Purpose purpose;
+	private PurposeService purposeService;
 	private int currentPage;
 	private PaginationSupport paginationSupport;
-	private String procedureMessageId;
+	private String purposeId;
 
 	// 初始化
 	public String init() {
-		if(procedureMessageId!=null){
-			procedureMessage=procedureMessageService.findByPrimaryKey(procedureMessageId);
+		if(purposeId!=null){
+			purpose=purposeService.findByPrimaryKey(purposeId);
 		}
 		if(currentPage<=1){
 			currentPage=1;
@@ -33,7 +33,7 @@ public class ProcedureMessageAction extends ActionSupport {
 		try {
 			Map<String, Object> params=new HashMap<String, Object>();
 			params.put("isDelete", "1");
-			paginationSupport=procedureMessageService.findByPage(params, currentPage, 2);
+			paginationSupport=purposeService.findByPage(params, currentPage, 2);
 			return "init";
 		} catch (DataAccessException e) {
 			return ERROR;
@@ -42,18 +42,18 @@ public class ProcedureMessageAction extends ActionSupport {
 
 	public String add() {
 		try {
-			if(procedureMessage.getId()==null||procedureMessage.getId().equals("")){
+			if(purpose.getId()==null||purpose.getId().equals("")){
 			//新建保存
 				Manager manager = (Manager)ActionContext.getContext().getSession().get("manager");
-				Assert.notNull(procedureMessage);
-				procedureMessage.setIsDelete("1");
-				procedureMessage.setManagerByCreateBy(manager);
-				procedureMessage.setCreateDate(new Timestamp(System
+				Assert.notNull(purpose);
+				purpose.setIsDelete("1");
+				purpose.setManagerByCreateBy(manager);
+				purpose.setCreateDate(new Timestamp(System
 						.currentTimeMillis()));
-				procedureMessageService.addProcedureMessage(procedureMessage);
+				purposeService.addPurpose(purpose);
 			}else{
 			//修改保存
-				procedureMessageService.update(procedureMessage);
+				purposeService.update(purpose);
 			}
 			return SUCCESS;
 		} catch (DataAccessException e) {
@@ -65,29 +65,29 @@ public class ProcedureMessageAction extends ActionSupport {
 	public String removeAll(){
 		try {
 			String[] ids=(String[]) ActionContext.getContext().getParameters().get("ids");
-			procedureMessageService.removeAll(ids);
+			purposeService.removeAll(ids);
 			return SUCCESS;
 		} catch (DataAccessException e) {
 			return ERROR;
 		}
 	}
 
-	public ProcedureMessage getProcedureMessage() {
-		return procedureMessage;
+	public Purpose getPurpose() {
+		return purpose;
 	}
 
-	public void setProcedureMessage(ProcedureMessage procedureMessage) {
-		this.procedureMessage = procedureMessage;
+	public void setPurpose(Purpose purpose) {
+		this.purpose = purpose;
 	}
 
 
-	public ProcedureMessageService getProcedureMessageService() {
-		return procedureMessageService;
+	public PurposeService getPurposeService() {
+		return purposeService;
 	}
 
-	public void setProcedureMessageService(
-			ProcedureMessageService procedureMessageService) {
-		this.procedureMessageService = procedureMessageService;
+	public void setPurposeService(
+			PurposeService purposeService) {
+		this.purposeService = purposeService;
 	}
 
 	public int getCurrentPage() {
@@ -106,12 +106,12 @@ public class ProcedureMessageAction extends ActionSupport {
 		this.paginationSupport = paginationSupport;
 	}
 
-	public String getProcedureMessageId() {
-		return procedureMessageId;
+	public String getPurposeId() {
+		return purposeId;
 	}
 
-	public void setProcedureMessageId(String procedureMessageId) {
-		this.procedureMessageId = procedureMessageId;
+	public void setPurposeId(String purposeId) {
+		this.purposeId = purposeId;
 	}
 
 }

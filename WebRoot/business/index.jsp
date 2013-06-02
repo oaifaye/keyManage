@@ -44,6 +44,7 @@
 								<li><a href="<%=basePath%>procedureMessage_init" target="right">程序信息管理</a></li>
 								<li><a href="<%=basePath%>procedureVersion_init" target="right">程序版本管理</a></li>
 								<li><a href="<%=basePath%>department_init" target="right">单位信息管理</a></li>
+								<li><a href="<%=basePath%>purpose_init" target="right">锁用途管理</a></li>
 							</ul>
 						</li>
 					</s:if>

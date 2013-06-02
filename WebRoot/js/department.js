@@ -19,6 +19,8 @@ $(function(){
 					DWRUtil.addOptions("city", data); 
 				}
 			);
+		}else{
+			$("#city option").remove();;
 			//$("#city option").add("#district option").remove();
 		}
 			$("#district option").remove();
@@ -43,8 +45,8 @@ $(function(){
 		}
 	});
 	
-	$("#district").change(function(){
-		if($(this).val()!=""){
+	$("#province").add("#city").add("#district").change(function(){
+		if($("#district").val()!=""&&$("#district").val()!=null){
 			//保存按钮只读
 			$("#addSubmit").add("#departmentName").attr("disabled",true);
 		}else{
