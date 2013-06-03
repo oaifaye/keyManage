@@ -148,6 +148,11 @@
 	<bean id="keyMessageAction" class="com.keyManage.action.KeyMessageAction" scope="prototype">
 		<property name="keyMessageService" ref="keyMessageService"></property>
 		<property name="containService" ref="containService"></property>
+		<property name="procedureVersionService" ref="procedureVersionService"></property>
+		<property name="procedureMessageService" ref="procedureMessageService"></property>
+		<property name="departmentService" ref="departmentService"></property>
+		<property name="expressTypeService" ref="expressTypeService"></property>
+		<property name="purposeService" ref="purposeService"></property>
 	</bean>
 	
 	<!-- 程序 -->
@@ -183,7 +188,7 @@
 		<property name="procedureMessageService" ref="procedureMessageService"></property>
 	</bean>
 	
-	<!-- 程序版本 -->
+	<!-- 单位 -->
 	<bean id="departmentDAO" class="com.keyManage.dao.department.DepartmentDAOImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
@@ -213,5 +218,21 @@
 	</bean>
 	<bean id="purposeAction" class="com.keyManage.action.PurposeAction" scope="prototype">
 		<property name="purposeService" ref="purposeService"></property>
+	</bean>
+	
+	<!-- 送锁方式 -->
+	<bean id="expressTypeDAO" class="com.keyManage.dao.expressType.ExpressTypeDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="expressTypeDAOProxy" parent="txProxyTemplate">
+		<property name="target">
+			<ref local="expressTypeDAO" />
+		</property>
+	</bean>
+	<bean id="expressTypeService" class="com.keyManage.service.expressType.ExpressTypeServiceImpl">
+		<property name="expressTypeDAO" ref="expressTypeDAOProxy"></property>
+	</bean>
+	<bean id="expressTypeAction" class="com.keyManage.action.ExpressTypeAction" scope="prototype">
+		<property name="expressTypeService" ref="expressTypeService"></property>
 	</bean>
 </beans>

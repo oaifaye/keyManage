@@ -4,4 +4,5 @@ import com.keyManage.bean.KeyMessage;
 
 public interface KeyMessageService {
 	public void addKeyMessage(KeyMessage keyMessage);
+	public KeyMessage findByPrimaryKey(String keyMessageId);
 }

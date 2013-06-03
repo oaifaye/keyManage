@@ -1,9 +1,12 @@
 package com.keyManage.service.procedureVersion;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import com.keyManage.base.PaginationSupport;
+import com.keyManage.bean.Department;
 import com.keyManage.bean.ProcedureVersion;
 import com.keyManage.dao.procedureVersion.ProcedureVersionDAO;
 
@@ -29,6 +32,24 @@ public class ProcedureVersionServiceImpl implements ProcedureVersionService {
 			procedureVersionDAO.update(procedureVersion);
 		}
 	}
+	
+	//dwr
+		public Map<String, String> findByProcedureMessageIdDwr(ArrayList<String> array){
+			String procedureMessageId = array.get(0);
+			String isDelete = array.get(1);
+			Map<String, Object> params=new HashMap<String, Object>();
+			params.put("procedureMessage.id", procedureMessageId);
+			params.put("isDelete", isDelete);
+			List<ProcedureVersion> procedureVersionList = procedureVersionDAO.findListByParams(params);
+			Map<String, String> procedureVersionMap=new HashMap<String, String>();
+			if(procedureVersionList!=null){
+				for(int i=0;i<procedureVersionList.size();i++){
+					procedureVersionMap.put(procedureVersionList.get(i).getId(), procedureVersionList.get(i).getVersionName());
+				}
+			}
+			return procedureVersionMap;
+		}
+	
 	
 	@Override
 	public List<ProcedureVersion> findListByParams(Map<String, Object> params) {

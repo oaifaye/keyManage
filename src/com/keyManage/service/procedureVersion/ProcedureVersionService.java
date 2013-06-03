@@ -1,5 +1,6 @@
 package com.keyManage.service.procedureVersion;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -15,4 +16,6 @@ public interface ProcedureVersionService {
 	public void removeAll(String[] ids);
 	public ProcedureVersion findByPrimaryKey(String id);
 	public List<ProcedureVersion> findListByParams(Map<String, Object> params);
+	//dwr
+	public Map<String, String> findByProcedureMessageIdDwr(ArrayList<String> array);
 }

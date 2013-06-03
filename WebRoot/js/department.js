@@ -4,7 +4,6 @@ $(function(){
 		window.DWRUtil = dwr.util;  
 	}  
 	
-	//修改时，初始化科目下拉框
 	$("#province").change(function(){
 		if($(this).val()!=""){
 			var array=new Array();

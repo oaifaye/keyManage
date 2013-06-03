@@ -10,20 +10,20 @@
             <column name="ID" length="32" />
             <generator class="uuid.hex" />
         </id>
+        <many-to-one name="managerByUpdateBy" class="com.keyManage.bean.Manager" fetch="select" lazy="false">
+            <column name="UpdateBy" length="32" />
+        </many-to-one>
+        <many-to-one name="managerByCreateBy" class="com.keyManage.bean.Manager" fetch="select" lazy="false">
+            <column name="CreateBy" length="32" />
+        </many-to-one>
         <property name="expressTypeName" type="java.lang.String">
             <column name="ExpressTypeName" length="100" />
         </property>
         <property name="isDelete" type="java.lang.String">
             <column name="IsDelete" length="1" />
         </property>
-        <property name="createBy" type="java.lang.String">
-            <column name="CreateBy" length="32" />
-        </property>
         <property name="createDate" type="java.sql.Timestamp">
             <column name="CreateDate" length="23" />
-        </property>
-        <property name="updateBy" type="java.lang.String">
-            <column name="UpdateBy" length="32" />
         </property>
         <property name="updateDate" type="java.sql.Timestamp">
             <column name="UpdateDate" length="23" />

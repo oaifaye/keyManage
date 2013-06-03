@@ -87,6 +87,7 @@
 					<td colspan="2">
 						<input type="hidden" id="kindOfKeyId" name="kindOfKey.id" />
 						<input id="submit" type="submit" value="提交" class="button2" />
+						<input id="close" type="button" value="关闭" class="button2" />
 					</td>
 				</tr>
 			</table>

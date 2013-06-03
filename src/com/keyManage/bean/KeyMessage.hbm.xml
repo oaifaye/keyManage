@@ -9,7 +9,7 @@
   schema="dbo" table="KeyMessage">
   <id name="id" type="java.lang.String">
    <column length="32" name="ID"/>
-   <generator class="assigned"/>
+   <generator class="uuid.hex"/>
   </id>
   <many-to-one class="com.keyManage.bean.KindOfKey" fetch="select" name="kindOfKey" lazy="false">
    <column length="32" name="KindOfKeyID"/>

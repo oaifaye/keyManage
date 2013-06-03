@@ -9,6 +9,11 @@ public class KeyMessageServiceImpl implements KeyMessageService {
 	public void addKeyMessage(KeyMessage keyMessage){
 		keyMessageDAO.insert(keyMessage);
 	}
+	@Override
+	public KeyMessage findByPrimaryKey(String keyMessageId) {
+		return keyMessageDAO.findByPrimaryKey(keyMessageId);
+	}
+	
 	
 	public KeyMessageDAO getKeyMessageDAO() {
 		return keyMessageDAO;
@@ -17,4 +22,6 @@ public class KeyMessageServiceImpl implements KeyMessageService {
 	public void setKeyMessageDAO(KeyMessageDAO keyMessageDAO) {
 		this.keyMessageDAO = keyMessageDAO;
 	}
+
+	
 }

@@ -12,5 +12,8 @@
   	<create creator="spring" javascript="departmentService">  
   		<param name="beanName" value="departmentService" />  
   	</create>
+  	<create creator="spring" javascript="procedureVersionService">  
+  		<param name="beanName" value="procedureVersionService" />  
+  	</create>
   </allow>
 </dwr>

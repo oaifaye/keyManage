@@ -27,7 +27,7 @@ function del(newsType){
 		alert("至少选择一条记录！！");
 	}
 	else{
-		if(confirm("新闻删除后将永久删除\n确定删除新闻？")) {
+		if(confirm("信息删除后将永久删除\n确定删除此条信息？")) {
 			document.submitForm.action=newsType+".action";
 			document.submitForm.submit();
 		}	

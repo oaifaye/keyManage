@@ -20,6 +20,15 @@ $(function(){
 		$("#kindOfKeyId").val($(this).parent().find("#id").val());
 	});
 	
+	//关闭
+	$("#close").click(function(){
+		$("#greybackground").css({
+			"height" : 0
+		});
+		$("#askKeySubmit").css("display", "none");
+		$("#askNum").add("#askDate").add("#askRemark").val("");
+	});
+	
 	//确定申请数量为数字
 	$("#askNum").blur(function(){
 		if($(this).val() != ""){

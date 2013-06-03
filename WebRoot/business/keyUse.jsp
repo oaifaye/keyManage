@@ -47,6 +47,7 @@
 							<td>
 								<s:a action="keyMessage_initAddKey" >
 									<s:param name="containId" value="id"></s:param>
+									<s:param name="keyAskId" value="%{keyAskId}"></s:param>
 									填写用途
 								</s:a>
 							</td>

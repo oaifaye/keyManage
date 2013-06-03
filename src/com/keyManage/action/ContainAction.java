@@ -1,11 +1,15 @@
 package com.keyManage.action;
 
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
 import org.springframework.dao.DataAccessException;
 import org.springframework.util.Assert;
 
@@ -41,6 +45,7 @@ public class ContainAction extends ActionSupport {
 	private List<KeyAsk> keyAskList;
 	private List<CountObject> countObjectList;//含有各种锁的剩余数量的对象
 	private Integer lastNum ;
+	private Integer totalNum;
 	
 	//初始化
 	public String init(){
@@ -130,11 +135,29 @@ public class ContainAction extends ActionSupport {
 	
 	//锁出库处理
 	public String shipment(){
+		
 		try {
 		//向Contain中插入出库信息
 			List<Contain> containList=new ArrayList<Contain>();
 			String[] shipmentArray=shipmentNum.split(",");
 			String[] lotNumberArray=lotNumber.split(",");
+			//判断所填锁的数量是否小于库存
+			keyAsk=keyAskService.findByPrimaryKey(keyAsk.getId());
+			countObjectList=containService.findLastKey(keyAsk.getKindOfKey().getId());
+			Integer tokenNum = containService.findCountNumByKeyAskID(keyAsk.getId(), "1");
+			if(tokenNum!=null){
+				lastNum=keyAsk.getAskNum()-tokenNum;
+			}else{
+				lastNum=keyAsk.getAskNum();
+			}
+				if(totalNum>lastNum){
+					HttpServletResponse response=ServletActionContext.getResponse();
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=utf-8");
+					PrintWriter out=response.getWriter();
+					out.print("<script>alert('锁的数量数量不能超过"+lastNum+"!!');location='contain_initEditShipment?keyAskId="+keyAsk.getId()+"';</script>");
+					return null;
+				}
 			//计算containList，以便批量插入
 			
 			for(int i=0;i<shipmentArray.length;i++){
@@ -161,7 +184,7 @@ public class ContainAction extends ActionSupport {
 		//修改KeyAsk中信息
 			keyAsk=keyAskService.findByPrimaryKey(keyAsk.getId());
 			keyAsk.setAnswerDate(new Timestamp(System.currentTimeMillis()));
-			Integer tokenNum=containService.findCountNumByKeyAskID(keyAsk.getId(), "1");
+			tokenNum = containService.findCountNumByKeyAskID(keyAsk.getId(), "1");
 			//自动完结
 			if(tokenNum.equals(keyAsk.getAskNum())){
 				keyAsk.setIsFinished("0");
@@ -317,6 +340,14 @@ public class ContainAction extends ActionSupport {
 
 	public void setLastNum(Integer lastNum) {
 		this.lastNum = lastNum;
+	}
+
+	public Integer getTotalNum() {
+		return totalNum;
+	}
+
+	public void setTotalNum(Integer totalNum) {
+		this.totalNum = totalNum;
 	}
 
 

@@ -84,7 +84,16 @@ a:hover {
 	width: 130px;
 }
 
+.text1{
+	width: 180px;
+}
+
 .addDepartment{
 	text-align: left;
 	margin-left: 40px;
+}
+
+.tdLeft{
+	font-weight: 600;
+	font-size: 13px;
 }
