@@ -1,5 +1,6 @@
 package com.keyManage.base;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +55,19 @@ public interface HibernateGenericDAO<T> {
 	 * @param params key为表中字段 value为对应字段的值
 	 * */
 	public List<T> findListByParams(Map<String, Object> params);
+	/**
+	 * 按条件查询，返回一个对象List
+	 * @param params key为表中字段 value为对应字段的值
+	 * @param likeParams key为表中字段 value为对应字段的值(模糊查询)
+	 * */
+	public List<T> findListByParams(Map<String, Object> params,Map<String, Object> likeParams);
+	/**
+	 * 按条件查询，返回一个对象List
+	 * @param params key为表中字段 value为对应字段的值
+	 * @param likeParams key为表中字段 value为对应字段的值(模糊查询)
+	 * @param betweenParams key为表中字段 value为两个值组成的字符串，查询两个值之间的范围
+	 * */
+	public List<T> findListByParams(Map<String, Object> params,Map<String, Object> likeParams,Map<String, Timestamp[]> betweenParams,Map<String, String[]> inParams);
 	/**
 	 * 分页查询
 	 * @param params key为要查询的字段 value为要查询的值

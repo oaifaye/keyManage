@@ -2,6 +2,7 @@ package com.keyManage.base;
 
 import java.lang.reflect.ParameterizedType;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -144,7 +145,101 @@ public class HibernateGenericDAOImpl<T> extends HibernateDaoSupport implements
 				return list;
 			} else {
 				throw new DaoException(
-						"jdbc.error.code.Common.findUniqueByParams.notUique",
+						"jdbc.error.code.Common.findListByParams.notUique",
+						new String[] { entityClass.getName(), params.toString() },
+						null);
+			}
+		} catch (DataAccessException e) {
+			throw e;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<T> findListByParams(Map<String, Object> params,Map<String, Object> likeParams) {
+		try {
+			Session session = this.getSession();
+			Criteria crit = session.createCriteria(entityClass);
+			// 获取params全部的key
+			Set<String> keySet = params.keySet();
+			Iterator<String> keyIterator = keySet.iterator();
+			while (keyIterator.hasNext()) {
+				String key = keyIterator.next();
+				crit.add(Restrictions.eq(key, params.get(key)));
+			}
+			//like部分查询
+			keySet=likeParams.keySet();
+			keyIterator=keySet.iterator();
+			while (keyIterator.hasNext()) {
+				String key = keyIterator.next();
+				crit.add(Restrictions.like(key, params.get(key)));
+			}
+			List<T> list = crit.addOrder( Property.forName("createDate").desc()).list();
+			if (list == null || list.size() == 0) {
+				return null;
+			} else if (list.size() > 0) {
+				return list;
+			} else {
+				throw new DaoException(
+						"jdbc.error.code.Common.findListByParams.notUique",
+						new String[] { entityClass.getName(), params.toString() },
+						null);
+			}
+		} catch (DataAccessException e) {
+			throw e;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<T> findListByParams(Map<String, Object> params,Map<String, Object> likeParams,Map<String, Timestamp[]> betweenParams,Map<String, String[]> inParams) {
+		try {
+			Session session = this.getSession();
+			Criteria crit = session.createCriteria(entityClass);
+			Set<String> keySet;
+			Iterator<String> keyIterator;
+			// 获取params全部的key
+			if(params!=null&&!params.isEmpty()){
+				keySet = params.keySet();
+				keyIterator = keySet.iterator();
+				while (keyIterator.hasNext()) {
+					String key = keyIterator.next();
+					crit.add(Restrictions.eq(key, params.get(key)));
+				}
+			}
+			//like部分查询
+			if(likeParams!=null&&!likeParams.isEmpty()){
+				keySet=likeParams.keySet();
+				keyIterator=keySet.iterator();
+				while (keyIterator.hasNext()) {
+					String key = keyIterator.next();
+					crit.add(Restrictions.like(key, params.get(key)));
+				}
+			}
+			//between部分
+			if(betweenParams!=null&&!betweenParams.isEmpty()){
+				keySet = betweenParams.keySet();
+				keyIterator = keySet.iterator();
+				while (keyIterator.hasNext()) {
+					String key = keyIterator.next();
+					crit.add(Restrictions.between(key, betweenParams.get(key)[0], betweenParams.get(key)[1]));
+				}
+			}
+			//in部分
+			if(inParams!=null&&!inParams.isEmpty()){
+				keySet = inParams.keySet();
+				keyIterator = keySet.iterator();
+				while (keyIterator.hasNext()) {
+					String key = keyIterator.next();
+					crit.add(Restrictions.in(key, inParams.get(key)));
+				}
+			}
+			List<T> list = crit.addOrder( Property.forName("createDate").desc()).list();
+			if (list == null || list.size() == 0) {
+				return null;
+			} else if (list.size() > 0) {
+				return list;
+			} else {
+				throw new DaoException(
+						"jdbc.error.code.Common.findListByParams.notUique",
 						new String[] { entityClass.getName(), params.toString() },
 						null);
 			}
@@ -243,5 +338,6 @@ public class HibernateGenericDAOImpl<T> extends HibernateDaoSupport implements
 	public List<T> findByHql(String hql){
 		return getHibernateTemplate().find(hql);
 	}
+
 	
 }

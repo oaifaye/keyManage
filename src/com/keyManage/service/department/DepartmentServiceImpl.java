@@ -60,6 +60,18 @@ public class DepartmentServiceImpl implements DepartmentService {
 		return departmentMap;
 	}
 	
+	@Override
+	public String[] findListByParentId(String parentId,String isDelete) {
+		List<Department> departmentList = departmentDAO.findByParentID(parentId, null, isDelete);
+		String[] ids =new String[departmentList.size()+1];
+		for(int i = 0;i<departmentList.size();i++){
+			ids[i]=departmentList.get(i).getId();
+		}
+		ids[departmentList.size()]=parentId;
+		return ids;
+	}
+	
+	
 	public DepartmentDAO getDepartmentDAO() {
 		return departmentDAO;
 	}
@@ -67,4 +79,6 @@ public class DepartmentServiceImpl implements DepartmentService {
 	public void setDepartmentDAO(DepartmentDAO departmentDAO) {
 		this.departmentDAO = departmentDAO;
 	}
+
+	
 }

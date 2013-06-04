@@ -27,7 +27,6 @@
 	<div class="pageTitle">密码锁仓库管理—密码锁种类管理</div>
 	<div class="pageColumn">
 		<div class="add"></div>
-		<s:property value="lastNum" />
 			<table class="table">
 				<thead>
 					<th width="">密码锁批号</th>

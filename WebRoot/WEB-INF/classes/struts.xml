@@ -71,6 +71,8 @@
 		<action name="keyMessage_*" class="keyMessageAction" method="{1}">
 			<result name="initAddKey">/business/keyMessage.jsp</result>
 			<result name="addKey" type="chain">keyAsk_initKeyUse</result>
+			<result name="initListKeyMessage">/business/listKeyMessage.jsp</result>
+			<result name="execListKeyMessage" type="chain">keyMessage_initListKeyMessage</result>
 			<result name="error">/404.jsp</result>
 		</action>
 		

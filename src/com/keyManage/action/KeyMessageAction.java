@@ -26,6 +26,7 @@ import com.keyManage.service.keyMessage.KeyMessageService;
 import com.keyManage.service.procedureMessage.ProcedureMessageService;
 import com.keyManage.service.procedureVersion.ProcedureVersionService;
 import com.keyManage.service.purpose.PurposeService;
+import com.keyManage.util.SelectObject;
 import com.keyManage.util.TimeSupport;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -46,10 +47,12 @@ public class KeyMessageAction extends ActionSupport {
 	private List<Department> departmentList;
 	private List<ExpressType> expressTypeList;
 	private List<Purpose> purposeList;
+	private List<KeyMessage> keyMessageList;
 	private String departmentId;
 	private String expressDate;
 	private String keyAskId;//保存后跳转keyAsk_initKeyUse.action时用
 	private Integer lastNum;
+	private SelectObject selectObject;//自定义查询的对象
 	//初始化添加锁用途页面
 	public String initAddKey(){
 		contain=containService.findByPrimaryKey(containId);
@@ -89,9 +92,7 @@ public class KeyMessageAction extends ActionSupport {
 				response.setCharacterEncoding("UTF-8");
 				response.setContentType("text/html; charset=utf-8");
 				PrintWriter out;
-			
 				out = response.getWriter();
-			
 				out.print("<script>alert('申请数量不能超过"+lastNum+"!!');location='keyMessage_initAddKey?containId="+containId+"&keyAskId="+keyAskId+"';</script>");
 				return null;
 			}
@@ -118,6 +119,49 @@ public class KeyMessageAction extends ActionSupport {
 		}
 	}
 	
+	//初始化锁列表（listKeyMessage.jsp）
+	public String initListKeyMessage(){
+		Map<String, Object> params=new HashMap<String, Object>();
+		params.put("isDelete", "1");
+		procedureMessageList=procedureMessageService.findListByParams(params);//初始化程序下拉菜单
+		purposeList=purposeService.findListByParams(params);//初始化用途下拉菜单
+		params.put("level", 1);
+		departmentList=departmentService.findListByParams(params);//初始化省级单位下拉菜单
+		return "initListKeyMessage";
+	}
+	
+	//执行锁列表自助查询
+	public String execListKeyMessage(){
+		Map<String, Object> params = new HashMap<String, Object>();
+		Map<String, Timestamp[]> betweenParams=new HashMap<String, Timestamp[]>();
+		Map<String, String[]> inParams=new HashMap<String, String[]>();
+		//查询条件临时存入一个keyMessage对象
+		if(selectObject.getProcedureMessage()!=null&&!selectObject.getProcedureMessage().equals("")){
+			params.put("procedureMessage.id", selectObject.getProcedureMessage());//程序
+		}
+		if(selectObject.getPurpose()!=null&&!selectObject.getPurpose().equals("")){
+			params.put("purpose.id", selectObject.getPurpose());//用途
+		}
+		
+		Manager manager = (Manager)ActionContext.getContext().getSession().get("manager");
+		params.put("managerByCreateBy.id", manager.getId());//填写人为当前用户
+		
+		if(selectObject.getDepartment()!=null&&!selectObject.getDepartment().equals("")){
+			String[] departmentIds = departmentService.findListByParentId(selectObject.getDepartment(), "1");
+			inParams.put("department.id", departmentIds);//单位
+		}
+		
+		if(selectObject.getStartDate()!=null&&!selectObject.getStartDate().equals("")&&
+				selectObject.getEndDate()!=null&&!selectObject.getEndDate().equals("")){
+			//开始时间与结束时间转换格式
+			Timestamp startTime = TimeSupport.parseTime(selectObject.getStartDate(), "yyyy-MM-dd");
+			Timestamp endTime = TimeSupport.parseTime(selectObject.getEndDate(), "yyyy-MM-dd");
+			Timestamp[] betweenValue={startTime,endTime};
+			betweenParams.put("createDate", betweenValue);//填写时间
+		}
+		keyMessageList=keyMessageService.findListByParams(params, null,betweenParams,inParams);
+		return "execListKeyMessage";
+	}
 	
 	public KeyMessageService getKeyMessageService() {
 		return keyMessageService;
@@ -256,6 +300,22 @@ public class KeyMessageAction extends ActionSupport {
 
 	public void setLastNum(Integer lastNum) {
 		this.lastNum = lastNum;
+	}
+
+	public SelectObject getSelectObject() {
+		return selectObject;
+	}
+
+	public void setSelectObject(SelectObject selectObject) {
+		this.selectObject = selectObject;
+	}
+
+	public List<KeyMessage> getKeyMessageList() {
+		return keyMessageList;
+	}
+
+	public void setKeyMessageList(List<KeyMessage> keyMessageList) {
+		this.keyMessageList = keyMessageList;
 	}
 
 	

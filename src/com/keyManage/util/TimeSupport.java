@@ -24,6 +24,23 @@ public class TimeSupport {
 	}
 	
 	/**
+	 * 将字符串时间格式化为需要的Timestamp格式
+	 * @param dateString 要被格式化的Timestamp时间
+	 * @param dateFormat 需要的格式，如yyyy-MM-dd HH:mm
+	 * @return Timestamp类型的时间
+	 * */
+	public static Timestamp parseTime(Timestamp dateString,String dateFormat){
+		Timestamp reslutTime = null;
+		try {
+			SimpleDateFormat formate = new SimpleDateFormat(dateFormat);
+			reslutTime=new Timestamp(formate.parse(dateString.toString()).getTime());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return reslutTime;
+	}
+	
+	/**
 	 * 将Timestamp时间格式化为需要的String格式
 	 * @param dateTime 要被格式化的Timestamp时间
 	 * @param dateFormat 需要的格式，如yyyy-MM-dd HH:mm

@@ -1,5 +1,9 @@
 package com.keyManage.service.keyMessage;
 
+import java.sql.Timestamp;
+import java.util.List;
+import java.util.Map;
+
 import com.keyManage.bean.KeyMessage;
 import com.keyManage.dao.keyMessage.KeyMessageDAO;
 
@@ -13,7 +17,11 @@ public class KeyMessageServiceImpl implements KeyMessageService {
 	public KeyMessage findByPrimaryKey(String keyMessageId) {
 		return keyMessageDAO.findByPrimaryKey(keyMessageId);
 	}
-	
+	@Override
+	public List<KeyMessage> findListByParams(Map<String, Object> params,Map<String, Object> likeParams,Map<String, Timestamp[]> betweenParams,Map<String, String[]> inParams) {
+		return keyMessageDAO.findListByParams(params, likeParams,betweenParams,inParams);
+	}
+
 	
 	public KeyMessageDAO getKeyMessageDAO() {
 		return keyMessageDAO;
@@ -22,6 +30,6 @@ public class KeyMessageServiceImpl implements KeyMessageService {
 	public void setKeyMessageDAO(KeyMessageDAO keyMessageDAO) {
 		this.keyMessageDAO = keyMessageDAO;
 	}
-
+	
 	
 }

@@ -52,27 +52,26 @@
 				<!-- 管理员end -->
 				<!-- 锁管理员start -->
 					<s:if test='#session.manager.role=="1"'>
-					<li class="subMenu"><a href="#">密码锁仓库管理</a>
-						<ul>
-							<li><a href="<%=basePath%>kindOfKey_init" target="right">锁种类</a></li>
-							<li><a href="<%=basePath%>contain_init" target="right">锁入库</a></li>
-							<li><a href="<%=basePath%>contain_initShipment" target="right">锁出库</a></li>
-						</ul>
-					</li>
+						<li class="subMenu"><a href="#">密码锁仓库管理</a>
+							<ul>
+								<li><a href="<%=basePath%>kindOfKey_init" target="right">锁种类</a></li>
+								<li><a href="<%=basePath%>contain_init" target="right">锁入库</a></li>
+								<li><a href="<%=basePath%>contain_initShipment" target="right">锁出库</a></li>
+							</ul>
+						</li>
 					</s:if>
 				<!-- 锁管理员end -->
 				<!-- 锁领用者start -->
 					<s:if test='#session.manager.role=="2"'>
 						<li class="subMenu"><a href="#">密码锁申请</a>
-						<ul>
-							<li><a href="<%=basePath%>keyAsk_initKeyAsk" target="right">密码锁申请</a></li>
-							<li><a href="<%=basePath%>keyAsk_initListKeyAsk" target="right">申请管理</a>
-							</li>
-						</ul>
-					</li>
+							<ul>
+								<li><a href="<%=basePath%>keyAsk_initKeyAsk" target="right">密码锁申请</a></li>
+								<li><a href="<%=basePath%>keyAsk_initListKeyAsk" target="right">添加用途</a></li>
+								<li><a href="<%=basePath%>keyMessage_initListKeyMessage" target="right">用途管理</a></li>
+							</ul>
+						</li>
 					</s:if>
 				<!-- 锁领用者end -->
-				
 				</ul>
 			</div>
 			<div class="sidebar fleft"></div>
