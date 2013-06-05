@@ -1,8 +1,8 @@
 @CHARSET "UTF-8";
 
 body {
-	background: #FFF;
 	font-size: 12px;
+	width: 1400px;
 }
 
 a {
@@ -17,15 +17,17 @@ a:hover {
 }
 
 .center {
-	background: #fff;
-	margin: 30px auto;
-	text-align: center;
-	padding-top: 70px;
+	background: #198bc9;
+	margin: 0 auto;
+	overflow: hidden;
+	width: 1300px;
 }
 
 .add {
 	margin-top: 30px;
 	margin-bottom: 20px;
+	height: 50px;
+	background:url("../page-pageTitle-bg.gif") repeat-x;
 }
 
 .trLight {
@@ -34,11 +36,11 @@ a:hover {
 
 .table {
 	margin: auto;
-	width: 100%;
 	border-collapse: collapse;
 	table-layout: fixed;
 	cursor: default;
 	text-align: center;
+	float: left;
 }
 
 .table tr td,.table th {
@@ -69,14 +71,24 @@ a:hover {
 	margin-left: 5px;
 }
 
+.main{
+	float: left;
+	margin-left:8px;
+	width: 85%;
+	height: 577px;
+	background-color: #ffffff;
+}
+
 .pageColumn thead,.table1 thead {
 	color: #075587;
 	background: url(../images/page-thead-bg.gif);
 }
 
 .pageTitle {
+	float: left;
 	padding-left: 10px;
 	height: 31px;
+	width:95%;
 	line-height: 31px;
 	color: #075587;
 	background: url(../images/page-pageTitle-bg.gif);
@@ -133,5 +145,6 @@ a:hover {
 .resultList1 {
 	width: 100%;
 	overflow: scroll;
+	clear:left;
 	height: 450px;
 }

@@ -5,14 +5,6 @@ $(function(){
 	if (typeof window["DWRUtil"] == "undefined") {  
 		window.DWRUtil = dwr.util;  
 	}  
-	document.documentElement.onclick = function(){  
-        //alert('name: '+self.parent.frames[1].name+', id: '+self.parent.frames[1].id);  
-        //self.frames[1].name = 'main';  
-		
-		$('#rightPage', parent.document).attr("name","data-jqv");
-        alert($('#rightPage', parent.document).attr("name"))
-        alert($('#test1', parent.document).attr("target"))
-    }  
         
 	//修改时初始化页面
 	if($("#keyMessageId").val()!=""){

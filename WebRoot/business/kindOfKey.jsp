@@ -21,6 +21,10 @@
 </head>
 
 <body>
+	<div class="center">
+	<%@ include file="../include/top.jsp" %>
+	<%@ include file="../include/left.jsp" %>
+	<div class="main">
 	<div class="pageTitle">密码锁仓库管理—密码锁种类管理</div>
 	<div class="pageColumn">
 		<div class="add">
@@ -82,6 +86,8 @@
 				</tbody>
 			</table>
 		</s:form>
+	</div>
+	</div>
 	</div>
 </body>
 </html>

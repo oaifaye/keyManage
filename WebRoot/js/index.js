@@ -1,13 +1,13 @@
 
 
 $(function(){
-	document.documentElement.onclick = function(){  
-        //alert('name: '+self.parent.frames[1].name+', id: '+self.parent.frames[1].id);  
-        //self.frames[1].name = 'main';  
-        $("#rightPage").attr("name","data-jqv");
-        alert($("#rightPage").attr("name"))
-    }  
-	
+//	document.documentElement.onclick = function(){  
+//        //alert('name: '+self.parent.frames[1].name+', id: '+self.parent.frames[1].id);  
+//        //self.frames[1].name = 'main';  
+//        $("#rightPage").attr("name","data-jqv");
+//        alert($("#rightPage").attr("name"))
+//    }  
+//	
 	
 	//setMenuHeight
 	$('.menu').height($(window).height()-51-27-26-5);

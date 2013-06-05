@@ -23,7 +23,11 @@
 </head>
 
 <body>
+	<div class="center">
 	<div id="greybackground"></div>
+	<%@ include file="../include/top.jsp" %>
+	<%@ include file="../include/left.jsp" %>
+	<div class="main">
 	<div class="pageTitle">密码锁仓库管理—密码锁种类管理</div>
 	<div class="pageColumn">
 		<div class="add"></div>
@@ -54,6 +58,9 @@
 					</s:iterator>
 				</tbody>
 			</table>
+	</div>
+	</div>
+	<%@ include file="../include/foot.jsp" %>
 	</div>
 </body>
 </html>

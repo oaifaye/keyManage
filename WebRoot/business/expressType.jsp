@@ -21,10 +21,13 @@
 </head>
 
 <body>
+	<div class="center">
+	<%@ include file="../include/top.jsp" %>
+	<%@ include file="../include/left.jsp" %>
+	<div class="main">
 	<div class="pageTitle">密码锁仓库管理—密码锁种类管理</div>
 	<div class="pageColumn">
 		<div class="add">
-
 			<s:form action="expressType_add" theme="simple" id="add">
 			增加：<br />
 			送锁方式：<s:textfield id="expressTypeName" name="expressType.expressTypeName" maxLength="20"></s:textfield>
@@ -76,6 +79,9 @@
 				</tbody>
 			</table>
 		</s:form>
+	</div>
+	</div>
+	<%@ include file="../include/foot.jsp" %>
 	</div>
 </body>
 </html>

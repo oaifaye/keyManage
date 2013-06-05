@@ -6,7 +6,10 @@
 <html>
   <head>
 
-  <link rel="stylesheet" href="css/style.css" type="text/css"></link></head>
+  <link rel="stylesheet" href="css/style.css" type="text/css"></link>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+  </head>
   
   <body>
     <div id="content">
