@@ -64,10 +64,28 @@ public class DepartmentServiceImpl implements DepartmentService {
 	public String[] findListByParentId(String parentId,String isDelete) {
 		List<Department> departmentList = departmentDAO.findByParentID(parentId, null, isDelete);
 		String[] ids =new String[departmentList.size()+1];
-		for(int i = 0;i<departmentList.size();i++){
+		for(int i = 1;i<departmentList.size()+1;i++){
 			ids[i]=departmentList.get(i).getId();
 		}
-		ids[departmentList.size()]=parentId;
+		ids[0]=parentId;
+		return ids;
+	}
+	
+	public String[] findparentIdById(String id,String isDelete){
+		Department department = departmentDAO.findByPrimaryKey(id);
+		String[] ids=null;
+		String parentId = department.getParentId();
+		if(parentId!=null){
+			String[] parentIdArray = parentId.split(",");
+			ids = new String[parentIdArray.length+1];
+			for(int i = 0;i<parentIdArray.length;i++){
+				ids[i]=parentIdArray[i];
+			}
+			ids[parentIdArray.length]=id;
+		}else{
+			ids=new String[1];
+			ids[0]=id;
+		}
 		return ids;
 	}
 	

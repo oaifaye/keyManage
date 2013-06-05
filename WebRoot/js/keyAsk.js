@@ -1,5 +1,7 @@
+
+
 $(function(){
-	
+
 	//定义DWRUtil，否则报错
 	if (typeof window["DWRUtil"] == "undefined") {  
 		window.DWRUtil = dwr.util;  

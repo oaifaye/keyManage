@@ -18,10 +18,10 @@
 <script type="text/javascript" src="js/list.js"></script>
 <script type="text/javascript" src="js/Calendar3.js"></script>
 <script type="text/javascript" src="js/keyMessage.js"></script>
-<script type='text/javascript' src='<%=basePath%>dwr/engine.js'></script> 
-<script type='text/javascript' src='<%=basePath%>dwr/util.js'></script> 
-<script type='text/javascript' src='<%=basePath%>dwr/interface/procedureVersionService.js'></script> 
-<script type='text/javascript' src='<%=basePath%>dwr/interface/departmentService.js'></script> 
+<script type='text/javascript' src='dwr/engine.js'></script> 
+<script type='text/javascript' src='dwr/util.js'></script> 
+<script type='text/javascript' src='dwr/interface/procedureVersionService.js'></script> 
+<script type='text/javascript' src='dwr/interface/departmentService.js'></script> 
 
 <link rel="stylesheet" href="css/detail.css" type="text/css"></link>
 </head>
@@ -103,7 +103,11 @@
 			</table>
 			<s:hidden name="containId" value="%{containId}"/>
 			<s:hidden name="keyAskId" value="%{keyAskId}"/>
-			
+			<s:hidden id="versionId" value="%{keyMessage.procedureVersion.id}"/>
+			<s:hidden id="provinceId" value="%{provinceId}"/>
+			<s:hidden id="cityId" value="%{cityId}"/>
+			<s:hidden id="districtId" value="%{districtId}"/>
+			<s:hidden id="keyMessageId" name="keyMessage.id" value="%{keyMessage.id}"/>
 		</s:form>
 	</div>
 </body>

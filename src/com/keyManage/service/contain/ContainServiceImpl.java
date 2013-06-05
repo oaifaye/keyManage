@@ -1,5 +1,6 @@
 package com.keyManage.service.contain;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -185,6 +186,11 @@ public class ContainServiceImpl implements ContainService {
 			}
 		}
 		return num;
+	}
+	
+	/**自定义查询*/
+	public List<Contain> findListByParams(Map<String, Object> params,Map<String, Object> likeParams,Map<String, Timestamp[]> betweenParams,Map<String, String[]> inParams){
+		return containDAO.findListByParams(params, likeParams, betweenParams, inParams);
 	}
 	
 	public ContainDAO getContainDAO() {

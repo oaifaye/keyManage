@@ -53,6 +53,9 @@ public class KeyMessageAction extends ActionSupport {
 	private String keyAskId;//保存后跳转keyAsk_initKeyUse.action时用
 	private Integer lastNum;
 	private SelectObject selectObject;//自定义查询的对象
+	private String provinceId;
+	private String cityId;
+	private String districtId;
 	//初始化添加锁用途页面
 	public String initAddKey(){
 		contain=containService.findByPrimaryKey(containId);
@@ -68,10 +71,31 @@ public class KeyMessageAction extends ActionSupport {
 		params.put("level", 1);
 		departmentList=departmentService.findListByParams(params);
 		List<Contain> containList = containService.findLastNumOfContain(keyAskId);
+		
 		for(Contain contain:containList){
 			if(containId.equals(contain.getId())){
 				lastNum=contain.getKeyNum();
 			}
+		}
+		
+		/*修改时使用*/
+		if(keyMessage!=null){
+			/*总数需要加上当前锁在数据库中的数量*/
+			lastNum=lastNum+keyMessage.getKeyNum();
+			/*三级单位的id*/
+			String[] ids = departmentService.findparentIdById(keyMessage.getDepartment().getId(), "1");
+			if(ids.length>=1){
+				provinceId=ids[0];
+			}
+			if(ids.length>=2){
+				cityId=ids[1];
+			}
+			if(ids.length>=3){
+				districtId=ids[2];
+			}
+			/*初始化送锁时间*/
+			expressDate=TimeSupport.formateTime(keyMessage.getExpressDate(), "yyyy-MM-dd");
+			
 		}
 		return "initAddKey";
 	}
@@ -85,6 +109,11 @@ public class KeyMessageAction extends ActionSupport {
 				if(containId.equals(contain.getId())){
 					lastNum=contain.getKeyNum();
 				}
+			}
+			/*修改保存时*/
+			if(keyMessage.getId()!=null&&!keyMessage.getId().equals("")){
+				/*修改时校验总数需要加上当前锁在数据库中的数量*/
+				lastNum=lastNum+keyMessage.getKeyNum();
 			}
 			if(keyMessage.getKeyNum()>lastNum){
 				//请求锁数量超过数据库中的
@@ -111,6 +140,11 @@ public class KeyMessageAction extends ActionSupport {
 			Manager manager = (Manager)ActionContext.getContext().getSession().get("manager");
 			keyMessage.setManagerByCreateBy(manager);
 			keyMessage.setCreateDate(new Timestamp(System.currentTimeMillis()));
+			/*修改保存时*/
+			if(keyMessage.getId()!=null&&!keyMessage.getId().equals("")){
+				keyMessageService.updateKeyMessage(keyMessage);
+				return "updateKey";
+			}
 			keyMessageService.addKeyMessage(keyMessage);
 			return "addKey";
 		} catch (IOException e) {
@@ -136,6 +170,7 @@ public class KeyMessageAction extends ActionSupport {
 		Map<String, Timestamp[]> betweenParams=new HashMap<String, Timestamp[]>();
 		Map<String, String[]> inParams=new HashMap<String, String[]>();
 		//查询条件临时存入一个keyMessage对象
+		if(selectObject!=null){
 		if(selectObject.getProcedureMessage()!=null&&!selectObject.getProcedureMessage().equals("")){
 			params.put("procedureMessage.id", selectObject.getProcedureMessage());//程序
 		}
@@ -144,7 +179,13 @@ public class KeyMessageAction extends ActionSupport {
 		}
 		
 		Manager manager = (Manager)ActionContext.getContext().getSession().get("manager");
-		params.put("managerByCreateBy.id", manager.getId());//填写人为当前用户
+		/*为锁用户时*/
+		if(manager.getRole().equals("2")){
+			params.put("managerByCreateBy.id", manager.getId());//填写人为当前用户
+		}else{
+		/*为管理员或仓库保管员时*/	
+			
+		}
 		
 		if(selectObject.getDepartment()!=null&&!selectObject.getDepartment().equals("")){
 			String[] departmentIds = departmentService.findListByParentId(selectObject.getDepartment(), "1");
@@ -159,8 +200,14 @@ public class KeyMessageAction extends ActionSupport {
 			Timestamp[] betweenValue={startTime,endTime};
 			betweenParams.put("createDate", betweenValue);//填写时间
 		}
+		}
 		keyMessageList=keyMessageService.findListByParams(params, null,betweenParams,inParams);
 		return "execListKeyMessage";
+	}
+	
+	public String editkeyMessage(){
+		keyMessage=keyMessageService.findByPrimaryKey(keyMessage.getId());
+		return "editkeyMessage";
 	}
 	
 	public KeyMessageService getKeyMessageService() {
@@ -316,6 +363,30 @@ public class KeyMessageAction extends ActionSupport {
 
 	public void setKeyMessageList(List<KeyMessage> keyMessageList) {
 		this.keyMessageList = keyMessageList;
+	}
+
+	public String getProvinceId() {
+		return provinceId;
+	}
+
+	public void setProvinceId(String provinceId) {
+		this.provinceId = provinceId;
+	}
+
+	public String getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
+	}
+
+	public String getDistrictId() {
+		return districtId;
+	}
+
+	public void setDistrictId(String districtId) {
+		this.districtId = districtId;
 	}
 
 	

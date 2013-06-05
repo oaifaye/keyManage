@@ -22,6 +22,10 @@ public class KeyMessageServiceImpl implements KeyMessageService {
 		return keyMessageDAO.findListByParams(params, likeParams,betweenParams,inParams);
 	}
 
+	@Override
+	public void updateKeyMessage(KeyMessage keyMessage) {
+		keyMessageDAO.update(keyMessage);
+	}
 	
 	public KeyMessageDAO getKeyMessageDAO() {
 		return keyMessageDAO;
@@ -30,6 +34,7 @@ public class KeyMessageServiceImpl implements KeyMessageService {
 	public void setKeyMessageDAO(KeyMessageDAO keyMessageDAO) {
 		this.keyMessageDAO = keyMessageDAO;
 	}
+	
 	
 	
 }

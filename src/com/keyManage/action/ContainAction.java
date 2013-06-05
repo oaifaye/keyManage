@@ -44,8 +44,12 @@ public class ContainAction extends ActionSupport {
 	private PaginationSupport paginationSupport;
 	private List<KeyAsk> keyAskList;
 	private List<CountObject> countObjectList;//含有各种锁的剩余数量的对象
+	private List<Contain> containList;
 	private Integer lastNum ;
 	private Integer totalNum;
+	private String saveOrTake;
+	private String startDate;
+	private String endDate;
 	
 	//初始化
 	public String init(){
@@ -167,6 +171,7 @@ public class ContainAction extends ActionSupport {
 					contain.setKindOfKey(kindOfKey);
 					contain.setSaveOrTake("1");
 					contain.setIsDelete("1");
+					contain.setContainDate(new Timestamp(System.currentTimeMillis()));
 					Manager manager = (Manager)ActionContext.getContext().getSession().get("manager");
 					contain.setManagerByCreateBy(manager);
 					contain.setCreateDate(new Timestamp(System.currentTimeMillis()));
@@ -197,7 +202,40 @@ public class ContainAction extends ActionSupport {
 		}
 	}
 	
+	/**初始化查询统计——出入库情况*/
+	public String initListConatin(){
+		Map<String, Object> params=new HashMap<String, Object>();
+		params.put("isDelete", "1");
+		//初始化锁的种类
+		kindOfKeyList=kindOfKeyService.findListByParams(params);
+		return "initListContain";
+	}
 	
+	/**执行查询统计——出入库情况*/
+	public String execListContain(){
+		Map<String, Object> params=new HashMap<String, Object>();
+		Map<String, Timestamp[]> betweenParams=new HashMap<String, Timestamp[]>();
+		Timestamp startTimestamp = null;
+		Timestamp endTimestamp = null;
+		params.put("isDelete", "1");
+		if(kindOfKeyId!=null&&!kindOfKeyId.equals("")){
+			params.put("kindOfKey.id",kindOfKeyId);
+		}
+		if(saveOrTake!=null&&!saveOrTake.equals("")){
+			params.put("saveOrTake",saveOrTake);
+		}
+		if(startDate!=null&&endDate!=null&&!startDate.equals("")&&!endDate.equals("")){
+			//开始时间与结束时间转换格式
+			startTimestamp = TimeSupport.parseTime(startDate, "yyyy-MM-dd");
+			endTimestamp = TimeSupport.parseTime(endDate, "yyyy-MM-dd");
+			Timestamp[] betweenValue={startTimestamp,endTimestamp};
+			betweenParams.put("createDate", betweenValue);//填写时间
+		}
+		containList=containService.findListByParams(params, null, betweenParams, null);
+		return "execListContain";
+	}
+	
+//============================================================================================================================
 	public Contain getContain() {
 		return contain;
 	}
@@ -348,6 +386,38 @@ public class ContainAction extends ActionSupport {
 
 	public void setTotalNum(Integer totalNum) {
 		this.totalNum = totalNum;
+	}
+
+	public List<Contain> getContainList() {
+		return containList;
+	}
+
+	public void setContainList(List<Contain> containList) {
+		this.containList = containList;
+	}
+
+	public String getSaveOrTake() {
+		return saveOrTake;
+	}
+
+	public void setSaveOrTake(String saveOrTake) {
+		this.saveOrTake = saveOrTake;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 
 

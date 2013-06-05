@@ -19,7 +19,7 @@
 <script type="text/javascript" src="js/index.js"></script>
 </head>
 
-<body style="overflow-y:hidden">
+<body>
 	<div id="wrap">
 		<div id="header">
 			<div class="logo fleft"></div>
@@ -41,11 +41,11 @@
 					<s:if test='#session.manager.role=="0"'>
 						<li class="subMenu"><a href="#">基础信息管理</a>
 							<ul>
-								<li><a href="<%=basePath%>procedureMessage_init" target="right">程序信息管理</a></li>
-								<li><a href="<%=basePath%>procedureVersion_init" target="right">程序版本管理</a></li>
-								<li><a href="<%=basePath%>department_init" target="right">单位信息管理</a></li>
-								<li><a href="<%=basePath%>purpose_init" target="right">锁用途管理</a></li>
-								<li><a href="<%=basePath%>expressType_init" target="right">送锁方式管理</a></li>
+								<li><a href="<%=basePath%>procedureMessage_init" target="_self">程序信息管理</a></li>
+								<li><a href="<%=basePath%>procedureVersion_init" target="rightPage">程序版本管理</a></li>
+								<li><a href="<%=basePath%>department_init" target="rightPage">单位信息管理</a></li>
+								<li><a href="<%=basePath%>purpose_init" target="rightPage">锁用途管理</a></li>
+								<li><a href="<%=basePath%>expressType_init" target="rightPage">送锁方式管理</a></li>
 							</ul>
 						</li>
 					</s:if>
@@ -54,9 +54,16 @@
 					<s:if test='#session.manager.role=="1"'>
 						<li class="subMenu"><a href="#">密码锁仓库管理</a>
 							<ul>
-								<li><a href="<%=basePath%>kindOfKey_init" target="right">锁种类</a></li>
-								<li><a href="<%=basePath%>contain_init" target="right">锁入库</a></li>
-								<li><a href="<%=basePath%>contain_initShipment" target="right">锁出库</a></li>
+								<li><a href="<%=basePath%>kindOfKey_init" target="rightPage">锁种类</a></li>
+								<li><a href="<%=basePath%>contain_init" target="rightPage">锁入库</a></li>
+								<li><a href="<%=basePath%>contain_initShipment" target="rightPage">锁出库</a></li>
+							</ul>
+						</li>
+						<li class="subMenu"><a href="#">查询统计</a>
+							<ul>
+								<li><a href="<%=basePath%>contain_initListConatin" target="rightPage">出入库情况查询</a></li>
+								<li><a href="<%=basePath%>contain_init" target="rightPage">锁入库</a></li>
+								<li><a href="<%=basePath%>contain_initShipment" target="rightPage">锁出库</a></li>
 							</ul>
 						</li>
 					</s:if>
@@ -65,9 +72,9 @@
 					<s:if test='#session.manager.role=="2"'>
 						<li class="subMenu"><a href="#">密码锁申请</a>
 							<ul>
-								<li><a href="<%=basePath%>keyAsk_initKeyAsk" target="right">密码锁申请</a></li>
-								<li><a href="<%=basePath%>keyAsk_initListKeyAsk" target="right">添加用途</a></li>
-								<li><a href="<%=basePath%>keyMessage_initListKeyMessage" target="right">用途管理</a></li>
+								<li><a href="<%=basePath%>keyAsk_initKeyAsk" target="data-jqv">密码锁申请</a></li>
+								<li><a id="test1" href="<%=basePath%>keyAsk_initListKeyAsk" target="data-jqv">添加用途</a></li>
+								<li><a href="<%=basePath%>keyMessage_initListKeyMessage" target="_self">用途管理</a></li>
 							</ul>
 						</li>
 					</s:if>
@@ -76,9 +83,9 @@
 			</div>
 			<div class="sidebar fleft"></div>
 			<div class="right">
-			<div class="page">
-					<iframe class="rightMain" name="right" frameborder="0" src="main.html"></iframe>
-			</div>
+				<div class="page">
+					<iframe id="rightPage" class="rightMain" name="data-jqv" frameborder="0" src="main.html"></iframe>
+				</div>
 			</div>
 		</div>
 		<!--#content -->

@@ -1,5 +1,6 @@
 package com.keyManage.service.contain;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -43,5 +44,6 @@ public interface ContainService {
 	public Integer findNumOfUsed(String keyAskId);
 	/**按锁种类id查询库中剩余数量*/
 	public Integer findNumByKindOfKeyID(String kindOfKeyID);
-	
+	/**自定义查询*/
+	public List<Contain> findListByParams(Map<String, Object> params,Map<String, Object> likeParams,Map<String, Timestamp[]> betweenParams,Map<String, String[]> inParams);
 }

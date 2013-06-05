@@ -54,6 +54,8 @@
 			<result name="initShipment">/business/shipment.jsp</result>
 			<result name="initEditShipment">/business/editShipment.jsp</result>
 			<result name="shipmentSuccess" type="redirect">/contain_initShipment</result>
+			<result name="initListContain">/business/listContain.jsp</result>
+			<result name="execListContain" type="chain">contain_initListConatin</result>
 			<result name="initContain">/business/contain.jsp</result>
 			<result name="error">/404.jsp</result>
 		</action>
@@ -73,6 +75,8 @@
 			<result name="addKey" type="chain">keyAsk_initKeyUse</result>
 			<result name="initListKeyMessage">/business/listKeyMessage.jsp</result>
 			<result name="execListKeyMessage" type="chain">keyMessage_initListKeyMessage</result>
+			<result name="editkeyMessage" type="chain">keyMessage_initAddKey</result>
+			<result name="updateKey" type="chain">keyMessage_execListKeyMessage</result>
 			<result name="error">/404.jsp</result>
 		</action>
 		

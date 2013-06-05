@@ -1,3 +1,4 @@
+
 function paginate(currentPage) {
 			window.location.href="kindOfKey_init.action?currentPage="+currentPage;
 		}

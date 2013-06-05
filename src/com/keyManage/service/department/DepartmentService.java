@@ -18,6 +18,8 @@ public interface DepartmentService {
 	public List<Department> findListByParams(Map<String, Object> params);
 	//dwr
 	public Map<String, String> findByParentID(ArrayList<String> array);
-	/**根据一个parentId计算其下所有单位的id(包括自己)*/
+	/**根据一个parentId计算其下所有单位的id(包括自己，放在最前)*/
 	public String[] findListByParentId(String parentId,String isDelete);
+	/**根据一个单位的id，计算其所有上级单位（包括自己，放在会后）*/
+	public String[] findparentIdById(String id,String isDelete);
 }

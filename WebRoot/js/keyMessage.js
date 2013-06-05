@@ -1,8 +1,76 @@
+
+
 $(function(){
 	//定义DWRUtil，否则报错
 	if (typeof window["DWRUtil"] == "undefined") {  
 		window.DWRUtil = dwr.util;  
 	}  
+	document.documentElement.onclick = function(){  
+        //alert('name: '+self.parent.frames[1].name+', id: '+self.parent.frames[1].id);  
+        //self.frames[1].name = 'main';  
+		
+		$('#rightPage', parent.document).attr("name","data-jqv");
+        alert($('#rightPage', parent.document).attr("name"))
+        alert($('#test1', parent.document).attr("target"))
+    }  
+        
+	//修改时初始化页面
+	if($("#keyMessageId").val()!=""){
+		/*初始化程序版本*/
+		if($("#procedureMessage").val()!=""){
+			var array=new Array();
+			array[0]=$("#procedureMessage").val();
+			array[1]="1";
+			procedureVersionService.findByProcedureMessageIdDwr(array,
+				function(data){
+					//alert(data)
+					DWRUtil.removeAllOptions("procedureVersion"); 
+					DWRUtil.addOptions("procedureVersion", [""]); 
+					DWRUtil.addOptions("procedureVersion", data); 
+					//确定版本选中项
+					DWRUtil.setValue("procedureVersion",$("#versionId").val());
+				}
+			);
+		}
+		/*初始化单位*/
+		if($("#provinceId").val()!=""){
+			$("#province option").each(function(){
+				if($(this).val()==$("#provinceId").val()){
+					$(this).attr("selected",true);
+				}
+			});
+			//初始化市级单位
+			var array=new Array();
+			array[0]=$("#provinceId").val();
+			array[1]="2";//单位等级
+			array[2]="1";
+			departmentService.findByParentID(array,
+				function(data){
+					DWRUtil.removeAllOptions("city"); 
+					DWRUtil.addOptions("city", [""]); 
+					DWRUtil.addOptions("city", data); 
+					//确定市级选中项
+					DWRUtil.setValue("city",$("#cityId").val());
+				}
+			);
+		}
+		if($("#cityId").val()!=""){
+			var array=new Array();
+			array[0]=$("#cityId").val();
+			array[1]="3";//单位等级
+			array[2]="1";
+			departmentService.findByParentID(array,
+				function(data){
+					DWRUtil.removeAllOptions("district"); 
+					DWRUtil.addOptions("district", [""]); 
+					DWRUtil.addOptions("district", data); 
+					//确定区级选中项
+					DWRUtil.setValue("district",$("#districtId").val());
+				}
+			);
+		}
+	}
+	
 	
 	$("#procedureMessage").change(function(){
 		if($(this).val()!=""){

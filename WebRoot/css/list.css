@@ -129,3 +129,9 @@ a:hover {
 	z-index: 2;
 	display: none;
 }
+
+.resultList1 {
+	width: 100%;
+	overflow: scroll;
+	height: 450px;
+}
