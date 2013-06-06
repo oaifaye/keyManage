@@ -49,20 +49,21 @@ public class KindOfKeyAction extends ActionSupport {
 	public String add() {
 		Map<String, Object> params=new HashMap<String, Object>();
 		try {
-			/*验证是否重复*/
-			params.put("kindName", kindOfKey.getKindName().trim());
-			List<KindOfKey> kindOfKeyTest = kindOfKeyService.findListByParams(params);
-			if(kindOfKeyTest!=null){
-				HttpServletResponse response=ServletActionContext.getResponse();
-				response.setCharacterEncoding("UTF-8");
-				response.setContentType("text/html; charset=utf-8");
-				PrintWriter out = response.getWriter();
-				out.print("<script>alert('此锁种类型名称已存在，请更名!!');location='kindOfKey_init';</script>");
-				return null;
-			}
+			
 			
 			if(kindOfKey.getId()==null||kindOfKey.getId().equals("")){
 			//新建保存
+				/*验证是否重复*/
+				params.put("kindName", kindOfKey.getKindName().trim());
+				List<KindOfKey> kindOfKeyTest = kindOfKeyService.findListByParams(params);
+				if(kindOfKeyTest!=null){
+					HttpServletResponse response=ServletActionContext.getResponse();
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.print("<script>alert('此锁种类型名称已存在，请更名!!');location='kindOfKey_init';</script>");
+					return null;
+				}
 				Manager manager = (Manager)ActionContext.getContext().getSession().get("manager");
 				Assert.notNull(kindOfKey);
 				kindOfKey.setKindName(kindOfKey.getKindName().trim());

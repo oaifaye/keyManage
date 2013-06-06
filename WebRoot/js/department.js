@@ -54,4 +54,17 @@ $(function(){
 		}
 	});
 	
+	//表单提交验证
+	$("#department_add").submit(function(){
+		if($("#province").val()==""){
+			alert("单位父节点不能为空！！");
+			return false;
+		}
+		if($("#departmentName").val().replace(/[ ]/g,"")==""){
+			alert("单位名称不能为空！！");
+			$("#departmentName").focus();
+			return false;
+		}
+	});
+	
 });

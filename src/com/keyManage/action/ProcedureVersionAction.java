@@ -1,10 +1,14 @@
 package com.keyManage.action;
 
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
 import org.springframework.dao.DataAccessException;
 import org.springframework.util.Assert;
 
@@ -49,11 +53,26 @@ public class ProcedureVersionAction extends ActionSupport {
 	}
 
 	public String add() {
+		Map<String, Object> params=new HashMap<String, Object>();
 		try {
+			
 			if(procedureVersion.getId()==null||procedureVersion.getId().equals("")){
 			//新建保存
+				/*验证是否重复*/
+				params.put("versionName", procedureVersion.getVersionName().trim());
+				params.put("procedureMessage.id", procedureVersion.getProcedureMessage().getId());
+				List<ProcedureVersion> procedureVersionTest = procedureVersionService.findListByParams(params);
+				if(procedureVersionTest!=null){
+					HttpServletResponse response=ServletActionContext.getResponse();
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.print("<script>alert('此程序版本名称已存在，请更名!!');location='procedureVersion_init';</script>");
+					return null;
+				}
 				Manager manager = (Manager)ActionContext.getContext().getSession().get("manager");
 				Assert.notNull(procedureVersion);
+				procedureVersion.setVersionName(procedureVersion.getVersionName());
 				procedureVersion.setIsDelete("1");
 				procedureVersion.setManagerByCreateBy(manager);
 				procedureVersion.setCreateDate(new Timestamp(System
@@ -64,7 +83,7 @@ public class ProcedureVersionAction extends ActionSupport {
 				procedureVersionService.update(procedureVersion);
 			}
 			return SUCCESS;
-		} catch (DataAccessException e) {
+		} catch (Exception e) {
 			return ERROR;
 		}
 	}

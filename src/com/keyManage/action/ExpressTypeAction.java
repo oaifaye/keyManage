@@ -1,15 +1,21 @@
 package com.keyManage.action;
 
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
 import org.springframework.dao.DataAccessException;
 import org.springframework.util.Assert;
 
 import com.keyManage.base.PaginationSupport;
 import com.keyManage.bean.ExpressType;
 import com.keyManage.bean.Manager;
+import com.keyManage.bean.Purpose;
 import com.keyManage.service.expressType.ExpressTypeService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
@@ -41,9 +47,22 @@ public class ExpressTypeAction extends ActionSupport {
 	}
 
 	public String add() {
+		Map<String, Object> params=new HashMap<String, Object>();
 		try {
+			
 			if(expressType.getId()==null||expressType.getId().equals("")){
 			//新建保存
+				/*验证是否重复*/
+				params.put("expressTypeName", expressType.getExpressTypeName().trim());
+				List<ExpressType> expressTypeTest = expressTypeService.findListByParams(params);
+				if(expressTypeTest!=null){
+					HttpServletResponse response=ServletActionContext.getResponse();
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.print("<script>alert('此送锁方式已存在，请更名!!');location='expressType_init';</script>");
+					return null;
+				}
 				Manager manager = (Manager)ActionContext.getContext().getSession().get("manager");
 				Assert.notNull(expressType);
 				expressType.setIsDelete("1");
@@ -56,7 +75,7 @@ public class ExpressTypeAction extends ActionSupport {
 				expressTypeService.update(expressType);
 			}
 			return SUCCESS;
-		} catch (DataAccessException e) {
+		} catch (Exception e) {
 			return ERROR;
 		}
 	}

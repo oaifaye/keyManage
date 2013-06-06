@@ -33,7 +33,7 @@
 			<div class="pageTitle">密码锁仓库管理—密码锁种类管理</div>
 			<div class="pageColumn">
 				<div class="add"></div>
-				<s:form action="department_add" theme="simple">
+				<s:form id="department_add" action="department_add" theme="simple">
 					<table class="table2">
 						<thead>
 							<th width="" colspan="5" style="border-bottom: 0px;">单位信息管理</th>

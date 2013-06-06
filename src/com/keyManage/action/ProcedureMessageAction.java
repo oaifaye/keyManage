@@ -1,13 +1,19 @@
 package com.keyManage.action;
 
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
 import org.springframework.dao.DataAccessException;
 import org.springframework.util.Assert;
 
 import com.keyManage.base.PaginationSupport;
+import com.keyManage.bean.KindOfKey;
 import com.keyManage.bean.ProcedureMessage;
 import com.keyManage.bean.Manager;
 import com.keyManage.service.procedureMessage.ProcedureMessageService;
@@ -41,9 +47,22 @@ public class ProcedureMessageAction extends ActionSupport {
 	}
 
 	public String add() {
+		Map<String, Object> params=new HashMap<String, Object>();
 		try {
+			
 			if(procedureMessage.getId()==null||procedureMessage.getId().equals("")){
 			//新建保存
+				/*验证是否重复*/
+				params.put("procedureName", procedureMessage.getProcedureName().trim());
+				List<ProcedureMessage> procedureMessageTest = procedureMessageService.findListByParams(params);
+				if(procedureMessageTest!=null){
+					HttpServletResponse response=ServletActionContext.getResponse();
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.print("<script>alert('此程序名称已存在，请更名!!');location='procedureMessage_init';</script>");
+					return null;
+				}
 				Manager manager = (Manager)ActionContext.getContext().getSession().get("manager");
 				Assert.notNull(procedureMessage);
 				procedureMessage.setIsDelete("1");
@@ -56,7 +75,7 @@ public class ProcedureMessageAction extends ActionSupport {
 				procedureMessageService.update(procedureMessage);
 			}
 			return SUCCESS;
-		} catch (DataAccessException e) {
+		} catch (Exception e) {
 			return ERROR;
 		}
 	}

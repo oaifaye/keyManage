@@ -17,7 +17,7 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/list.js"></script>
 <link rel="stylesheet" href="css/list.css" type="text/css"></link>
-<script type="text/javascript" src="js/ProcedureMessage.js"></script>
+<script type="text/javascript" src="js/procedureMessage.js"></script>
 </head>
 
 <body>

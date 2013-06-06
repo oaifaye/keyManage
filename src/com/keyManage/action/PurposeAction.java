@@ -1,13 +1,19 @@
 package com.keyManage.action;
 
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
 import org.springframework.dao.DataAccessException;
 import org.springframework.util.Assert;
 
 import com.keyManage.base.PaginationSupport;
+import com.keyManage.bean.ProcedureVersion;
 import com.keyManage.bean.Purpose;
 import com.keyManage.bean.Manager;
 import com.keyManage.service.purpose.PurposeService;
@@ -41,9 +47,22 @@ public class PurposeAction extends ActionSupport {
 	}
 
 	public String add() {
+		Map<String, Object> params=new HashMap<String, Object>();
 		try {
+			
 			if(purpose.getId()==null||purpose.getId().equals("")){
 			//新建保存
+				/*验证是否重复*/
+				params.put("name", purpose.getName().trim());
+				List<Purpose> purposeTest = purposeService.findListByParams(params);
+				if(purposeTest!=null){
+					HttpServletResponse response=ServletActionContext.getResponse();
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.print("<script>alert('此锁用途已存在，请更名!!');location='purpose_init';</script>");
+					return null;
+				}
 				Manager manager = (Manager)ActionContext.getContext().getSession().get("manager");
 				Assert.notNull(purpose);
 				purpose.setIsDelete("1");
@@ -56,7 +75,7 @@ public class PurposeAction extends ActionSupport {
 				purposeService.update(purpose);
 			}
 			return SUCCESS;
-		} catch (DataAccessException e) {
+		} catch (Exception e) {
 			return ERROR;
 		}
 	}
