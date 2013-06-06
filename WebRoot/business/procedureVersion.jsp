@@ -37,7 +37,7 @@
 			<s:else>
 				程序名称：<a href="<%=basePath%>procedureMessage_init" >前往填写</a><br />
 			</s:else>
-			程序版本：<s:textfield id="VersionName" name="procedureVersion.VersionName" maxLength="20"></s:textfield><br />
+			程序版本：<s:textfield id="VersionName" name="procedureVersion.VersionName" maxLength="20"></s:textfield>
 				<input type="hidden" name="procedureVersion.id" value="${procedureVersion.id}" />
 				<input type="hidden" name="procedureVersion.isDelete"
 					value="${procedureVersion.isDelete}" />

@@ -21,11 +21,11 @@
 					<s:if test='#session.manager.role=="0"'>
 						<li class="subMenu"><a href="#">基础信息管理</a>
 							<ul>
-								<li><a href="procedureMessage_init" target="_self">程序信息管理</a></li>
-								<li><a href="procedureVersion_init" target="rightPage">程序版本管理</a></li>
-								<li><a href="department_init" target="rightPage">单位信息管理</a></li>
-								<li><a href="purpose_init" target="rightPage">锁用途管理</a></li>
-								<li><a href="expressType_init" target="rightPage">送锁方式管理</a></li>
+								<li><a href="procedureMessage_init" >程序信息管理</a></li>
+								<li><a href="procedureVersion_init" >程序版本管理</a></li>
+								<li><a href="department_init">单位信息管理</a></li>
+								<li><a href="purpose_init" >锁用途管理</a></li>
+								<li><a href="expressType_init" >送锁方式管理</a></li>
 							</ul>
 						</li>
 					</s:if>
@@ -34,22 +34,25 @@
 					<s:if test='#session.manager.role=="1"'>
 						<li class="subMenu"><a href="#">密码锁仓库管理</a>
 							<ul>
-								<li><a href="kindOfKey_init" target="rightPage">锁种类</a></li>
-								<li><a href="contain_init" target="rightPage">锁入库</a></li>
-								<li><a href="contain_initShipment" target="rightPage">锁出库</a></li>
+								<li><a href="kindOfKey_init" >锁种类</a></li>
+								<li><a href="contain_init" >锁入库</a></li>
+								<li><a href="contain_initShipment">锁出库</a></li>
 							</ul>
 						</li>
 						<li class="subMenu"><a href="#">查询统计</a>
 							<ul>
-								<li><a href="contain_initListConatin" target="rightPage">出入库情况查询</a></li>
-								<li><a href="contain_init" target="rightPage">锁入库</a></li>
-								<li><a href="contain_initShipment" target="rightPage">锁出库</a></li>
+								<li><a href="contain_initListConatin" >出入库情况查询</a></li>
 							</ul>
 						</li>
 					</s:if>
 				<!-- 锁管理员end -->
 				<!-- 锁领用者start -->
 					<s:if test='#session.manager.role=="2"'>
+						<li class="subMenu"><a href="#">基础信息管理</a>
+							<ul>
+								<li><a href="department_init">单位信息管理</a></li>
+							</ul>
+						</li>
 						<li class="subMenu"><a href="#">密码锁申请</a>
 							<ul>
 								<li><a href="keyAsk_initKeyAsk" >密码锁申请</a></li>

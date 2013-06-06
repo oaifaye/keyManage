@@ -23,7 +23,7 @@
 <script type='text/javascript' src='dwr/interface/procedureVersionService.js'></script> 
 <script type='text/javascript' src='dwr/interface/departmentService.js'></script> 
 
-<link rel="stylesheet" href="css/detail.css" type="text/css"></link>
+<link rel="stylesheet" href="css/list.css" type="text/css"></link>
 </head>
 
 <body>
@@ -36,7 +36,7 @@
 	<div class="pageColumn">
 		<div class="add"></div>
 		<s:form id="add" action="/keyMessage_addKey" theme="simple">
-			<table class="table">
+			<table class="table2">
 				<thead>
 					<th width="" colspan="6">密码锁信息添加</th>
 				</thead>
@@ -60,9 +60,9 @@
 					<tr>
 						<td class="tdLeft">单位</td>
 						<td colspan="5">
-							省级：<s:select id="province" name="departmentId" list="departmentList" listKey="id" listValue="departmentName" headerKey="" headerValue="--请选择--" theme="simple" cssClass="text"></s:select>
-							市级：<select id="city" name="departmentId" class="text"></select>
-							区级：<select id="district" name="departmentId" class="text"></select>
+							省级：<s:select id="province" name="departmentId" list="departmentList" listKey="id" listValue="departmentName" headerKey="" headerValue="--请选择--" theme="simple" cssClass="text2"></s:select>
+							市级：<select id="city" name="departmentId" class="text2"></select>
+							区级：<select id="district" name="departmentId" class="text2"></select>
 						</td>
 					</tr>
 					<tr>
@@ -78,7 +78,12 @@
 						</td>
 						<td class="tdLeft">
 							快递编号
-							<input type="checkbox" checked="checked" id="isExpress" name="isExpress"/>
+							<s:if test='keyMessage!=null&&keyMessage.expressCode!=""&&keyMessage.expressCode!=null'>
+								<input type="checkbox" checked="checked" id="isExpress" name="isExpress"/>
+							</s:if>
+							<s:else>
+								<input type="checkbox" id="isExpress" name="isExpress"/>
+							</s:else>
 						</td>
 						<td colspan="2"><s:textfield id="expressCode" name="keyMessage.expressCode" cssClass="text1" maxlength="20"/></td>
 					</tr>
@@ -98,7 +103,7 @@
 					</tr>
 					<tr>
 						<td class="tdLeft">备注</td>
-						<td colspan="5"><s:textarea id="remark" name="keyMessage.remark" cols="70" rows="2"/></td>
+						<td colspan="5"><s:textarea id="remark" name="keyMessage.remark" cols="110" rows="2"/></td>
 					</tr>
 					<tr>
 						<td colspan="6"><s:submit value="提交"/></td>

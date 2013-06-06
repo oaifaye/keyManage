@@ -15,86 +15,22 @@
 
 <title>天房科技密码锁管理系统</title>
 <script type="text/javascript" src="js/jquery.js"></script>
-<link rel="stylesheet" href="css/style.css" type="text/css"></link>
-<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/list.js"></script>
+
+<link rel="stylesheet" href="css/list.css" type="text/css"></link>
 </head>
 
 <body>
-	<div id="wrap">
-		<div id="header">
-			<div class="logo fleft"></div>
-			<a class="logout fright" href="<%=basePath%>logout.jsp"> </a>
-			<div class="clear"></div>
-			<div class="subnav">
-				<div class="subnavLeft fleft"></div>
-				<div class="fleft"></div>
-				<div class="subnavRight fright"></div>
+	<div id="greybackground"></div>
+	<div class="center">
+		<%@ include file="../include/top.jsp"%>
+		<%@ include file="../include/left.jsp"%>
+		<div class="main">
+			<div class="pageColumn">
+				<img class="index_bg" src="images/index_bg.jpg"></img>
 			</div>
 		</div>
-		<!--#header -->
-		<div id="content">
-			<div class="space"></div>
-			<div class="menu">
-				<ul>
-					<li class="subMenuTitle">功能菜单</li>
-				<!-- 管理员start -->
-					<s:if test='#session.manager.role=="0"'>
-						<li class="subMenu"><a href="#">基础信息管理</a>
-							<ul>
-								<li><a href="<%=basePath%>procedureMessage_init" target="_self">程序信息管理</a></li>
-								<li><a href="<%=basePath%>procedureVersion_init" target="rightPage">程序版本管理</a></li>
-								<li><a href="<%=basePath%>department_init" target="rightPage">单位信息管理</a></li>
-								<li><a href="<%=basePath%>purpose_init" target="rightPage">锁用途管理</a></li>
-								<li><a href="<%=basePath%>expressType_init" target="rightPage">送锁方式管理</a></li>
-							</ul>
-						</li>
-					</s:if>
-				<!-- 管理员end -->
-				<!-- 锁管理员start -->
-					<s:if test='#session.manager.role=="1"'>
-						<li class="subMenu"><a href="#">密码锁仓库管理</a>
-							<ul>
-								<li><a href="<%=basePath%>kindOfKey_init" target="rightPage">锁种类</a></li>
-								<li><a href="<%=basePath%>contain_init" target="rightPage">锁入库</a></li>
-								<li><a href="<%=basePath%>contain_initShipment" target="rightPage">锁出库</a></li>
-							</ul>
-						</li>
-						<li class="subMenu"><a href="#">查询统计</a>
-							<ul>
-								<li><a href="<%=basePath%>contain_initListConatin" target="rightPage">出入库情况查询</a></li>
-								<li><a href="<%=basePath%>contain_init" target="rightPage">锁入库</a></li>
-								<li><a href="<%=basePath%>contain_initShipment" target="rightPage">锁出库</a></li>
-							</ul>
-						</li>
-					</s:if>
-				<!-- 锁管理员end -->
-				<!-- 锁领用者start -->
-					<s:if test='#session.manager.role=="2"'>
-						<li class="subMenu"><a href="#">密码锁申请</a>
-							<ul>
-								<li><a href="<%=basePath%>keyAsk_initKeyAsk" target="data-jqv">密码锁申请</a></li>
-								<li><a id="test1" href="<%=basePath%>keyAsk_initListKeyAsk" target="data-jqv">添加用途</a></li>
-								<li><a href="<%=basePath%>keyMessage_initListKeyMessage" target="_self">用途管理</a></li>
-							</ul>
-						</li>
-					</s:if>
-				<!-- 锁领用者end -->
-				</ul>
-			</div>
-			<div class="sidebar fleft"></div>
-			<div class="right">
-				<div class="page">
-					<iframe id="rightPage" class="rightMain" name="data-jqv" frameborder="0" src="main.html"></iframe>
-				</div>
-			</div>
-		</div>
-		<!--#content -->
-		<div class="clear"></div>
-		<div id="footer">CopyRight &copy; 2012-2014 http://www.tftech.cn</div>
-		<!--#footer -->
-
-
+		<%@ include file="../include/foot.jsp" %>
 	</div>
-	<!--#wrap -->
 </body>
 </html>

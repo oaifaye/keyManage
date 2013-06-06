@@ -23,7 +23,11 @@
 		<div id="wrap">
 
 			<div id="header"></div>
+			<div class="logo">
+				<img src="images/index-logo.png"></img>天房科技密码锁管理系统
+			</div>
 			<div id="content-wrap">
+			
 				<div class="space"></div>
 				<div class="content">
 					<div class="field">

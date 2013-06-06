@@ -24,7 +24,7 @@
 
 <body>
 	<div id="greybackground"></div>
-	
+	<div class="center">
 	<%@ include file="../include/top.jsp" %>
 	<%@ include file="../include/left.jsp" %>
 	<div class="main">
@@ -102,5 +102,6 @@
 	</div>
 	</div>
 	<%@ include file="../include/foot.jsp" %>
+	</div>
 </body>
 </html>

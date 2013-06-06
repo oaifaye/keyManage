@@ -3,6 +3,7 @@
 body {
 	font-size: 12px;
 	width: 1400px;
+	cursor: default;
 }
 
 a {
@@ -14,6 +15,7 @@ a {
 a:hover {
 	cursor: pointer;
 	color: #075587;
+	text-decoration: underline;
 }
 
 .center {
@@ -36,9 +38,10 @@ a:hover {
 
 .table {
 	margin: auto;
+	width:100%;
 	border-collapse: collapse;
 	table-layout: fixed;
-	cursor: default;
+	
 	text-align: center;
 	float: left;
 }
@@ -62,6 +65,25 @@ a:hover {
 	height: 35px;
 }
 
+.table2 {
+	margin: auto;
+	width: 70%;
+	border-collapse: collapse;
+	table-layout: fixed;
+	cursor: default;
+	text-align: center;
+}
+
+.table2 tr td,.table2 th {
+	border: solid #ccc 1px;
+	height: 30px;
+}
+
+.tdLeft{
+	font-weight: 600;
+	font-size: 13px;
+}
+
 #askRemark{
 	width: 350px;
 }
@@ -69,6 +91,12 @@ a:hover {
 .text{
 	float: left;
 	margin-left: 5px;
+}
+.text1{
+	width: 180px;
+}
+.text2{
+	width: 150px;
 }
 
 .main{
@@ -131,8 +159,8 @@ a:hover {
 
 #askKeySubmit {
 	position: absolute;
-	top: 50px;
-	left: 250px;
+	top: 150px;
+	left: 400px;
 	height: 280px;
 	width: 600px;
 	background-color: #ffffff;

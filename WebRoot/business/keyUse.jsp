@@ -24,43 +24,39 @@
 
 <body>
 	<div class="center">
-	<div id="greybackground"></div>
-	<%@ include file="../include/top.jsp" %>
-	<%@ include file="../include/left.jsp" %>
-	<div class="main">
-	<div class="pageTitle">密码锁仓库管理—密码锁种类管理</div>
-	<div class="pageColumn">
-		<div class="add"></div>
-			<table class="table">
-				<thead>
-					<th width="">密码锁批号</th>
-					<th width="">空闲数量</th>
-					<th width="">获批时间</th>
-					<th width="">操作</th>
-				</thead>
-				<tbody>
-					<s:iterator value="containList">
-						<tr>
-							<td><s:property value="lotNumber" />
-							</td>
-							<td><s:property value="keyNum" />
-							</td>
-							<td><s:date name="createDate" format="yyyy-MM-dd hh:mm:ss"/>
-							</td>
-							<td>
-								<s:a action="keyMessage_initAddKey" >
-									<s:param name="containId" value="id"></s:param>
-									<s:param name="keyAskId" value="%{keyAskId}"></s:param>
+		<div id="greybackground"></div>
+		<%@ include file="../include/top.jsp"%>
+		<%@ include file="../include/left.jsp"%>
+		<div class="main">
+			<div class="pageTitle">密码锁仓库管理—密码锁种类管理</div>
+			<div class="pageColumn">
+				<div class="add"></div>
+				<table class="table">
+					<thead>
+						<th width="">密码锁批号</th>
+						<th width="">空闲数量</th>
+						<th width="">获批时间</th>
+						<th width="">操作</th>
+					</thead>
+					<tbody>
+						<s:iterator value="containList">
+							<tr>
+								<td><s:property value="lotNumber" /></td>
+								<td><s:property value="keyNum" /></td>
+								<td><s:date name="createDate" format="yyyy-MM-dd hh:mm:ss" />
+								</td>
+								<td><s:a action="keyMessage_initAddKey">
+										<s:param name="containId" value="id"></s:param>
+										<s:param name="keyAskId" value="%{keyAskId}"></s:param>
 									填写用途
-								</s:a>
-							</td>
-						</tr>
-					</s:iterator>
-				</tbody>
-			</table>
-	</div>
-	</div>
-	<%@ include file="../include/foot.jsp" %>
+								</s:a></td>
+							</tr>
+						</s:iterator>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<%@ include file="../include/foot.jsp"%>
 	</div>
 </body>
 </html>

@@ -74,7 +74,19 @@ public class ContainAction extends ActionSupport {
 	}
 	
 	public String add(){
+		Map<String, Object> params=new HashMap<String, Object>();
 		try {
+			/*验证批号是否重复*/
+			params.put("lotNumber", contain.getLotNumber());
+			List<Contain> containTest = containService.findListByParams(params);
+			if(containTest!=null){
+				HttpServletResponse response=ServletActionContext.getResponse();
+				response.setCharacterEncoding("UTF-8");
+				response.setContentType("text/html; charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.print("<script>alert('此锁批号已经存在，请更名!!');location='contain_init';</script>");
+				return null;
+			}
 			contain.setContainDate(TimeSupport.parseTime(containDate, "yyyy-MM-dd"));
 			if(contain.getId()==null||contain.getId().equals("")){
 				//新建保存
@@ -90,7 +102,7 @@ public class ContainAction extends ActionSupport {
 				containService.update(contain);
 			}
 			return SUCCESS;
-		} catch (DataAccessException e) {
+		} catch (Exception e) {
 			return ERROR;
 		}
 	}

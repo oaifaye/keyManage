@@ -10,13 +10,20 @@
   
   <body>
    <div id="header">
-			<div class="logo fleft"></div>
+			<div class="logo fleft">天房科技密码锁管理系统</div>
 			<a class="logout fright" href="logout.jsp"> </a>
 			<div class="clear"></div>
 			<div class="subnav">
 				<div class="subnavLeft fleft"></div>
 				<div class="fleft"></div>
 				<div class="subnavRight fright"></div>
+				<div class="userMessage">
+					当前用户：<s:property value="#session.manager.name"/>
+					(<s:property value="#session.manager.userName"/>)&nbsp;&nbsp;
+					角色：<s:if test='#session.manager.role==0' >管理员</s:if>
+						<s:if test='#session.manager.role==1' >密码锁管理员</s:if>
+						<s:if test='#session.manager.role==2' >密码锁领用者</s:if>
+				</div>
 			</div>
 	</div>
   </body>
