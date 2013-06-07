@@ -16,6 +16,12 @@ public interface DepartmentService {
 	public void removeAll(String[] ids);
 	public Department findByPrimaryKey(String id);
 	public List<Department> findListByParams(Map<String, Object> params);
+	/**
+	 * 按条件查询，返回一个对象List
+	 * @param params key为表中字段 value为对应字段的值
+	 * @param likeParams key为表中字段 value为对应字段的值(模糊查询)
+	 * */
+	public List<Department> findListByParams(Map<String, Object> params,Map<String, Object> likeParams);
 	//dwr
 	public Map<String, String> findByParentID(ArrayList<String> array);
 	/**根据一个parentId计算其下所有单位的id(包括自己，放在最前)*/

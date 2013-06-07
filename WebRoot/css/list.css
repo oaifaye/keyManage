@@ -95,7 +95,7 @@ a:hover {
 .text1{
 	width: 180px;
 }
-.text2{
+.text2,.province{
 	width: 150px;
 }
 
@@ -116,7 +116,7 @@ a:hover {
 	float: left;
 	padding-left: 10px;
 	height: 31px;
-	width:95%;
+	width:98%;
 	line-height: 31px;
 	color: #075587;
 	background: url(../images/page-pageTitle-bg.gif);

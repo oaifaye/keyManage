@@ -81,6 +81,9 @@
 							<s:if test='keyMessage!=null&&keyMessage.expressCode!=""&&keyMessage.expressCode!=null'>
 								<input type="checkbox" checked="checked" id="isExpress" name="isExpress"/>
 							</s:if>
+							<s:elseif test="keyMessage==null">
+								<input type="checkbox" checked="checked" id="isExpress" name="isExpress"/>
+							</s:elseif>
 							<s:else>
 								<input type="checkbox" id="isExpress" name="isExpress"/>
 							</s:else>

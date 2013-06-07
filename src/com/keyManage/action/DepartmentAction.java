@@ -1,5 +1,6 @@
 package com.keyManage.action;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.HashMap;
@@ -45,27 +46,33 @@ public class DepartmentAction extends ActionSupport {
 
 	public String add() {
 		Map<String, Object> params = new HashMap<String, Object>();
-		int level = 0;
+		Map<String, Object> likeParams = new HashMap<String, Object>();
+		int level = 1;
 		try {
+			if(department.getParentId()!=null&&!department.getParentId().equals("")){
 			// 去掉parentId中所有空格与最后一个逗号
-			parentId = department.getParentId().replace(" ", "");
-			department.setParentId(parentId.substring(0, parentId.length() - 1));
-			level = parentId.split(",").length + 1;
+				parentId = department.getParentId().replace(" ", "");
+				parentId =parentId .substring(0, parentId.length() - 1);
+				department.setParentId(parentId);
+				level = parentId.split(",").length + 1;
+			}
 			/* 验证是否重复 */
 			params.put("level", level);
 			params.put("departmentName", department.getDepartmentName());
-			List<Department> kindOfKeyTest = departmentService
-					.findListByParams(params);
-			if (kindOfKeyTest != null) {
-				HttpServletResponse response = ServletActionContext
-						.getResponse();
+			if(level!=1){
+				//不为1级单位的单位
+				likeParams.put("parentId", parentId);
+			}
+			List<Department> departmentTest = departmentService.findListByParams(params, likeParams);
+			if (departmentTest != null) {
+				HttpServletResponse response = ServletActionContext.getResponse();
 				response.setCharacterEncoding("UTF-8");
 				response.setContentType("text/html; charset=utf-8");
 				PrintWriter out = response.getWriter();
 				out.print("<script>alert('此单位名称已存在，请更名!!');location='department_init';</script>");
 				return null;
 			}
-			
+
 			department.setLevel(level);
 			Manager manager = (Manager) ActionContext.getContext().getSession()
 					.get("manager");
@@ -75,6 +82,49 @@ public class DepartmentAction extends ActionSupport {
 			departmentService.addDepartment(department);
 			return SUCCESS;
 		} catch (Exception e) {
+			return ERROR;
+		}
+	}
+
+	public String updateDepartment() {
+		Map<String, Object> params = new HashMap<String, Object>();
+		Map<String, Object> likeParams = new HashMap<String, Object>();
+		Department departmentLast = null;
+
+		try {
+			/* 按单位的id查找单位 */
+			parentId = department.getParentId().replace(" ", "");
+			//parentId =parentId .substring(0, parentId.length() - 1);
+			String[] parentIdArray = parentId.split(",");
+			//取得单位id
+			String departmentId = parentIdArray[parentIdArray.length - 1];
+			departmentLast = departmentService.findByPrimaryKey(departmentId);
+
+			params.put("level", departmentLast.getLevel());
+			params.put("departmentName", department.getDepartmentName());
+			if(departmentLast.getLevel()!=1){
+				parentId=parentIdArray[parentIdArray.length - 2];
+				likeParams.put("parentId", parentId);
+			}
+			List<Department> departmentTest = departmentService.findListByParams(params, likeParams);
+			// 
+			if (departmentTest!=null) {
+				HttpServletResponse response = ServletActionContext
+						.getResponse();
+				response.setCharacterEncoding("UTF-8");
+				response.setContentType("text/html; charset=utf-8");
+				PrintWriter out = null;
+
+				out = response.getWriter();
+
+				out.print("<script>alert('此单位名称已存在，请更名!!');location='department_init';</script>");
+				return null;
+			}
+			
+			departmentLast.setDepartmentName(department.getDepartmentName());
+			departmentService.update(departmentLast);
+			return SUCCESS;
+		} catch (IOException e) {
 			return ERROR;
 		}
 	}

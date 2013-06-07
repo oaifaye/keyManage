@@ -72,6 +72,18 @@ public class ExpressTypeAction extends ActionSupport {
 				expressTypeService.addExpressType(expressType);
 			}else{
 			//修改保存
+				/*验证是否重复*/
+				params.put("expressTypeName", expressType.getExpressTypeName().trim());
+				List<ExpressType> expressTypeTest = expressTypeService.findListByParams(params);
+				if(expressTypeTest!=null)
+				if(!expressTypeTest.get(0).getId().equals(expressType.getId())||expressTypeTest.size()>1){
+					HttpServletResponse response=ServletActionContext.getResponse();
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.print("<script>alert('此送锁方式已存在，请更名!!');location='expressType_init';</script>");
+					return null;
+				}
 				expressTypeService.update(expressType);
 			}
 			return SUCCESS;

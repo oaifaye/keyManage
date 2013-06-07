@@ -100,6 +100,18 @@ public class ContainAction extends ActionSupport {
 				containService.addContain(contain);
 			}else{
 			//修改保存
+				/*验证批号是否重复*/
+				params.put("lotNumber", contain.getLotNumber());
+				List<Contain> containTest = containService.findListByParams(params);
+				if(containTest!=null)
+				if(!containTest.get(0).getId().equals(contain.getId())||containTest.size()>1){
+					HttpServletResponse response=ServletActionContext.getResponse();
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.print("<script>alert('此锁批号已经存在，请更名!!');location='contain_init';</script>");
+					return null;
+				}
 				containService.update(contain);
 			}
 			return SUCCESS;

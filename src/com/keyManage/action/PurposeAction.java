@@ -13,7 +13,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.util.Assert;
 
 import com.keyManage.base.PaginationSupport;
-import com.keyManage.bean.ProcedureVersion;
 import com.keyManage.bean.Purpose;
 import com.keyManage.bean.Manager;
 import com.keyManage.service.purpose.PurposeService;
@@ -72,6 +71,18 @@ public class PurposeAction extends ActionSupport {
 				purposeService.addPurpose(purpose);
 			}else{
 			//修改保存
+				/*验证是否重复*/
+				params.put("name", purpose.getName().trim());
+				List<Purpose> purposeTest = purposeService.findListByParams(params);
+				if(purposeTest!=null)
+					if (!purposeTest.get(0).getId().equals(purpose.getId())||purposeTest.size()>1){
+					HttpServletResponse response=ServletActionContext.getResponse();
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.print("<script>alert('此锁用途已存在，请更名!!');location='purpose_init';</script>");
+					return null;
+				}
 				purposeService.update(purpose);
 			}
 			return SUCCESS;

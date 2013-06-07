@@ -171,7 +171,9 @@ public class HibernateGenericDAOImpl<T> extends HibernateDaoSupport implements
 			keyIterator=keySet.iterator();
 			while (keyIterator.hasNext()) {
 				String key = keyIterator.next();
-				crit.add(Restrictions.like(key, params.get(key)));
+				System.out.println(key);
+				System.out.println(likeParams.get(key));
+				crit.add(Restrictions.like(key, likeParams.get(key)));
 			}
 			List<T> list = crit.addOrder( Property.forName("createDate").desc()).list();
 			if (list == null || list.size() == 0) {

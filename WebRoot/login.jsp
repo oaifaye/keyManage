@@ -46,7 +46,7 @@
 					<input name="" type="submit" class="login-btn" value="" />
 				</div>
 				</div>
-				<s:actionerror cssStyle="font-weight:bold;color:red" />
+				<s:actionerror cssStyle="font-weight:bold;color:red;" />
 				<s:fielderror value="loginBack.error"
 					cssStyle="font-weight:bold;color:red" />
 			</div>

@@ -37,9 +37,12 @@
  	
  		<!-- 用户 -->
 	    <action name="manager_*" class="managerAction" method="{1}">
-			<result name="loginSuccess" type="redirect" >manager_init</result>
-			<result name="init">/business/index.jsp</result>
-			<result name="error">/login.jsp</result>
+			<result name="loginSuccess" type="redirect" >manager_initIndex</result>
+			<result name="initIndex">/business/index.jsp</result>
+			<result name="init">/business/manager.jsp</result>
+			<result name="addManager" type="redirect">manager_init</result>
+			<result name="relogin">/login.jsp</result>
+			<result name="error">/404.jsp</result>
 		</action>
 		<!-- 锁种类 -->
 		<action name="kindOfKey_*" class="kindOfKeyAction" method="{1}">

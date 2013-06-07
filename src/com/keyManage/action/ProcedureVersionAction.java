@@ -18,7 +18,6 @@ import com.keyManage.bean.ProcedureVersion;
 import com.keyManage.bean.Manager;
 import com.keyManage.service.procedureMessage.ProcedureMessageService;
 import com.keyManage.service.procedureVersion.ProcedureVersionService;
-import com.keyManage.service.purpose.PurposeService;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -80,6 +79,19 @@ public class ProcedureVersionAction extends ActionSupport {
 				procedureVersionService.addProcedureVersion(procedureVersion);
 			}else{
 			//修改保存
+				/*验证是否重复*/
+				params.put("versionName", procedureVersion.getVersionName().trim());
+				params.put("procedureMessage.id", procedureVersion.getProcedureMessage().getId());
+				List<ProcedureVersion> procedureVersionTest = procedureVersionService.findListByParams(params);
+				if(procedureVersionTest!=null)
+					if (!procedureVersionTest.get(0).getId().equals(procedureVersion.getId())||procedureVersionTest.size()>1){
+					HttpServletResponse response=ServletActionContext.getResponse();
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.print("<script>alert('此程序版本名称已存在，请更名!!');location='procedureVersion_init';</script>");
+					return null;
+				}
 				procedureVersionService.update(procedureVersion);
 			}
 			return SUCCESS;

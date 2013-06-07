@@ -1,6 +1,5 @@
 package com.keyManage.action;
 
-import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.HashMap;
@@ -74,6 +73,18 @@ public class KindOfKeyAction extends ActionSupport {
 				kindOfKeyService.addKindOfKey(kindOfKey);
 			}else{
 			//修改保存
+				/*验证是否重复*/
+				params.put("kindName", kindOfKey.getKindName().trim());
+				List<KindOfKey> kindOfKeyTest = kindOfKeyService.findListByParams(params);
+				if(kindOfKeyTest!=null)
+					if (!kindOfKeyTest.get(0).getId().equals(kindOfKey.getId())||kindOfKeyTest.size()>1){
+					HttpServletResponse response=ServletActionContext.getResponse();
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.print("<script>alert('此锁种类型名称已存在，请更名!!');location='kindOfKey_init';</script>");
+					return null;
+				}
 				kindOfKey.setKindName(kindOfKey.getKindName().trim());
 				kindOfKeyService.update(kindOfKey);
 			}

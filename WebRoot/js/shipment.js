@@ -22,7 +22,7 @@ $(function(){
 			}
 		});
 		if(num<=0||num>parseInt($("#lastNum").text())){
-			alert("给予锁的数量不能大于"+$("#lastNum").text()+"且不能为零");
+			alert("给予锁的数量不能大于"+$("#lastNum").text()+"\n且不能为零!!!");
 			return false;
 		}
 		$("#totalNum").val(num);

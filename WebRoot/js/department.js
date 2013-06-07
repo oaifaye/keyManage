@@ -54,17 +54,44 @@ $(function(){
 		}
 	});
 	
+	//单位父节点变化时，下方修改文本框中出现最后一级单位，以便修改
+	$(".province").change(function(){
+		if($("#district").val()!=null&&$("#district").val()!=""){
+			$("#departmentName1").val($("#district :selected").text());
+		}else if($("#city").val()!=null&&$("#city").val()!=""){
+			$("#departmentName1").val($("#city :selected").text());
+		}else if($("#province").val()!=null&&$("#province").val()!=""){
+			$("#departmentName1").val($("#province :selected").text());
+		}
+	});
+	
 	//表单提交验证
 	$("#department_add").submit(function(){
-		if($("#province").val()==""){
-			alert("单位父节点不能为空！！");
-			return false;
-		}
+//		if($("#province").val()==""){
+//			alert("单位父节点不能为空！！");
+//			return false;
+//		}
 		if($("#departmentName").val().replace(/[ ]/g,"")==""){
 			alert("单位名称不能为空！！");
 			$("#departmentName").focus();
 			return false;
 		}
+		$("#departmentName1").remove();
+	});
+	
+	//修改，表单提交
+	$("#updateSubmit").click(function(){
+		if($("#province").val()==""){
+			alert("单位父节点不能为空！！");
+			return false;
+		}
+		if($("#departmentName1").val().replace(/[ ]/g,"")==""){
+			alert("单位名称不能为空！！");
+			$("#departmentName1").focus();
+			return false;
+		}
+		$("#departmentName").remove();
+		$("#department_add").attr("action","department_updateDepartment").submit();
 	});
 	
 });

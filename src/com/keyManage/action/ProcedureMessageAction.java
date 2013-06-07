@@ -72,6 +72,18 @@ public class ProcedureMessageAction extends ActionSupport {
 				procedureMessageService.addProcedureMessage(procedureMessage);
 			}else{
 			//修改保存
+				/*验证是否重复*/
+				params.put("procedureName", procedureMessage.getProcedureName().trim());
+				List<ProcedureMessage> procedureMessageTest = procedureMessageService.findListByParams(params);
+				if(procedureMessageTest!=null)
+					if (!procedureMessageTest.get(0).getId().equals(procedureMessage.getId())||procedureMessageTest.size()>1){
+					HttpServletResponse response=ServletActionContext.getResponse();
+					response.setCharacterEncoding("UTF-8");
+					response.setContentType("text/html; charset=utf-8");
+					PrintWriter out = response.getWriter();
+					out.print("<script>alert('此程序名称已存在，请更名!!');location='procedureMessage_init';</script>");
+					return null;
+				}
 				procedureMessageService.update(procedureMessage);
 			}
 			return SUCCESS;

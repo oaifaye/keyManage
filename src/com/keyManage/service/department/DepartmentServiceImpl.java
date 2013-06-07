@@ -37,6 +37,18 @@ public class DepartmentServiceImpl implements DepartmentService {
 		return  departmentDAO.findListByParams(params);
 	}
 	
+	/**
+	 * 按条件查询，返回一个对象List
+	 * @param params key为表中字段 value为对应字段的值
+	 * @param likeParams key为表中字段 value为对应字段的值(模糊查询)
+	 * */
+	@Override
+	public List<Department> findListByParams(Map<String, Object> params,
+			Map<String, Object> likeParams) {
+		return departmentDAO.findListByParams(params, likeParams);
+	}
+
+	
 	public Department findByPrimaryKey(String id){
 		return departmentDAO.findByPrimaryKey(id);
 	}
@@ -98,5 +110,6 @@ public class DepartmentServiceImpl implements DepartmentService {
 		this.departmentDAO = departmentDAO;
 	}
 
+	
 	
 }

@@ -28,6 +28,16 @@
 								<li><a href="expressType_init" >送锁方式管理</a></li>
 							</ul>
 						</li>
+						<li class="subMenu"><a href="#">人员信息管理</a>
+							<ul>
+								<li><a href="manager_init" >用户信息管理</a></li>
+							</ul>
+						</li>
+						<li class="subMenu"><a href="#">查询统计</a>
+							<ul>
+								<li><a href="contain_initListConatin" >出入库情况查询</a></li>
+							</ul>
+						</li>
 					</s:if>
 				<!-- 管理员end -->
 				<!-- 锁管理员start -->
