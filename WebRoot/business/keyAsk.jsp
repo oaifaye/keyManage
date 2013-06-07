@@ -13,7 +13,7 @@
 <head>
 <base href="<%=basePath%>" />
 
-<title>锁仓库</title>
+<title>天房科技密码锁管理系统</title>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/list.js"></script>
 <link rel="stylesheet" href="css/list.css" type="text/css"></link>
@@ -31,7 +31,7 @@
 	<%@ include file="../include/top.jsp" %>
 	<%@ include file="../include/left.jsp" %>
 	<div class="main">
-		<div class="pageTitle">密码锁仓库管理—密码锁种类管理</div>
+		<div class="pageTitle">密码锁使用管理—密码锁申请</div>
 		<div class="pageColumn">
 			<div class="add"></div>
 			<table class="table">

@@ -63,7 +63,7 @@
 								<li><a href="department_init">单位信息管理</a></li>
 							</ul>
 						</li>
-						<li class="subMenu"><a href="#">密码锁申请</a>
+						<li class="subMenu"><a href="#">密码锁使用管理</a>
 							<ul>
 								<li><a href="keyAsk_initKeyAsk" >密码锁申请</a></li>
 								<li><a id="test1" href="keyAsk_initListKeyAsk" >添加用途</a></li>

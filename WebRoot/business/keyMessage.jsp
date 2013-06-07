@@ -13,7 +13,7 @@
 <head>
 <base href="<%=basePath%>" />
 
-<title>锁仓库</title>
+<title>天房科技密码锁管理系统</title>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/list.js"></script>
 <script type="text/javascript" src="js/Calendar3.js"></script>
@@ -32,34 +32,35 @@
 	<%@ include file="../include/top.jsp" %>
 	<%@ include file="../include/left.jsp" %>
 	<div class="main">
-	<div class="pageTitle">密码锁仓库管理—密码锁种类管理</div>
+	<div class="pageTitle">密码锁使用管理—密码锁信息添加</div>
 	<div class="pageColumn">
 		<div class="add"></div>
 		<s:form id="add" action="/keyMessage_addKey" theme="simple">
 			<table class="table2">
 				<thead>
-					<th width="" colspan="6">密码锁信息添加</th>
+					<th width="">密码锁信息添加</th>
 				</thead>
-				<tbody>
+			</table>
+			<table class="table2">
 					<tr>
-						<td class="tdLeft">锁种类</td>
-						<td colspan="2"><s:property value="contain.kindOfKey.kindName"/></td>
-						<td class="tdLeft">锁批号</td>
-						<td colspan="2"><s:property value="contain.lotNumber"/></td>
+						<td width="18%" class="tdLeft">锁种类</td>
+						<td><s:property value="contain.kindOfKey.kindName"/></td>
+						<td width="18%" class="tdLeft">锁批号</td>
+						<td><s:property value="contain.lotNumber"/></td>
 					</tr>
 					<tr>
 						<td class="tdLeft">程序</td>
-						<td colspan="2">
+						<td>
 							<s:select id="procedureMessage" name="keyMessage.procedureMessage.id" list="procedureMessageList" listKey="id" listValue="procedureName" headerKey="" headerValue="--请选择--" cssClass="text1"></s:select>
 						</td>
 						<td class="tdLeft">版本</td>
-						<td colspan="2">
+						<td>
 							<select id="procedureVersion" name="keyMessage.procedureVersion.id" class="text1"></select>
 						</td>
 					</tr>
 					<tr>
 						<td class="tdLeft">单位</td>
-						<td colspan="5">
+						<td colspan="3">
 							省级：<s:select id="province" name="departmentId" list="departmentList" listKey="id" listValue="departmentName" headerKey="" headerValue="--请选择--" theme="simple" cssClass="text2"></s:select>
 							市级：<select id="city" name="departmentId" class="text2"></select>
 							区级：<select id="district" name="departmentId" class="text2"></select>
@@ -67,13 +68,13 @@
 					</tr>
 					<tr>
 						<td class="tdLeft">锁数量(不超过<s:property value="lastNum" />)</td>
-						<td colspan="2"><s:textfield id="keyNum" name="keyMessage.keyNum" cssClass="text1" maxLength="6" /></td>
+						<td><s:textfield id="keyNum" name="keyMessage.keyNum" cssClass="text1" maxLength="6" /></td>
 						<td class="tdLeft">用户名</td>
-						<td colspan="2"><s:textfield  name="keyMessage.userName" cssClass="text1" maxlength="20"/></td>
+						<td><s:textfield  name="keyMessage.userName" cssClass="text1" maxlength="20"/></td>
 					</tr>
 					<tr>
 						<td class="tdLeft">送锁方式</td>
-						<td colspan="2">
+						<td>
 							<s:select id="expressType" name="keyMessage.expressType.id" list="expressTypeList" listKey="id" listValue="expressTypeName" headerKey="" headerValue="--请选择--" cssClass="text1"></s:select>
 						</td>
 						<td class="tdLeft">
@@ -88,30 +89,29 @@
 								<input type="checkbox" id="isExpress" name="isExpress"/>
 							</s:else>
 						</td>
-						<td colspan="2"><s:textfield id="expressCode" name="keyMessage.expressCode" cssClass="text1" maxlength="20"/></td>
+						<td><s:textfield id="expressCode" name="keyMessage.expressCode" cssClass="text1" maxlength="20"/></td>
 					</tr>
 					<tr>
 						<td class="tdLeft">邮编</td>
-						<td colspan="2"><s:textfield id="postCode" name="keyMessage.postCode" cssClass="text1" maxLength="6"/></td>
+						<td><s:textfield id="postCode" name="keyMessage.postCode" cssClass="text1" maxLength="6"/></td>
 						<td class="tdLeft">送锁日期</td>
-						<td colspan="2"><s:textfield id="expressDate" name="expressDate" onclick="new Calendar().show(this)" readonly="true" cssClass="text1"></s:textfield></td>
+						<td><s:textfield id="expressDate" name="expressDate" onclick="new Calendar().show(this)" readonly="true" cssClass="text1"></s:textfield></td>
 					</tr>
 					<tr>
 						<td class="tdLeft">锁用途</td>
-						<td colspan="2">
+						<td>
 							<s:select id="purpose" name="keyMessage.purpose.id" list="purposeList" listKey="id" listValue="remark" headerKey="" headerValue="--请选择--" cssClass="text1"></s:select>
 						</td>
 						<td class="tdLeft">用途描述：</td>
-						<td colspan="2"><span id="purposeRemark"/></td>
+						<td><span id="purposeRemark"/></td>
 					</tr>
 					<tr>
 						<td class="tdLeft">备注</td>
-						<td colspan="5"><s:textarea id="remark" name="keyMessage.remark" cols="110" rows="2"/></td>
+						<td colspan="3"><s:textarea id="remark" name="keyMessage.remark" cols="90" rows="3"/></td>
 					</tr>
 					<tr>
-						<td colspan="6"><s:submit value="提交"/></td>
+						<td colspan="4"><s:submit value="提交"/></td>
 					</tr>
-				</tbody>
 			</table>
 			<s:hidden name="containId" value="%{containId}"/>
 			<s:hidden name="keyAskId" value="%{keyAskId}"/>

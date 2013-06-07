@@ -13,7 +13,7 @@
 <head>
 <base href="<%=basePath%>" />
 
-<title>锁仓库</title>
+<title>天房科技密码锁管理系统</title>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/list.js"></script>
 <script type="text/javascript" src="js/Calendar3.js"></script>

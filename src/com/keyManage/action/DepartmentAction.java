@@ -104,7 +104,7 @@ public class DepartmentAction extends ActionSupport {
 			params.put("departmentName", department.getDepartmentName());
 			if(departmentLast.getLevel()!=1){
 				parentId=parentIdArray[parentIdArray.length - 2];
-				likeParams.put("parentId", parentId);
+				likeParams.put("parentId", "%"+parentId+"%");
 			}
 			List<Department> departmentTest = departmentService.findListByParams(params, likeParams);
 			// 
