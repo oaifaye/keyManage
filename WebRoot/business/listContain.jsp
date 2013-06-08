@@ -30,7 +30,6 @@
 	<div class="main">
 	<div class="pageTitle">查询统计—出入库情况查询</div>
 	<div class="pageColumn">
-		<div class="add"></div>
 		<s:form id="selectSubmit" action="contain_execListContain" theme="simple">
 			锁种类：<s:select name="kindOfKeyId" list="kindOfKeyList" listKey="id" listValue="kindName" headerKey="" headerValue="--请选择--" ></s:select>&nbsp;&nbsp;&nbsp;
 			选择时间范围：<s:textfield id="startDate" name="startDate" onclick="new Calendar().show(this)" readonly="true" cssClass="text1" ></s:textfield> &nbsp;—
@@ -41,9 +40,9 @@
 						<option value="0">入库</option>
 						<option value="1">出库</option>
 					</select>
-			<input type="submit" value="查询" />
+			<input type="submit" value="查询"  class="button2"/>
 		</s:form>
-		<div class="resultList1">
+		<div class="resultList2">
 			<table class="table">
 				<thead>
 					<th width="">密码锁种类</th>

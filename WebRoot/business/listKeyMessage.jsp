@@ -30,25 +30,26 @@
 	<div class="main">
 	<div class="pageTitle">密码锁使用管理—用途管理</div>
 	<div class="pageColumn">
-		<div class="add"></div>
 		<s:form id="selectSubmit" action="keyMessage_execListKeyMessage" theme="simple">
 			程序：<s:select name="selectObject.procedureMessage" list="procedureMessageList" listKey="id" listValue="procedureName" headerKey="" headerValue="--请选择--" ></s:select>&nbsp;&nbsp;&nbsp;
 			单位：<s:select name="selectObject.department" list="departmentList" listKey="id" listValue="departmentName" headerKey="" headerValue="--请选择--" ></s:select>&nbsp;&nbsp;&nbsp;
 			用途：<s:select name="selectObject.purpose" list="purposeList" listKey="id" listValue="name" headerKey="" headerValue="--请选择--" ></s:select>&nbsp;&nbsp;&nbsp;
-			选择时间范围：<s:textfield id="startDate" name="selectObject.startDate" onclick="new Calendar().show(this)" readonly="true" cssClass="text1" ></s:textfield> &nbsp;—
-						<s:textfield id="endDate" name="selectObject.endDate" onclick="new Calendar().show(this)" readonly="true" class="text1" />
-			<input type="submit" value="查询" />
+			选择时间范围：<s:textfield id="startDate" name="selectObject.startDate" onclick="new Calendar().show(this)" readonly="true" ></s:textfield> &nbsp;—
+						<s:textfield id="endDate" name="selectObject.endDate" onclick="new Calendar().show(this)" readonly="true" />&nbsp;&nbsp;&nbsp;
+			<s:reset value="重置" cssClass="button2" />&nbsp;&nbsp;&nbsp;
+			<input type="submit" value="查询" class="button2" />
 		</s:form>
-		<div class="resultList1">
+		<div class="resultList2">
 			<table class="table">
 				<thead>
 					<th width="">密码锁种类</th>
 					<th width="">单位</th>
 					<th width="">数量</th>
 					<th width="">所属程序</th>
-					<th width="">程序版本</th>
 					<th width="">送锁目的</th>
 					<th width="">送锁日期</th>
+					<th width="">送锁方式</th>
+					<th width="">快递编号</th>
 					<th width="">操作</th>
 				</thead>
 				<tbody>
@@ -67,13 +68,16 @@
 								<s:property value="procedureMessage.procedureName"/>
 							</td>
 							<td>
-								<s:property value="procedureVersion.versionName"/>
-							</td>
-							<td>
 								<s:property value="purpose.name"/>
 							</td>
 							<td>
 								<s:date name="expressDate" format="yyyy-MM-dd" />
+							</td>
+							<td>
+								<s:property value="expressType.expressTypeName"/>
+							</td>
+							<td>
+								<s:property value="postCode"/>
 							</td>
 							<td>
 								<s:if test='#session.manager.role=="2"'>

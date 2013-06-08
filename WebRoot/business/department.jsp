@@ -62,7 +62,7 @@
 								<div class="addDepartment">
 									单位名称：<s:textfield id="departmentName"
 										name="department.departmentName" maxLength="20" cssClass="text1"></s:textfield>
-									<s:submit id="addSubmit" value="保存" theme="simple"></s:submit>
+									<s:submit id="addSubmit" value="保存" theme="simple" cssClass="button2"></s:submit>
 								</div></td>
 						</tr>
 						<tr>
@@ -71,7 +71,7 @@
 								<div class="addDepartment">
 									单位名称：<s:textfield id="departmentName1"
 										name="department.departmentName" maxLength="20" cssClass="text1"></s:textfield>
-									<input id="updateSubmit" type="submit" value="修改" />
+									<input id="updateSubmit" type="submit" value="修改" class="button2" />
 								</div></td>
 						</tr>
 						<!-- </tbody> -->

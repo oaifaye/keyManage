@@ -110,7 +110,9 @@
 						<td colspan="3"><s:textarea id="remark" name="keyMessage.remark" cols="90" rows="3"/></td>
 					</tr>
 					<tr>
-						<td colspan="4"><s:submit value="提交"/></td>
+						<td colspan="4">
+							<s:submit id="submitButton" value="提交" cssClass="button2"/>
+						</td>
 					</tr>
 			</table>
 			<s:hidden name="containId" value="%{containId}"/>

@@ -16,43 +16,47 @@
 <title>天房科技密码锁管理系统</title>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/list.js"></script>
-<script type="text/javascript" src="js/Calendar3.js"></script>
-<script type="text/javascript" src="js/shipment.js"></script>
-
 <link rel="stylesheet" href="css/list.css" type="text/css"></link>
+<script type="text/javascript" src="js/editPass.js"></script>
 </head>
 
 <body>
 	<div class="center">
-		<div id="greybackground"></div>
 		<%@ include file="../include/top.jsp"%>
 		<%@ include file="../include/left.jsp"%>
 		<div class="main">
-			<div class="pageTitle">密码锁使用管理—填写用途</div>
+			<div class="pageTitle">人员信息管理—密码修改</div>
 			<div class="pageColumn">
-				<table class="table">
-					<thead>
-						<th width="">密码锁批号</th>
-						<th width="">空闲数量</th>
-						<th width="">获批时间</th>
-						<th width="">操作</th>
-					</thead>
-					<tbody>
-						<s:iterator value="containList">
+				<div class="add"></div>
+				<s:form id="execEditPass" action="manager_execEditPass"
+					theme="simple">
+					<table class="table2">
+						<thead>
+							<th width="" colspan="2" style="border-bottom: 0px;">修改密码</th>
+						</thead>
+						<tbody>
 							<tr>
-								<td><s:property value="lotNumber" /></td>
-								<td><s:property value="keyNum" /></td>
-								<td><s:date name="createDate" format="yyyy-MM-dd hh:mm:ss" />
+								<td>
+									输入新密码
 								</td>
-								<td><s:a action="keyMessage_initAddKey">
-										<s:param name="containId" value="id"></s:param>
-										<s:param name="keyAskId" value="%{keyAskId}"></s:param>
-									填写用途
-								</s:a></td>
+								<td>
+									<s:password id="password" name="password" cssClass="text1" maxLength="20" />
+								</td>
 							</tr>
-						</s:iterator>
-					</tbody>
-				</table>
+							<tr>
+								<td>
+									重复新密码
+								</td>
+								<td>
+									<input id="passwordRepeat" type="password" class="text1" maxLength="20"/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" ><s:submit value="保存" cssClass="button2" /></td>
+							</tr>
+						</tbody>
+					</table>
+				</s:form>
 			</div>
 		</div>
 		<%@ include file="../include/foot.jsp"%>

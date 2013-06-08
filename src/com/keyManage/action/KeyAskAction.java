@@ -46,7 +46,19 @@ public class KeyAskAction extends ActionSupport {
 	
 	//保存锁申请
 	public String addKeyAsk(){
+		Manager managerSession = (Manager) ActionContext.getContext()
+				.getSession().get("manager");
 		try {
+			/* 验证是否为锁领用者 */
+			if (!managerSession.getRole().equals("2")) {
+				HttpServletResponse response = ServletActionContext
+						.getResponse();
+				response.setCharacterEncoding("UTF-8");
+				response.setContentType("text/html; charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.print("<script>alert('您没有此权限!!');location='business/index.jsp';</script>");
+				return null;
+			}
 			if(!kindOfKey.getId().equals("")&&kindOfKey.getId()!=null){
 				Integer lastNum = containService.findNumByKindOfKeyID(kindOfKey.getId());
 				if(keyAsk.getAskNum()>lastNum){
@@ -81,7 +93,7 @@ public class KeyAskAction extends ActionSupport {
 		}
 		try {
 			Manager manager = (Manager)ActionContext.getContext().getSession().get("manager");
-			paginationSupport=keyAskService.findKeyAskByPage(manager.getId(),currentPage, 2);
+			paginationSupport=keyAskService.findKeyAskByPage(manager.getId(),currentPage, 12);
 			List<KeyAsk> keyAskList = (List<KeyAsk>)paginationSupport.getItems();
 			for(KeyAsk keyAsk:keyAskList){
 				Integer tokenNum = containService.findCountNumByKeyAskID(keyAsk.getId(), "1");
@@ -101,9 +113,25 @@ public class KeyAskAction extends ActionSupport {
 	
 	//初始化锁的用途页面keyUse.jsp
 	public String initKeyUse(){
+		Manager managerSession = (Manager) ActionContext.getContext()
+				.getSession().get("manager");
+		try {
+			/* 验证是否为锁领用者 */
+			if (!managerSession.getRole().equals("2")) {
+				HttpServletResponse response = ServletActionContext
+						.getResponse();
+				response.setCharacterEncoding("UTF-8");
+				response.setContentType("text/html; charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.print("<script>alert('您没有此权限!!');location='business/index.jsp';</script>");
+				return null;
+			}
 		keyAsk=keyAskService.findByPrimaryKey(keyAskId);
 		containList=containService.findLastNumOfContain(keyAsk.getId());
 		return "initKeyUse";
+		} catch (Exception e) {
+			return ERROR;
+		}
 	}
 	
 	

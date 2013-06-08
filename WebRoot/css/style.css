@@ -34,7 +34,7 @@ table { border-collapse: collapse; border-spacing: 0; }
 #wrap{ width:100%;background-color: #198bc9}
 #header{ height:78px; background:url(../images/index-header-bg.gif) repeat-x;margin-bottom: 8px;}
 .logo{  height:51px; background:url(../images/index-logo.png) no-repeat;font-size: 30px;color: #ffffff;padding-left: 70px;} 
-.logout{ width:23px; height:24px; background:url(../images/index-logout.png); margin-top:14px;}
+.logout{ width:23px; height:24px; background:url(../images/index-logout.png); margin-top:14px;margin-right:20px;}
 
 
 .nav-left{ width:34px; height:51px; background:url(../images/index-nav-left.png);}

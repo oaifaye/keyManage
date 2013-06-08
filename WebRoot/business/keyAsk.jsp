@@ -31,15 +31,24 @@
 	<%@ include file="../include/top.jsp" %>
 	<%@ include file="../include/left.jsp" %>
 	<div class="main">
-		<div class="pageTitle">密码锁使用管理—密码锁申请</div>
+		<div class="pageTitle">
+			<s:if test='#session.manager.role=="2"'>
+				密码锁使用管理—密码锁申请
+			</s:if>
+			<s:else>
+				查询统计—密码锁剩余查询
+			</s:else>
+		</div>
 		<div class="pageColumn">
-			<div class="add"></div>
-			<table class="table">
+			<div class="resultList1">
+			<table class="table1">
 				<thead>
 					<th width="">密码锁名称</th>
 					<th width="40%">备注</th>
 					<th width="">剩余锁数量</th>
+					<s:if test='#session.manager.role=="2"'>
 					<th width="20%">操作</th>
+					</s:if>
 				</thead>
 				<tbody>
 					<s:iterator value="CountObjectList">
@@ -51,12 +60,15 @@
 							<td><div id="countObjectNum">
 									<s:property value="num" />
 								</div></td>
+							<s:if test='#session.manager.role=="2"'>
 							<td><a class="askKey">申请取锁</a> <input type="hidden" id="id"
 								value="${item}" /></td>
+							</s:if>
 						</tr>
 					</s:iterator>
 				</tbody>
 			</table>
+			</div>
 		</div>
 		<div id="askKeySubmit">
 			<s:form id="addKeyAsk" action="keyAsk_addKeyAsk" theme="simple"

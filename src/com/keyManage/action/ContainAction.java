@@ -66,7 +66,7 @@ public class ContainAction extends ActionSupport {
 			//初始化锁的种类
 			kindOfKeyList=kindOfKeyService.findListByParams(params);
 			params.put("saveOrTake", "0");
-			paginationSupport=containService.findByPage(params, currentPage, 2);
+			paginationSupport=containService.findByPage(params, currentPage, 10);
 			return "initContain";
 		} catch (DataAccessException e) {
 			return ERROR;
@@ -127,7 +127,7 @@ public class ContainAction extends ActionSupport {
 				currentPage=1;
 			}
 			try {
-				paginationSupport=keyAskService.findKeyAskByPage(currentPage, 2);
+				paginationSupport=keyAskService.findKeyAskByPage(currentPage, 12);
 				List<KeyAsk> keyAskList = (List<KeyAsk>)paginationSupport.getItems();
 				for(KeyAsk keyAsk:keyAskList){
 					Integer tokenNum = containService.findCountNumByKeyAskID(keyAsk.getId(), "1");

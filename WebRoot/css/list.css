@@ -174,5 +174,26 @@ a:hover {
 	width: 100%;
 	overflow: scroll;
 	clear:left;
-	height: 450px;
+	height: 546px;
+}
+
+.resultList2{
+	width: 100%;
+	overflow: scroll;
+	clear:left;
+	height: 520px;
+}
+
+.button2{
+	background-color:#5599FF;
+	border:1px solid #0066FF;
+	font-size:12px;
+	font-weight:bold;
+	color:#ffffff;
+	cursor:pointer;
+	padding:3px 7px 3px 7px;
+}
+
+.button2:hover{
+    background-color:#99BBFF;
 }

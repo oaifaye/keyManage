@@ -77,15 +77,6 @@ public class HibernateGenericDAOImpl<T> extends HibernateDaoSupport implements
 			getHibernateTemplate().update(entity);
 		}
 	}
-//	public void updateAll(String[] ids){
-//		if(ids.length!=0){
-//			for(String s : ids){
-//				T entity=findByPrimaryKey(s);
-//				getHibernateTemplate().update(entity);
-//			}
-//		}
-//		
-//	}
 
 	// ==============================================查==========================================================
 

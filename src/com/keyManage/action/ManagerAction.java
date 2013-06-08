@@ -31,18 +31,30 @@ public class ManagerAction extends ActionSupport {
 	 * 初始化人员列表
 	 * */
 	public String init() {
+		Manager managerSession = (Manager) ActionContext.getContext()
+				.getSession().get("manager");
+		try {
+			/* 验证是否为管理员 */
+			if (!managerSession.getRole().equals("0")) {
+				HttpServletResponse response = ServletActionContext
+						.getResponse();
+				response.setCharacterEncoding("UTF-8");
+				response.setContentType("text/html; charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.print("<script>alert('您没有此权限!!');location='business/index.jsp';</script>");
+				return null;
+			}
 		if (managerId != null) {
 			managerMessages = managerService.findByPrimaryKey(managerId);
 		}
 		if (currentPage <= 1) {
 			currentPage = 1;
 		}
-		try {
 			Map<String, Object> params = new HashMap<String, Object>();
 			paginationSupport = managerService.findByPage(params, currentPage,
 					2);
 			return "init";
-		} catch (DataAccessException e) {
+		} catch (Exception e) {
 			return ERROR;
 		}
 	}
@@ -170,7 +182,21 @@ public class ManagerAction extends ActionSupport {
 			return ERROR;
 		}
 	}
+	
+	/**初始化修改密码页面*/
+	public String initEditPass(){
+		return "initEditPass";
+	}
 
+	/**修改密码*/
+	public String execEditPass(){
+		managerMessages = (Manager) ActionContext.getContext()
+				.getSession().get("manager");
+		managerMessages.setPassword(password);
+		managerService.update(managerMessages);
+		return "initEditPass";
+	}
+	
 	public String getUserName() {
 		return userName;
 	}

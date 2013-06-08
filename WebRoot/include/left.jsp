@@ -28,14 +28,16 @@
 								<li><a href="expressType_init" >送锁方式管理</a></li>
 							</ul>
 						</li>
+						<li class="subMenu"><a href="#">查询统计</a>
+							<ul>
+								<li><a href="keyAsk_initKeyAsk" >密码锁剩余查询</a></li>
+								<li><a href="contain_initListConatin" >出入库情况查询</a></li>
+							</ul>
+						</li>
 						<li class="subMenu"><a href="#">人员信息管理</a>
 							<ul>
 								<li><a href="manager_init" >用户信息管理</a></li>
-							</ul>
-						</li>
-						<li class="subMenu"><a href="#">查询统计</a>
-							<ul>
-								<li><a href="contain_initListConatin" >出入库情况查询</a></li>
+								<li><a href="manager_initEditPass" >密码修改</a></li>
 							</ul>
 						</li>
 					</s:if>
@@ -51,7 +53,13 @@
 						</li>
 						<li class="subMenu"><a href="#">查询统计</a>
 							<ul>
+								<li><a href="keyAsk_initKeyAsk" >密码锁剩余查询</a></li>
 								<li><a href="contain_initListConatin" >出入库情况查询</a></li>
+							</ul>
+						</li>
+						<li class="subMenu"><a href="#">人员信息管理</a>
+							<ul>
+								<li><a href="manager_initEditPass" >密码修改</a></li>
 							</ul>
 						</li>
 					</s:if>
@@ -68,6 +76,11 @@
 								<li><a href="keyAsk_initKeyAsk" >密码锁申请</a></li>
 								<li><a id="test1" href="keyAsk_initListKeyAsk" >添加用途</a></li>
 								<li><a href="keyMessage_initListKeyMessage" >用途管理</a></li>
+							</ul>
+						</li>
+						<li class="subMenu"><a href="#">人员信息管理</a>
+							<ul>
+								<li><a href="manager_initEditPass" >密码修改</a></li>
 							</ul>
 						</li>
 					</s:if>

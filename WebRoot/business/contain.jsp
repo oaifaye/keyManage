@@ -54,12 +54,12 @@
 	<s:form name="submitForm">
 	<table class="table">
 		<thead>
-			<th width="15">密码锁种类</th>
-			<th width="25">密码锁批号</th>
-			<th width="15%">密码锁数量</th>
-			<th width="15%">入库时间</th>
-			<th width="20%">创建人</th>
-			<th width="10%">操作</th>
+			<th width="">密码锁种类</th>
+			<th width="">密码锁批号</th>
+			<th width="">密码锁数量</th>
+			<th width="">入库时间</th>
+			<th width="">创建人</th>
+			<th width="">操作</th>
 		</thead>
 		<tbody>
 			<s:iterator value="paginationSupport.items" >

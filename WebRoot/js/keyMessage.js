@@ -138,9 +138,14 @@ $(function(){
 	});
 	
 	//锁数量必须为数字校验
-	$("# keyNum").blur(function(){
+	$("#keyNum").blur(function(){
 		if (!($(this).val().match(/^\d+$/))&&$(this).val()!="") {
 			alert("加密锁数量只能为正整数！");
+			$(this).val("");
+			return;
+		}
+		if($(this).val()=="0"){
+			alert("加密锁数量不能为0！");
 			$(this).val("");
 			return;
 		}
@@ -188,6 +193,8 @@ $(function(){
 			$("#remark").focus();
 			return false;
 		}
+		$("#submitButton").attr("disabled",true);
+		
 	});
-
+	
 });

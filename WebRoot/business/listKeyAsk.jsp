@@ -30,7 +30,6 @@
 	<div class="main">
 	<div class="pageTitle">密码锁使用管理—添加用途</div>
 	<div class="pageColumn">
-		<div class="add"></div>
 			<table class="table">
 				<thead>
 					<th width="">密码锁名称</th>
