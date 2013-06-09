@@ -15,6 +15,7 @@ import org.springframework.util.Assert;
 import com.keyManage.bean.Contain;
 import com.keyManage.bean.Department;
 import com.keyManage.bean.ExpressType;
+import com.keyManage.bean.KeyAsk;
 import com.keyManage.bean.KeyMessage;
 import com.keyManage.bean.Manager;
 import com.keyManage.bean.ProcedureMessage;
@@ -22,6 +23,7 @@ import com.keyManage.bean.Purpose;
 import com.keyManage.service.contain.ContainService;
 import com.keyManage.service.department.DepartmentService;
 import com.keyManage.service.expressType.ExpressTypeService;
+import com.keyManage.service.keyAsk.KeyAskService;
 import com.keyManage.service.keyMessage.KeyMessageService;
 import com.keyManage.service.procedureMessage.ProcedureMessageService;
 import com.keyManage.service.procedureVersion.ProcedureVersionService;
@@ -40,6 +42,7 @@ public class KeyMessageAction extends ActionSupport {
 	private ContainService containService;
 	private ExpressTypeService expressTypeService;
 	private PurposeService purposeService;
+	private KeyAskService keyAskService;
 	private KeyMessage keyMessage;
 	private Contain contain;
 	private String containId;
@@ -102,6 +105,8 @@ public class KeyMessageAction extends ActionSupport {
 	
 	//添加锁信息
 	public String addKey(){
+		KeyAsk keyAsk=keyAskService.findByPrimaryKey(keyAskId);
+		Integer usedNum=0;
 		try {
 		//判断所填锁的数量是否小于库存
 			List<Contain> containList = containService.findLastNumOfContain(keyAskId);
@@ -144,8 +149,16 @@ public class KeyMessageAction extends ActionSupport {
 			if(keyMessage.getId()!=null&&!keyMessage.getId().equals("")){
 				keyMessageService.updateKeyMessage(keyMessage);
 				return "updateKey";
-			}
+			} 
 			keyMessageService.addKeyMessage(keyMessage);
+			
+			//自动变为已完结
+			usedNum=keyMessageService.findNumOfUsed(keyAskId);
+			if(usedNum.equals(keyAsk.getAskNum())){
+				keyAsk.setIsFinished("0");
+				keyAskService.updateKeyAsk(keyAsk);
+			}
+			
 			return "addKey";
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -387,6 +400,14 @@ public class KeyMessageAction extends ActionSupport {
 
 	public void setDistrictId(String districtId) {
 		this.districtId = districtId;
+	}
+
+	public KeyAskService getKeyAskService() {
+		return keyAskService;
+	}
+
+	public void setKeyAskService(KeyAskService keyAskService) {
+		this.keyAskService = keyAskService;
 	}
 
 	

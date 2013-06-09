@@ -30,6 +30,15 @@
 	<div class="main">
 	<div class="pageTitle">密码锁使用管理—添加用途</div>
 	<div class="pageColumn">
+		<s:form id="selectSubmit" action="keyAsk_initListKeyAsk" theme="simple">
+			选择锁的类型：<s:select name="kindOfKeyId" list="kindOfKeyList" listKey="id" listValue="kindName" headerKey="" headerValue="--请选择--" ></s:select>&nbsp;&nbsp;&nbsp;
+			选择时间范围：<s:textfield id="startDate" name="startDate" onclick="new Calendar().show(this)" readonly="true" ></s:textfield> &nbsp;—
+						<s:textfield id="endDate" name="endDate" onclick="new Calendar().show(this)" readonly="true" />&nbsp;&nbsp;&nbsp;
+			响应状态：<s:select name="isFinished" list="#{0:'已完结',1:'已满足',2:'未完结'}"  headerKey="" headerValue="--请选择--" ></s:select>&nbsp;&nbsp;&nbsp;
+			<s:reset value="重置" cssClass="button2" />&nbsp;&nbsp;&nbsp;
+			<input type="submit" value="查询" class="button2" />
+		</s:form>
+		<div class="resultList2">
 			<table class="table">
 				<thead>
 					<th width="">密码锁名称</th>
@@ -42,9 +51,9 @@
 					<th width="">操作</th>
 				</thead>
 				<tbody>
-					<s:iterator value="paginationSupport.items">
+					<s:iterator value="keyAskList">
 						<tr>
-							<td><s:property value="kindOfKey.kindName" />
+							<td><s:property value="" />
 							</td>
 							<td><s:date name="askDate" format="yyyy-MM-dd" />
 							</td>
@@ -56,23 +65,27 @@
 							</td>
 							<td><s:property value="askRemark" />
 							</td>
-							<td><s:property value="isFinished" />
+							<td>
+								<s:if test='isFinished=="0"'>已完结</s:if> 
+								<s:elseif test='isFinished=="1"'>已满足</s:elseif>
+								<s:elseif test='isFinished=="2"'>未完结</s:elseif>
 							</td>
 							<td>
-								<s:a action="keyAsk_initKeyUse" >
-									<s:param name="keyAskId" value="id"></s:param>
+								<s:if test='isFinished!="0"&&tokenNum>usedNum'>
+									<s:a action="keyAsk_initKeyUse" >
+										<s:param name="keyAskId" value="id"></s:param>
+										填写用途
+									</s:a>
+								</s:if>
+								<s:else>
 									填写用途
-								</s:a>
+								</s:else>
 							</td>
 						</tr>
 					</s:iterator>
-					<tr>
-						<td colspan="8" class="pageControl">
-							<%@ include file="../include/pageControl.jsp" %>
-						</td>
-					</tr>
 				</tbody>
 			</table>
+		</div>
 	</div>
 	</div>
 	<%@ include file="../include/foot.jsp" %>

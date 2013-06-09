@@ -152,7 +152,7 @@ public class ContainServiceImpl implements ContainService {
 		return containList;
 	}
 	
-	//计算一个请求单中的已经用掉的锁得数量
+	//计算一个请求单中的已经用掉的锁得数量(暂不使用)
 	public Integer findNumOfUsed(String keyAskId){
 		Integer num=0;
 		Map<String, Object> params=new HashMap<String, Object>();

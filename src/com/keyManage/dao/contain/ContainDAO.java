@@ -18,7 +18,7 @@ public interface ContainDAO extends HibernateGenericDAO<Contain> {
 	public List<CountObject> findCountLotNumberByKindOfKeyID(String saveOrTake,String kindOfKeyID);
 	
 	/**
-	 * 按请求锁的id查询锁的数量
+	 * 按请求锁的id查询锁的已出库数量
 	 * */
 	public Integer findCountNumByKeyAskID(String keyAskID,String isDelete);
 	

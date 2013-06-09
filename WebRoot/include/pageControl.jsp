@@ -9,7 +9,7 @@
 </head>
 
 <body>
-
+	<s:if test="paginationSupport.items==null">
 	共${paginationSupport.totalCount}条&nbsp; 第${currentPage}页&nbsp;
 	<s:if test="currentPage==1">首页&nbsp;上一页</s:if>
 	<s:else>
@@ -22,5 +22,6 @@
 		<a href="javascript:paginate(${paginationSupport.lastPage})">尾页</a>
 	</s:else>
 	&nbsp;
+	</s:if>
 </body>
 </html>

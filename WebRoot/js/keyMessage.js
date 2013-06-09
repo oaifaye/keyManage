@@ -178,6 +178,11 @@ $(function(){
 			$("#expressType").focus();
 			return false;
 		}
+		if($("#isExpress").attr("checked")&&$("#expressCode").val().replace(/[ ]/g,"")==""){
+			alert("请选输入快递编号！！");
+			$("#expressCode").focus();
+			return false;
+		}
 		if($("#expressDate").val().replace(/[ ]/g,"")==""){
 			alert("请选填写送锁日期！！");
 			$("#expressDate").focus();
@@ -194,7 +199,6 @@ $(function(){
 			return false;
 		}
 		$("#submitButton").attr("disabled",true);
-		
 	});
 	
 });

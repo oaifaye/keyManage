@@ -30,6 +30,15 @@
 		<div class="main">
 			<div class="pageTitle">密码锁仓库管理—锁出库</div>
 			<div class="pageColumn">
+				<s:form id="selectSubmit" action="keyAsk_initListKeyAsk" theme="simple">
+			选择锁的类型：<s:select name="kindOfKeyId" list="kindOfKeyList" listKey="id" listValue="kindName" headerKey="" headerValue="--请选择--" ></s:select>&nbsp;&nbsp;&nbsp;
+			选择时间范围：<s:textfield id="startDate" name="startDate" onclick="new Calendar().show(this)" readonly="true" ></s:textfield> &nbsp;—
+						<s:textfield id="endDate" name="endDate" onclick="new Calendar().show(this)" readonly="true" />&nbsp;&nbsp;&nbsp;
+			响应状态：<s:select name="isFinished" list="#{0:'已完结',1:'已满足',2:'未完结'}"  headerKey="" headerValue="--请选择--" ></s:select>&nbsp;&nbsp;&nbsp;
+			<s:reset value="重置" cssClass="button2" />&nbsp;&nbsp;&nbsp;
+			<input type="submit" value="查询" class="button2" />
+		</s:form>
+		<div class="resultList2">
 				<table class="table">
 					<thead>
 						<th width="">密码锁名称</th>
@@ -59,9 +68,12 @@
 								</td>
 								<td><s:property value="managerByCreateBy.name" />
 								</td>
-								<td><s:if test='isFinished=="0"'>已完结</s:if> <s:else>未完结</s:else>
+								<td>
+									<s:if test='isFinished=="0"'>已完结</s:if> 
+									<s:elseif test='isFinished=="1"'>已满足</s:elseif>
+									<s:elseif test='isFinished=="2"'>未完结</s:elseif>
 								</td>
-								<td><s:if test='isFinished=="0"'>回应</s:if> <s:else>
+								<td><s:if test='isFinished!="2"'>回应</s:if> <s:else>
 										<s:a action="/contain_initEditShipment">
 											<s:param name="keyAskId" value="id"></s:param>
 										回应
@@ -77,7 +89,7 @@
 					</tbody>
 				</table>
 			</div>
-
+</div>
 		</div>
 		<%@ include file="../include/foot.jsp"%>
 	</div>

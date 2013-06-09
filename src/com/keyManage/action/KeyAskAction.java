@@ -2,7 +2,10 @@ package com.keyManage.action;
 
 import java.io.PrintWriter;
 import java.sql.Timestamp;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
@@ -31,7 +34,11 @@ public class KeyAskAction extends ActionSupport {
 	private String keyAskId;
 	private int currentPage;
 	private List<Contain> containList;
-	private PaginationSupport paginationSupport;
+	private List<KindOfKey> kindOfKeyList;
+	private String startDate;
+	private String endDate;
+	private String kindOfKeyId;
+	private String isFinished;
 
 	//==============================================锁申请用户===========================================================
 	//初始化keyAsk.jsp
@@ -72,7 +79,7 @@ public class KeyAskAction extends ActionSupport {
 				}
 				keyAsk.setKindOfKey(kindOfKey);
 				keyAsk.setAskDate(TimeSupport.parseTime(askDate, "yyyy-MM-dd"));
-				keyAsk.setIsFinished("1");
+				keyAsk.setIsFinished("2");
 				keyAsk.setIsDelete("1");
 				Manager manager = (Manager)ActionContext.getContext().getSession().get("manager");
 				keyAsk.setManagerByCreateBy(manager);
@@ -85,16 +92,36 @@ public class KeyAskAction extends ActionSupport {
 		}
 	}
 	
-	//初始化listKeyAsk.jsp（申请管理）
-	@SuppressWarnings("unchecked")
+	
+	//初始化listKeyAsk.jsp（申请管理,自助查询）
 	public String initListKeyAsk(){
-		if(currentPage<=1){
-			currentPage=1;
-		}
+		Map<String, Object> params = new HashMap<String, Object>();
+		Map<String, Timestamp[]> betweenParams = new HashMap<String, Timestamp[]>();
+		Manager manager = (Manager)ActionContext.getContext().getSession().get("manager");
+		params.put("isDelete", "1");
 		try {
-			Manager manager = (Manager)ActionContext.getContext().getSession().get("manager");
-			paginationSupport=keyAskService.findKeyAskByPage(manager.getId(),currentPage, 12);
-			List<KeyAsk> keyAskList = (List<KeyAsk>)paginationSupport.getItems();
+			kindOfKeyList=kindOfKeyService.findListByParams(params);
+			params.put("managerByCreateBy.id", manager.getId());
+			/*执行查询*/
+			if(kindOfKeyId!=null&&!kindOfKeyId.equals("")){
+				params.put("kindOfKey.id",kindOfKeyId);
+			}
+			
+			if(startDate!=null&&!startDate.equals("")&&
+					endDate!=null&&!endDate.equals("")){
+				//开始时间与结束时间转换格式
+				Timestamp startTime = TimeSupport.parseTime(startDate, "yyyy-MM-dd");
+				Timestamp endTime = TimeSupport.parseTime(endDate, "yyyy-MM-dd");
+				Timestamp[] betweenValue={startTime,endTime};
+				betweenParams.put("createDate", betweenValue);//填写时间
+			}
+			
+			if(isFinished!=null&&!isFinished.equals("")){
+				params.put("isFinished",isFinished);
+			}
+			
+			params.put("managerByCreateBy.id", manager.getId());
+			keyAskList=keyAskService.findListByParams(params, null, betweenParams, null);
 			for(KeyAsk keyAsk:keyAskList){
 				Integer tokenNum = containService.findCountNumByKeyAskID(keyAsk.getId(), "1");
 				if(tokenNum==null){
@@ -104,6 +131,7 @@ public class KeyAskAction extends ActionSupport {
 				keyAsk.setTokenNum(tokenNum);
 				keyAsk.setUsedNum(usedNum);
 			}
+			
 			return "initListKeyAsk";
 		} catch (Exception e) {
 			return ERROR;
@@ -208,12 +236,21 @@ public class KeyAskAction extends ActionSupport {
 		this.currentPage = currentPage;
 	}
 
-	public PaginationSupport getPaginationSupport() {
-		return paginationSupport;
+
+	public String getStartDate() {
+		return startDate;
 	}
 
-	public void setPaginationSupport(PaginationSupport paginationSupport) {
-		this.paginationSupport = paginationSupport;
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 
 	public String getKeyAskId() {
@@ -230,5 +267,29 @@ public class KeyAskAction extends ActionSupport {
 
 	public void setContainList(List<Contain> containList) {
 		this.containList = containList;
+	}
+
+	public List<KindOfKey> getKindOfKeyList() {
+		return kindOfKeyList;
+	}
+
+	public void setKindOfKeyList(List<KindOfKey> kindOfKeyList) {
+		this.kindOfKeyList = kindOfKeyList;
+	}
+
+	public String getKindOfKeyId() {
+		return kindOfKeyId;
+	}
+
+	public void setKindOfKeyId(String kindOfKeyId) {
+		this.kindOfKeyId = kindOfKeyId;
+	}
+
+	public String getIsFinished() {
+		return isFinished;
+	}
+
+	public void setIsFinished(String isFinished) {
+		this.isFinished = isFinished;
 	}
 }

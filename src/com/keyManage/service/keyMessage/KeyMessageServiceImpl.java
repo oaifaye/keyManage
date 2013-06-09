@@ -27,6 +27,13 @@ public class KeyMessageServiceImpl implements KeyMessageService {
 		keyMessageDAO.update(keyMessage);
 	}
 	
+	/**
+	 * 计算一个请求单中的已经使用的锁的数量
+	 * */
+	public Integer findNumOfUsed(String keyAskId){
+		return keyMessageDAO.findNumOfUsed(keyAskId);
+	}
+	
 	public KeyMessageDAO getKeyMessageDAO() {
 		return keyMessageDAO;
 	}

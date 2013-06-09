@@ -40,7 +40,7 @@ public interface ContainService {
 	 * 计算已经批准的每批锁的未使用（未填写通途）数量
 	 * */
 	public List<Contain> findLastNumOfContain(String keyAskId);
-	/**计算一个请求单中的已经使用的锁的数量*/
+	/**计算一个请求单中的已经使用的锁的数量(暂不使用)*/
 	public Integer findNumOfUsed(String keyAskId);
 	/**按锁种类id查询库中剩余数量*/
 	public Integer findNumByKindOfKeyID(String kindOfKeyID);

@@ -20,6 +20,7 @@ import com.keyManage.bean.KindOfKey;
 import com.keyManage.bean.Manager;
 import com.keyManage.service.contain.ContainService;
 import com.keyManage.service.keyAsk.KeyAskService;
+import com.keyManage.service.keyMessage.KeyMessageService;
 import com.keyManage.service.kindOfKey.KindOfKeyService;
 import com.keyManage.util.CountObject;
 import com.keyManage.util.TimeSupport;
@@ -33,6 +34,7 @@ public class ContainAction extends ActionSupport {
 	private ContainService containService;
 	private KindOfKeyService kindOfKeyService;
 	private KeyAskService keyAskService;
+	private KeyMessageService keyMessageService;
 	private List<KindOfKey> kindOfKeyList;
 	private String containId;
 	private String keyAskId;
@@ -50,6 +52,8 @@ public class ContainAction extends ActionSupport {
 	private String saveOrTake;
 	private String startDate;
 	private String endDate;
+	private String isFinished;
+	
 	
 	//初始化
 	public String init(){
@@ -120,15 +124,43 @@ public class ContainAction extends ActionSupport {
 		}
 	}
 	
-	//初始化shipment.jsp(锁出库)
-		@SuppressWarnings("unchecked")
+	public String getIsFinished() {
+		return isFinished;
+	}
+
+	public void setIsFinished(String isFinished) {
+		this.isFinished = isFinished;
+	}
+
+		//初始化shipment.jsp(锁出库)
 		public String initShipment(){
-			if(currentPage<=1){
-				currentPage=1;
-			}
+			Map<String, Object> params = new HashMap<String, Object>();
+			Map<String, Timestamp[]> betweenParams = new HashMap<String, Timestamp[]>();
+			Manager manager = (Manager)ActionContext.getContext().getSession().get("manager");
+			params.put("isDelete", "1");
 			try {
-				paginationSupport=keyAskService.findKeyAskByPage(currentPage, 12);
-				List<KeyAsk> keyAskList = (List<KeyAsk>)paginationSupport.getItems();
+				kindOfKeyList=kindOfKeyService.findListByParams(params);
+				params.put("managerByCreateBy.id", manager.getId());
+				/*执行查询*/
+				if(kindOfKeyId!=null&&!kindOfKeyId.equals("")){
+					params.put("kindOfKey.id",kindOfKeyId);
+				}
+				
+				if(startDate!=null&&!startDate.equals("")&&
+						endDate!=null&&!endDate.equals("")){
+					//开始时间与结束时间转换格式
+					Timestamp startTime = TimeSupport.parseTime(startDate, "yyyy-MM-dd");
+					Timestamp endTime = TimeSupport.parseTime(endDate, "yyyy-MM-dd");
+					Timestamp[] betweenValue={startTime,endTime};
+					betweenParams.put("createDate", betweenValue);//填写时间
+				}
+				
+				if(isFinished!=null&&!isFinished.equals("")){
+					params.put("isFinished",isFinished);
+				}
+				
+				params.put("managerByCreateBy.id", manager.getId());
+				keyAskList=keyAskService.findListByParams(params, null, betweenParams, null);
 				for(KeyAsk keyAsk:keyAskList){
 					Integer tokenNum = containService.findCountNumByKeyAskID(keyAsk.getId(), "1");
 					if(tokenNum==null){
@@ -215,9 +247,9 @@ public class ContainAction extends ActionSupport {
 			keyAsk=keyAskService.findByPrimaryKey(keyAsk.getId());
 			keyAsk.setAnswerDate(new Timestamp(System.currentTimeMillis()));
 			tokenNum = containService.findCountNumByKeyAskID(keyAsk.getId(), "1");
-			//自动完结
+			//自动变为已满足
 			if(tokenNum.equals(keyAsk.getAskNum())){
-				keyAsk.setIsFinished("0");
+				keyAsk.setIsFinished("1");
 			}
 			keyAskService.updateKeyAsk(keyAsk);
 			
@@ -443,6 +475,14 @@ public class ContainAction extends ActionSupport {
 
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
+	}
+
+	public KeyMessageService getKeyMessageService() {
+		return keyMessageService;
+	}
+
+	public void setKeyMessageService(KeyMessageService keyMessageService) {
+		this.keyMessageService = keyMessageService;
 	}
 
 

@@ -113,6 +113,7 @@
 		<property name="keyAskService" ref="keyAskService"></property>
 		<property name="containService" ref="containService"></property>
 		<property name="kindOfKeyService" ref="kindOfKeyService"></property>
+		<property name="keyMessageService" ref="keyMessageService"></property>
 	</bean>
 	
 	<!-- 请求锁 -->
@@ -153,6 +154,7 @@
 		<property name="departmentService" ref="departmentService"></property>
 		<property name="expressTypeService" ref="expressTypeService"></property>
 		<property name="purposeService" ref="purposeService"></property>
+		<property name="keyAskService" ref="keyAskService"></property>
 	</bean>
 	
 	<!-- 程序 -->

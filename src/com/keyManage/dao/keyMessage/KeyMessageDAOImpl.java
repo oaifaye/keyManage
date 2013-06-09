@@ -39,4 +39,23 @@ public class KeyMessageDAOImpl extends HibernateGenericDAOImpl<KeyMessage> imple
 		return list;
 	}
 	
+	/**
+	 * 计算一个请求单中的已经使用的锁的数量
+	 * */
+	@SuppressWarnings("unchecked")
+	public Integer findNumOfUsed(String keyAskId){
+		String hql="select SUM(k.KeyNum) from KeyMessage k join Contain c on k.ContainID=c.ID where c.KeyAskID=? group by c.KeyAskID";
+		Integer num = 0;
+		System.out.println(keyAskId);
+		Session session = this.getSession();
+		List<Object> list =session.createSQLQuery(hql)
+								.setString(0, keyAskId)
+								.list();
+		if(list.size()>0){
+			num = (Integer)list.get(0);
+		}
+		
+		return num;
+	}
+	
 }

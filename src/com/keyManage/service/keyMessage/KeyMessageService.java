@@ -13,5 +13,8 @@ public interface KeyMessageService {
 	public List<KeyMessage> findListByParams(Map<String, Object> params,Map<String, Object> likeParams,Map<String, Timestamp[]> betweenParams,Map<String, String[]> inParams);
 	/**修改*/
 	public void updateKeyMessage(KeyMessage keyMessage);
-	
+	/**
+	 * 计算一个请求单中的已经使用的锁的数量
+	 * */
+	public Integer findNumOfUsed(String keyAskId);
 }

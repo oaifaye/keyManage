@@ -87,7 +87,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 		Department department = departmentDAO.findByPrimaryKey(id);
 		String[] ids=null;
 		String parentId = department.getParentId();
-		if(parentId!=null){
+		if(parentId!=null&&!parentId.equals("")){
 			String[] parentIdArray = parentId.split(",");
 			ids = new String[parentIdArray.length+1];
 			for(int i = 0;i<parentIdArray.length;i++){
