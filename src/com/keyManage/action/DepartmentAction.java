@@ -24,15 +24,25 @@ public class DepartmentAction extends ActionSupport {
 	private DepartmentService departmentService;
 	private List<Department> departmentList;
 	private String parentId;
+	private String provinceId;
+	private String cityId;
+	private String districtId;
 
 	// 初始化
 	public String init() {
-		// if(kindOfKeyId!=null){
-		// //kindOfKey=kindOfKeyService.findByPrimaryKey(kindOfKeyId);
-		// }
-		// if(currentPage<=1){
-		// currentPage=1;
-		// }
+		/*三级单位的id,增加和修改后初始化三级下来菜单*/
+		if(parentId!=null){
+			String[] ids = parentId.split(",");
+			if(ids.length>=1){
+				provinceId=ids[0];
+			}
+			if(ids.length>=2){
+				cityId=ids[1];
+			}
+			if(ids.length>=3){
+				districtId=ids[2];
+			}
+		}
 		try {
 			Map<String, Object> params = new HashMap<String, Object>();
 			params.put("isDelete", "1");
@@ -56,6 +66,8 @@ public class DepartmentAction extends ActionSupport {
 				department.setParentId(parentId);
 				level = parentId.split(",").length + 1;
 			}
+			
+			
 			/* 验证是否重复 */
 			params.put("level", level);
 			params.put("departmentName", department.getDepartmentName());
@@ -80,6 +92,7 @@ public class DepartmentAction extends ActionSupport {
 			department.setCreateDate(new Timestamp(System.currentTimeMillis()));
 			department.setIsDelete("1");
 			departmentService.addDepartment(department);
+			
 			return SUCCESS;
 		} catch (Exception e) {
 			return ERROR;
@@ -90,6 +103,7 @@ public class DepartmentAction extends ActionSupport {
 		Map<String, Object> params = new HashMap<String, Object>();
 		Map<String, Object> likeParams = new HashMap<String, Object>();
 		Department departmentLast = null;
+		String likeParentId=null;
 
 		try {
 			/* 按单位的id查找单位 */
@@ -103,8 +117,8 @@ public class DepartmentAction extends ActionSupport {
 			params.put("level", departmentLast.getLevel());
 			params.put("departmentName", department.getDepartmentName());
 			if(departmentLast.getLevel()!=1){
-				parentId=parentIdArray[parentIdArray.length - 2];
-				likeParams.put("parentId", "%"+parentId+"%");
+				likeParentId=parentIdArray[parentIdArray.length - 2];
+				likeParams.put("parentId", "%"+likeParentId+"%");
 			}
 			List<Department> departmentTest = departmentService.findListByParams(params, likeParams);
 			// 
@@ -163,6 +177,30 @@ public class DepartmentAction extends ActionSupport {
 
 	public void setParentId(String parentId) {
 		this.parentId = parentId;
+	}
+
+	public String getProvinceId() {
+		return provinceId;
+	}
+
+	public void setProvinceId(String provinceId) {
+		this.provinceId = provinceId;
+	}
+
+	public String getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
+	}
+
+	public String getDistrictId() {
+		return districtId;
+	}
+
+	public void setDistrictId(String districtId) {
+		this.districtId = districtId;
 	}
 
 }

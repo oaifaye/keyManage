@@ -53,6 +53,7 @@ public class ContainAction extends ActionSupport {
 	private String startDate;
 	private String endDate;
 	private String isFinished;
+	private String userId;
 	
 	
 	//初始化
@@ -136,11 +137,9 @@ public class ContainAction extends ActionSupport {
 		public String initShipment(){
 			Map<String, Object> params = new HashMap<String, Object>();
 			Map<String, Timestamp[]> betweenParams = new HashMap<String, Timestamp[]>();
-			Manager manager = (Manager)ActionContext.getContext().getSession().get("manager");
 			params.put("isDelete", "1");
 			try {
 				kindOfKeyList=kindOfKeyService.findListByParams(params);
-				params.put("managerByCreateBy.id", manager.getId());
 				/*执行查询*/
 				if(kindOfKeyId!=null&&!kindOfKeyId.equals("")){
 					params.put("kindOfKey.id",kindOfKeyId);
@@ -159,7 +158,10 @@ public class ContainAction extends ActionSupport {
 					params.put("isFinished",isFinished);
 				}
 				
-				params.put("managerByCreateBy.id", manager.getId());
+				if(userId!=null&&!userId.equals("")){
+					params.put("managerByCreateBy.id", userId);
+				}
+				
 				keyAskList=keyAskService.findListByParams(params, null, betweenParams, null);
 				for(KeyAsk keyAsk:keyAskList){
 					Integer tokenNum = containService.findCountNumByKeyAskID(keyAsk.getId(), "1");
@@ -483,6 +485,14 @@ public class ContainAction extends ActionSupport {
 
 	public void setKeyMessageService(KeyMessageService keyMessageService) {
 		this.keyMessageService = keyMessageService;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 

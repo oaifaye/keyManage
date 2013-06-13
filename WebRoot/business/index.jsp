@@ -16,9 +16,8 @@
 <title>天房科技密码锁管理系统</title>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript" src="js/list.js"></script>
-
 <link rel="stylesheet" href="css/list.css" type="text/css"></link>
-</head>
+
 
 <body>
 	<div id="greybackground"></div>

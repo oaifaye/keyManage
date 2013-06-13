@@ -76,6 +76,9 @@
 						</tr>
 						<!-- </tbody> -->
 					</table>
+					<s:hidden id="provinceId" value="%{provinceId}"/>
+					<s:hidden id="cityId" value="%{cityId}"/>
+					<s:hidden id="districtId" value="%{districtId}"/>
 				</s:form>
 			</div>
 		</div>

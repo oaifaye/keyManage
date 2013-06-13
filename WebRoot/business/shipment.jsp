@@ -30,7 +30,7 @@
 		<div class="main">
 			<div class="pageTitle">密码锁仓库管理—锁出库</div>
 			<div class="pageColumn">
-				<s:form id="selectSubmit" action="keyAsk_initListKeyAsk" theme="simple">
+				<s:form id="selectSubmit" action="contain_initShipment" theme="simple">
 			选择锁的类型：<s:select name="kindOfKeyId" list="kindOfKeyList" listKey="id" listValue="kindName" headerKey="" headerValue="--请选择--" ></s:select>&nbsp;&nbsp;&nbsp;
 			选择时间范围：<s:textfield id="startDate" name="startDate" onclick="new Calendar().show(this)" readonly="true" ></s:textfield> &nbsp;—
 						<s:textfield id="endDate" name="endDate" onclick="new Calendar().show(this)" readonly="true" />&nbsp;&nbsp;&nbsp;
@@ -52,7 +52,7 @@
 						<th width="">操作</th>
 					</thead>
 					<tbody>
-						<s:iterator value="paginationSupport.items">
+						<s:iterator value="keyAskList">
 							<tr>
 								<td><s:property value="kindOfKey.kindName" />
 								</td>
@@ -82,10 +82,6 @@
 								</td>
 							</tr>
 						</s:iterator>
-						<tr>
-							<td colspan="9" class="pageControl"><%@ include
-									file="../include/pageControl.jsp"%></td>
-						</tr>
 					</tbody>
 				</table>
 			</div>
