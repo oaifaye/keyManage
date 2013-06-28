@@ -51,8 +51,7 @@ public class ManagerAction extends ActionSupport {
 			currentPage = 1;
 		}
 			Map<String, Object> params = new HashMap<String, Object>();
-			paginationSupport = managerService.findByPage(params, currentPage,
-					2);
+			paginationSupport = managerService.findByPage(params, currentPage,10);
 			return "init";
 		} catch (Exception e) {
 			return ERROR;

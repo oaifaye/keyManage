@@ -44,7 +44,7 @@ public class ProcedureVersionAction extends ActionSupport {
 			params.put("isDelete", "1");
 			//初始化程序名称
 			procedureMessageList=procedureMessageService.findListByParams(params);
-			paginationSupport=procedureVersionService.findByPage(params, currentPage, 2);
+			paginationSupport=procedureVersionService.findByPage(params, currentPage, 10);
 			return "init";
 		} catch (DataAccessException e) {
 			return ERROR;

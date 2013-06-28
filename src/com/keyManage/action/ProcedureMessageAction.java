@@ -39,7 +39,7 @@ public class ProcedureMessageAction extends ActionSupport {
 		try {
 			Map<String, Object> params=new HashMap<String, Object>();
 			params.put("isDelete", "1");
-			paginationSupport=procedureMessageService.findByPage(params, currentPage, 2);
+			paginationSupport=procedureMessageService.findByPage(params, currentPage, 10);
 			return "init";
 		} catch (DataAccessException e) {
 			return ERROR;
