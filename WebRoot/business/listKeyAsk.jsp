@@ -53,7 +53,7 @@
 				<tbody>
 					<s:iterator value="keyAskList">
 						<tr>
-							<td><s:property value="" />
+							<td><s:property value="kindOfKey.kindName" />
 							</td>
 							<td><s:date name="askDate" format="yyyy-MM-dd" />
 							</td>

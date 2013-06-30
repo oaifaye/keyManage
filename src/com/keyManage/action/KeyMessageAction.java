@@ -116,9 +116,13 @@ public class KeyMessageAction extends ActionSupport {
 				}
 			}
 			/*修改保存时*/
-			if(keyMessage.getId()!=null&&!keyMessage.getId().equals("")){
+			String id = keyMessage.getId();
+			if(id!=null&&!id.equals("")){
 				/*修改时校验总数需要加上当前锁在数据库中的数量*/
-				lastNum=lastNum+keyMessage.getKeyNum();
+				KeyMessage KeySelf = keyMessageService.findByPrimaryKey(id);
+				Integer KeyNumSelf = KeySelf.getKeyNum();
+				if(KeyNumSelf!=null)
+				lastNum=lastNum+KeyNumSelf;
 			}
 			if(keyMessage.getKeyNum()>lastNum){
 				//请求锁数量超过数据库中的

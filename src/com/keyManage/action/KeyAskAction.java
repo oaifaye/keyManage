@@ -122,16 +122,17 @@ public class KeyAskAction extends ActionSupport {
 			
 			params.put("managerByCreateBy.id", manager.getId());
 			keyAskList=keyAskService.findListByParams(params, null, betweenParams, null);
-			for(KeyAsk keyAsk:keyAskList){
-				Integer tokenNum = containService.findCountNumByKeyAskID(keyAsk.getId(), "1");
-				if(tokenNum==null){
-					tokenNum=0;
+			if(keyAskList!=null){
+				for(KeyAsk keyAsk:keyAskList){
+					Integer tokenNum = containService.findCountNumByKeyAskID(keyAsk.getId(), "1");
+					if(tokenNum==null){
+						tokenNum=0;
+					}
+					Integer usedNum=containService.findNumOfUsed(keyAsk.getId());
+					keyAsk.setTokenNum(tokenNum);
+					keyAsk.setUsedNum(usedNum);
 				}
-				Integer usedNum=containService.findNumOfUsed(keyAsk.getId());
-				keyAsk.setTokenNum(tokenNum);
-				keyAsk.setUsedNum(usedNum);
 			}
-			
 			return "initListKeyAsk";
 		} catch (Exception e) {
 			return ERROR;
