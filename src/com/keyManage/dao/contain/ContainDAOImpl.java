@@ -14,7 +14,7 @@ public class ContainDAOImpl extends HibernateGenericDAOImpl<Contain> implements
 
 	@SuppressWarnings("unchecked")
 	public List<CountObject> findCountByKindOfKeyID(String saveOrTake) {
-		String hql = "SELECT cast(KindOfKeyID as varchar(32)) AS KindOfKeyID ,SUM(KeyNum) FROM Contain WHERE SaveOrTake=? GROUP BY KindOfKeyID ORDER BY SUM(KeyNum)";
+		String hql = "SELECT cast(KindOfKeyID as varchar(32)) AS KindOfKeyID ,SUM(KeyNum) FROM Contain WHERE SaveOrTake=? GROUP BY KindOfKeyID ";
 		Session session = this.getSession();
 		List<CountObject> list = new ArrayList<CountObject>();
 		List<Object> listC =session.createSQLQuery(hql).setString(0, saveOrTake)
@@ -34,7 +34,7 @@ public class ContainDAOImpl extends HibernateGenericDAOImpl<Contain> implements
 	
 	@SuppressWarnings("unchecked")
 	public List<CountObject> findCountLotNumberByKindOfKeyID(String saveOrTake,String kindOfKeyID) {
-		String hql = "SELECT LotNumber , Remark, SUM(KeyNum) FROM Contain WHERE SaveOrTake=? AND KindOfKeyID=? GROUP BY LotNumber , Remark ORDER BY SUM(KeyNum)";
+		String hql = "SELECT LotNumber , Remark, SUM(KeyNum) FROM Contain WHERE SaveOrTake=? AND KindOfKeyID=? GROUP BY LotNumber , Remark ";
 		Session session = this.getSession();
 		List<CountObject> list = new ArrayList<CountObject>();
 		List<Object> listC =session.createSQLQuery(hql)
